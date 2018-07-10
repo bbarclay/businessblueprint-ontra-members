@@ -124,7 +124,7 @@ class Ontra_Members_Admin {
 
 		    $args = array(
 		        'label'               => 'BB members',
-		        'description'         =>'Blueprint Members',
+		        'description'         =>'BB Members',
 		        'labels'              => $labels,
 		        'supports'            => array( 'title', 'editor',   'thumbnail', 'comments', 'revisions', 'custom-fields', ),
 		        'hierarchical'        => false,
@@ -133,7 +133,7 @@ class Ontra_Members_Admin {
 		        'show_in_menu'        => true,
 		        'show_in_nav_menus'   => true,
 		        'show_in_admin_bar'   => false,
-		        'menu_position'       => 99,
+		        'menu_position'       => 26,
 		        'can_export'          => true,
 		        'has_archive'         => true,
 		        'exclude_from_search' => true,
