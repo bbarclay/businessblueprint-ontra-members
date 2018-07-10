@@ -1,0 +1,103 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+.ontramember-list .image {
+    width: 100%;
+    height: 250px;
+}
+.ontramember-list .member .name {
+    font-size: 1.1em !important;
+}
+.ontramember-list .member .bg-Orange {
+    background: #f15d22 !important;
+    padding: 0.5em;
+}
+
+.mbb-form {
+    position: relative;
+}
+.mbb-form label {
+    color: #737171; 
+    margin-top: 10px;
+    display: inline-block;
+    font-family: 'Geogrotesque-SemiBold', sans-serif;
+    color: #002749;
+    font-size: 20px;      
+}
+.mbb-form input[type="text"], 
+.mbb-form input[type="email"],
+.mbb-form input[type="url"],
+.mbb-form select {
+    margin-bottom: 10px;
+    width: 100%;
+    background: #f5f4f4;
+    border: 1px solid #e8e6e6;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0px 1px 1px 1px #f1efef;
+    box-shadow: inset 0px 1px 1px 1px #f1efef;
+}
+
+.mbb-form input[type="text"].input-error,
+.mbb-form select.input-error {
+    border: 1px solid #f15d22;
+}
+
+.mbb-form input[type="file"] {
+    display: inline-block;
+    border: 0;
+    margin: 5px 0 2px 0;   
+    background: transparent;
+}
+.mbb-form input[type="file"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.mbb-form .title {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.mbb-form input[type="submit"] {
+	max-width: 150px;
+	margin: 10px auto;
+    display: block;
+    color: #fff;
+    border-radius: 3px;
+    border: 0;
+}
+
+.mbb-form .spin-loader {
+    display: none;
+    position: fixed;
+    z-index: 110;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.mbb-form .spin-loader span {
+    font-size: 50px;
+    color: #000000;
+    position: absolute;
+    z-index: 100;
+    top: calc(50% - 29px);
+    left: calc(50% - 29px);
+    transform: translate(-50%, -50%);
+}
+
+.mbb-form .error-message {
+    color: #f15d22;
+    font-size: 17px;
+    display: block;
+}
+.mbb-form .label-default {
+    background: #d5f5bd;
+    display: block;
+    color: #4d792b;
+    padding: 10px;
+    border-radius: 3px;
+}

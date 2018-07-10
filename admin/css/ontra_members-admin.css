@@ -1,0 +1,39 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+ #bb_table {
+    width: 100%;
+    background: #fff;
+}
+#bb_table tr th {
+	text-align: left;
+	padding: 10px 5px;
+    background: #0073aa;
+    color: #fff;
+    font-size: 16px;
+}
+#bb_table tr td {
+	padding: 10px 5px;
+}
+#bb_table tr td img {
+	width: 80px;
+	height: 80px;
+}
+#bb_table tr td:nth-child(2) {
+	width: 40%;
+	padding: 0 10px;
+	font-size: 16px;
+    font-weight: 600;
+}
+#bb_table tr:nth-child(even) td {
+	background: #fbfafa;
+}
+#member-listing .page-numbers {
+	text-align: right;
+}
+#member-listing .page-numbers li {
+    display: inline-block;
+    margin-right: 7px;
+}
