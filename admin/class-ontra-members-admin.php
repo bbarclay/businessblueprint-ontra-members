@@ -123,7 +123,7 @@ class Ontra_Members_Admin {
 		     
 		    $args = array(
 		        'label'               => 'BB members',
-		        'description'         =>'BB Members',
+		        'description'         =>'MBB Members',
 		        'labels'              => $labels,
 		        'supports'            => array( 'title', 'editor',   'thumbnail', 'comments', 'revisions', 'custom-fields', ),
 		        'hierarchical'        => false,
