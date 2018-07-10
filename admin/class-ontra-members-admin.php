@@ -121,7 +121,6 @@ class Ontra_Members_Admin {
 
 		    );
 		     
-
 		    $args = array(
 		        'label'               => 'BB members',
 		        'description'         =>'BB Members',
