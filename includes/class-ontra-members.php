@@ -88,8 +88,7 @@ class Ontra_members {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		//Register Menu and Submenu
-		$this->loader->add_action( 'init', $plugin_admin, 'register_post_type' );
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_mybb_subpage' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_subpage' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'settings_init' );
 
 

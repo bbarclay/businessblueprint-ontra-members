@@ -112,38 +112,6 @@ class Ontra_Members_Admin {
 	}
 
 
-    public function register_post_type() {
- 
-		    $labels = array(
-		        'name'                => 'BB Members',
-		        'singular_name'       => 'BB Member',
-		        'menu_name'           => 'Members'
-
-		    );
-		     
-		    $args = array(
-		        'label'               => 'BB members',
-		        'description'         =>'MBB Members',
-		        'labels'              => $labels,
-		        'supports'            => array( 'title', 'editor',   'thumbnail', 'comments', 'revisions', 'custom-fields', ),
-		        'hierarchical'        => false,
-		        'public'              => false,
-		        'show_ui'             => true,
-		        'show_in_menu'        => true,
-		        'show_in_nav_menus'   => true,
-		        'show_in_admin_bar'   => false,
-		        'menu_position'       => 26,
-		        'can_export'          => true,
-		        'has_archive'         => true,
-		        'exclude_from_search' => true,
-		        'publicly_queryable'  => false,
-		        'capability_type'     => 'page',
-		    );
-		     
-		 
-		    register_post_type( 'bb_members', $args );
-		 
-	}
 
 
 	public function get_totalItems() {
@@ -207,9 +175,9 @@ class Ontra_Members_Admin {
 
 	}
 
-	public function add_mybb_subpage() {
+	public function add_subpage() {
 
-			add_menu_page('Blueprint Members', 'Blueprint Members', 'manage_options', 'ontra_members', array($this,'ontra_members_page') );
+			add_menu_page('BB Members', 'MBB Members', 'manage_options', 'ontra_members', array($this,'ontra_members_page'), '', 26 );
 
     		add_submenu_page(
     			  'ontra_members',
