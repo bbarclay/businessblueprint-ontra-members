@@ -904,13 +904,15 @@ class Ontra_Members_Public {
 		
 		$response = $this->getMeta($meta);
 
-			foreach($response as $key => $value) :
+			if($response) {
+				foreach($response as $key => $value) :
 
-				if ($curValue == $key ) {
-					return $value;
-				} 
+					if ($curValue == $key ) {
+						return $value;
+					} 
 
-			endforeach;
+				endforeach;
+			}
 
 		return $output = "N/A";
 

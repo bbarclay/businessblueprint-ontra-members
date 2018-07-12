@@ -1,6 +1,6 @@
 	
 	<div class="option-to-edit">
-	    <a href="<?php echo site_url() ?>/wp-login.php?action=lostpassword" class="reset-link">Reset Password</a>
+	    <a href="<?php echo site_url() ?>/reset-password" class="reset-link">Reset Password</a>
 		<a href="<?php echo site_url() ?>/edit-membership-info" ><span class="fa fa-edit"></span> Edit</a>
 	</div>	
 	<div class="profile">	
