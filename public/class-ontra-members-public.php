@@ -679,8 +679,7 @@ class Ontra_Members_Public {
 	                             '[{
 				"field":{"field":"email"},
 				"op":"=",
-				"value":{"value":"'. $email .'"},
-				"listFields" => "id, firstname, lastname, website, address, address2, city, state, zip, country, cell_phone, office_phone, company, BBYearLeve_258, f1608, BBCustomer_165, JoinedBlue_174, RenewalDat_214, TestDropBo_234, owner",
+				"value":{"value":"'. $email .'"}
 				}]'
 		);
 
