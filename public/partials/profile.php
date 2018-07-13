@@ -29,17 +29,21 @@
 	<div class="extra-info">
 		<button class="accordion"><span> <img src="<?php echo esc_url( plugins_url('businessblueprint-ontra-members/public/image/contact-info.svg') ) ?>" width="24" /> Contact info</span> <span class="fa fa-plus"></span></button>
 		<div class="panel">
-		    	<div class="contact"><span class="label">Mobile No </span><span class="text"><?php echo $this->mobile_no; ?></span></div>
-		    	<div class="contact"><span class="label">Office No </span><span class="text"><?php echo $this->office_no; ?></span></div>
+				<?php if( $this->mobile_no ) : ?>
+		    		<div class="contact"><span class="label">Mobile No </span><span class="text"><?php echo $this->mobile_no; ?></span></div>
+		    	<?php endif; ?>
+		    	<?php if( $this->office_no ) : ?>
+		    		<div class="contact"><span class="label">Office No </span><span class="text"><?php echo $this->office_no; ?></span></div>
+		    	<?php endif; ?>
 		    	<div class="email"><span class="label">Email </span><span class="text"><?php echo $this->email; ?></span></div>
 		    	<div class="location"><span class="label">Address </span><span class="text"><?php echo $this->address; ?> <?php echo ( $this->address2 ) ? ',' . $this->address2: ''; ?> <?php echo $this->city; ?> <?php echo ( $this->state ) ? ',' . $this->state: ''; ?> <?php echo $this->get_country( $this->country ); ?>  <?php echo $this->zipcode; ?> </span></div>
 		</div>
 		<button class="accordion"><span><img src="<?php echo esc_url( plugins_url('businessblueprint-ontra-members/public/image/customer-info.svg') ) ?>" width="24" /> Membership Info</span>  <span class="fa fa-plus"></span></button>
 		<div class="panel">
-				<div class="label"><span>Customer Type</span><span class="text"><?php echo $this->customer_type ?></span></div>
-				<div class="label"><span>Year Level</span><span class="text"><?php echo $this->yearlevel ?></span></div>
-				<div class="label"><span>Joined Date</span><span class="text"><?php echo $this->joined_date; ?></span></div>
-				<div class="label"><span>Renewal Date</span><span class="text"><?php echo $this->renew_date; ?></span></div>
+				<div class="label"><span>Customer Type</span><span class="text"><?php echo ( $this->customer_type ) ? $this->customer_type: 'N/A'; ?></span></div>
+				<div class="label"><span>Year Level</span><span class="text"><?php echo ( $this->yearlevel ) ? $this->yearlevel : 'N/A';?></span></div>
+				<div class="label"><span>Joined Date</span><span class="text"><?php echo ( $this->joined_date ) ? $this->joined_date : 'N/A';  ?></span></div>
+				<div class="label"><span>Renewal Date</span><span class="text"><?php echo (  $this->renew_date ) ?  $this->renew_date : 'N/A'; ?></span></div>
 		</div>
 		<button class="accordion"><span><img src="<?php echo esc_url( plugins_url('businessblueprint-ontra-members/public/image/affiliate-link.svg') ) ?>" width="24" /> Affiliate Link</span>  <span class="fa fa-plus"></span></button>
 		<div class="panel">
@@ -60,7 +64,7 @@
 		</div>
 		<button class="accordion"><span><img src="<?php echo esc_url( plugins_url('businessblueprint-ontra-members/public/image/other-info.svg') ) ?>" width="24" /> Website Link</span>  <span class="fa fa-plus"></span></button>
 		<div class="panel">
-		    <div class="website"><span class="label">Website </span><span class="text"><?php echo $this->website; ?></span></div>
+		    <div class="website"><span class="label">Website </span><span class="text"><?php echo (  $this->website  ) ?  $this->website : 'N/A'; ?></span></div>
 		</div>
 
 	</div>	

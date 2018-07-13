@@ -748,29 +748,6 @@ class Ontra_Members_Public {
 	
 		$this->business_type 		= $response[0]['TestDropBo_234'];
 		$this->owner 				= $this->getConsultant($response[0]['owner']);
-		$member_consultant 			= get_user_meta(get_current_user_id(), 'consultant', true);
-
-		if( $member_consultant ) 
-		{
-			if( $this->getConsultant($response[0]['owner']) != $member_consultant ) {
-
-				$member_consultant = update_user_meta( get_current_user_id(), 'consultant', $this->getConsultant($response[0]['owner']) );
-
-			}
-
-			$this->owner 		  = $member_consultant;
-		}
-		else 
-		{
-
-			$ontra_consultant	  = $this->getConsultant($response[0]['owner']);
-
-			add_user_meta( get_current_user_id(), 'consultant', $this->getConsultant($response[0]['owner']) );
-
-			$this->owner 		  = $this->getConsultant($response[0]['owner']);
-
-		}
-
 		$this->thumbnail		  = $this->get_profile_photo($response[0]['id']);
 		$this->yearlevel 		  = $this->getYearLevel($response[0]['BBYearLeve_258']);
 	}
