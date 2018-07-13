@@ -116,6 +116,7 @@ class Ontra_members {
 		add_shortcode( 'MBB_contactInfo', array( $plugin_public, 'get_contactInfo' ) );
 		add_shortcode( 'BB_get_customer_type', array( $plugin_public, 'get_member_type' ) );
 		add_shortcode( 'MBB_update_info', array( $plugin_public, 'generate_membership_form' ) );
+		add_shortcode( 'mbb_your_consultant', array( $plugin_public, 'your_consultant' ) );
 
 		$this->loader->add_action( 'wp_ajax_ontra_update_contact', $plugin_public, 'update_contact' );
 		$this->loader->add_action( 'wp_ajax_nopriv_ontra_update_contact', $plugin_public, 'update_contact' );

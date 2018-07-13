@@ -468,6 +468,36 @@ class Ontra_Members_Public {
     }
 
 
+    public function your_consultant() {
+      
+		//Get Email
+		$email = $this->getEmail();
+
+		//connect ontraport
+		$client = $this->ontraport;
+
+		//query ontraport database
+	    $queryParams = array(
+
+	          "condition"     => 
+	                             '[{
+				"field":{"field":"email"},
+				"op":"=",
+				"value":{"value":"'. $email .'"},
+				"listFields" => "owner",
+				}]'
+		);
+
+		$response 				= $client->contact()->retrieveMultiple($queryParams);
+		$response 				= json_decode($response, true);
+		$response 				= $response['data'];
+
+		$this->owner 			= $this->getConsultant($response[0]['owner']);
+    	return $this->owner;
+    }
+
+
+
 	/** 
 	*   Update Contact Page
 	*/
@@ -645,7 +675,8 @@ class Ontra_Members_Public {
 	                             '[{
 				"field":{"field":"email"},
 				"op":"=",
-				"value":{"value":"'. $email .'"}
+				"value":{"value":"'. $email .'"},
+				"listFields" => "id, firstname, lastname, website, address, address2, city, state, zip, country, cell_phone, office_phone, company, BBYearLeve_258, f1608, BBCustomer_165, JoinedBlue_174, RenewalDat_214, TestDropBo_234, owner",
 				}]'
 		);
 
