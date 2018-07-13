@@ -1180,7 +1180,6 @@ class Ontra_Members_Public {
 		$email = $user->user_email;
 
 			
-
 	    $queryParams = array(
 
 			          "condition"     => 
@@ -1219,13 +1218,14 @@ class Ontra_Members_Public {
 			$member_type = 'Elite Platinum';
 
 		}
-		else if( $response[0]['BBCustomer_165'] === '917' || $response[0]['BBCustomer_165'] === '1652' || $response[0]['BBCustomer_165'] === '1220' || $response[0]['BBCustomer_165'] === '1759' || $response[0]['BBCustomer_165'] === '982' && $response[0]['BBYearLeve_258'] !== '1204') {
-			$member_type = 'Elite Platinum';
-
-		}
 		else {
-			$member_type = '';
+			$member_type = 'N/A';
 		}
+		// else if( $response[0]['BBCustomer_165'] === '917' || $response[0]['BBCustomer_165'] === '1652' || $response[0]['BBCustomer_165'] === '1220' || $response[0]['BBCustomer_165'] === '1759' || $response[0]['BBCustomer_165'] === '982' && $response[0]['BBYearLeve_258'] !== '1204') {
+		// 	$member_type = 'Elite Platinum';
+
+		// }
+		
 		return  $member_type;
 
 	}
