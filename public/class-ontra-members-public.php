@@ -638,7 +638,7 @@ class Ontra_Members_Public {
 				"id"          	 => $this->get_ontraport_id(),
 		        "firstname"   	 => $firstname,
 		        "lastname"    	 => $lastname,
-		        "cell_phone"  	 => $mobile_phone,
+		        "cell_phone"  	 => $mobile_no,
 		        "address"     	 => $address,
 		        "address2"    	 => $address2,
 		        "city"        	 => $city,
