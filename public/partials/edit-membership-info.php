@@ -18,12 +18,12 @@
 			   <div class="col-sm-6">
 			   	  <label>First Name</label> 
 			   	  <span class="privacy-status"><input type="checkbox" name="hide_firstname" <?php echo ( get_user_meta(  $user_id , 'hide_firstname' ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
-			   	  <input type="text" name="firstname" value="<?php echo $this->firstname; ?>" class="form-control"  required/>
+			   	  <input type="text" name="firstname" value="<?php echo $this->firstname; ?>" class="form-control"  required disabled/>
 			   </div>
 
 			   <div class="col-sm-6">
 			      <label>Last Name</label> <span class="privacy-status"><input type="checkbox" name="hide_lastname" <?php echo ( get_user_meta(  $user_id , 'hide_lastname' ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
-			   	  <input type="text" name="lastname" value="<?php echo $this->lastname; ?>" class="form-control" required/>
+			   	  <input type="text" name="lastname" value="<?php echo $this->lastname; ?>" class="form-control" required disabled/>
 			   </div>
 
 			   <div class="col-sm-6">

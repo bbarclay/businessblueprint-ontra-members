@@ -45,15 +45,6 @@ class Ontra_Members_Public {
 		$this->version = $version;
 		$this->ontraport = $ontraport;
 
-		//This shortcode show member tasks.
-		
-		add_shortcode( 'BB_fastrackMember', array( $this, 'display_fasttrackmembers' ) );
-		add_shortcode( 'BB_EliteMember', array( $this, 'display_elitemembers' ) );
-		add_shortcode( 'BB_PastMember', array( $this, 'display_pastmembers' ) );
-		add_shortcode( 'bb_active_members', array( $this, 'display_active_members' ) );
-		add_shortcode( 'MBB_contactInfo', array( $this, 'get_contactInfo' ) );
-		add_shortcode( 'BB_get_customer_type', array( $this, 'get_member_type' ) );
-		add_shortcode( 'MBB_update_info', array( $this, 'generate_membership_form' ) );
 
 	}
 
