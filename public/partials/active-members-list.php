@@ -41,8 +41,16 @@
 	 	?>
 		   	   <div class="contact-item">
 					<div class="inner">
-						<div class="image <?php echo $this->get_color($list['owner']) ?>" style="background: url(<?php echo $this->get_thumbnail( $id ); ?>) center center / cover no-repeat;">
-							<?php echo wp_get_attachment_image( $id, 'custom-size') ?>
+						<?php 
+							$img_url = wp_get_attachment_url( $id );
+							if($img_url) {
+								$img_bg = $img_url;
+							} else {
+								$img_bg = $this->get_thumbnail( $id );
+							}	
+
+						?>
+						<div class="image <?php echo $this->get_color($list['owner']) ?>" style="background: url(<?php echo $img_bg ?>) center center / cover no-repeat;">
 						</div>	
 						<div class="detail">
 							
