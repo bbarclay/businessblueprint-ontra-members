@@ -56,7 +56,7 @@
 
 		    			} else {
 
-		    				echo "<div class='text'>You don't have an affiliate link yet! Please contact support</div>";
+		    				echo "<div class='text'>You don't have an affiliate link. Please contact support</div>";
 
 		    			}
 		    		?>

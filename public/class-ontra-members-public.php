@@ -70,6 +70,11 @@ class Ontra_Members_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ontra_members-public.js', array( 'jquery' ), $this->version, false );
 
+		  // wp_localize_script( $this->plugin_name, 'mybb_ontramembers', array( 
+    //     	'security' => wp_create_nonce('todo_post_once'),
+    //     ) );
+
+
 	}
 
 	public function get_fasttrack() 
@@ -509,17 +514,18 @@ class Ontra_Members_Public {
   	
   		$nonce = $_POST['update_ontra_field'];
 
-    	if( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'update_ontra_action' ) ) {
 
-    		die('Security issue');
+    	// if( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'update_ontra_action' ) ) {
 
-    	}
+    	// 	die('Security issue');
 
-    	if( ! $_POST['firstname'] ) {
+    	// }
 
-    		return new WP_Error('broke', __( "Firstname cannot be empty!") );	
+    	// if( ! $_POST['firstname'] ) {
 
-    	} 
+    	// 	return new WP_Error('broke', __( "Firstname cannot be empty!") );	
+
+    	// } 
 
 
      	$firstname 			= sanitize_text_field( $_POST['firstname'] );
@@ -660,7 +666,7 @@ class Ontra_Members_Public {
 
 		wp_redirect( $url );
 
-		exit;
+		die();
 
     }
 
@@ -748,8 +754,8 @@ class Ontra_Members_Public {
 	
 		$this->business_type 		= $response[0]['TestDropBo_234'];
 		$this->owner 				= $this->getConsultant($response[0]['owner']);
-		$this->thumbnail		  = $this->get_profile_photo($response[0]['id']);
-		$this->yearlevel 		  = $this->getYearLevel($response[0]['BBYearLeve_258']);
+		$this->thumbnail		    = $this->get_profile_photo($response[0]['id']);
+		$this->yearlevel 		    = $this->getYearLevel($response[0]['BBYearLeve_258']);
 	}
 
 
