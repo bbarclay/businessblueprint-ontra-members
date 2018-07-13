@@ -1090,10 +1090,10 @@ class Ontra_Members_Public {
 
 
 		switch($id) {
-			case '13':
+			case $id == '13':
 				return 'Beau Chase';
 				break;
-			case '22':
+			case $id == '22':
 				 return 'Luke Ahearn';
 				 break;
 			default:
