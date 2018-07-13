@@ -1093,7 +1093,7 @@ class Ontra_Members_Public {
 			case '13':
 				return 'Beau Chase';
 				break;
-			case $id == '22':
+			case '22':
 				 return 'Luke Ahearn';
 				 break;
 			default:
