@@ -21,8 +21,8 @@ $output .= '<h2>People registered on your link</h2>';
 
 if($referrals != false) {
     $data .= '<div class="table-wrap">';
-	$data .= '<table class="table-view">';
-	$data .= '<tr><th>#</th><th>Name</th><th>Email</th><th>City</th><th>Date</th><th>Attended</th></tr>';
+	$data .= '<table class="table-default-brand">';
+	$data .= '<thead><tr><th>#</th><th>Name</th><th>Email</th><th>City</th><th>Date</th><th>Attended</th></tr></thead><tbody>';
 
 	$count = $start;
 	foreach( $referrals as $row) {
@@ -37,7 +37,7 @@ if($referrals != false) {
 	}
 
 
-	$data .= '</table>';
+	$data .= '</tbody></table>';
 	$data .= '</div>';
 }
 else {
@@ -47,14 +47,14 @@ else {
 if($members) {
 
     $data2 .= '<div class="table-wrap">';
-	$data2 .= '<table class="table-view">';
+	$data2 .= '<table class="table-default-brand">';
 	$data2 .= '<tr><th>#</th><th>First Name</th><th>Last Name</th><th>Membership Level</th><th>Referral Fee</th><th>Start Date</th><th>Payment Due</th><th>Paid</th></tr>';
 
 	$count = 1;
 	foreach( $members as $row) {
 
 	    $data2 .= '<tr>';
-	      $data2 .= '<td>' . $count . '</td><td>'. $row['firstname'] . '</td><td>'. $row['lastname'] . '</td><td>'.  $row['member_type']  . '</td><td>'.  $row['referral_fee'] . '</td><td>' .  $row['joined_date'] . '</td><td>'.   $row['payment_date'] .'</td><td>'.   olr_is_paid( $row['is_paid'] ) .'</td>';
+	      $data2 .= '<td>' . $count . '</td><td>'. $row['firstname'] . '</td><td>'. $row['lastname'] . '</td><td>'.  $row['member_type']  . '</td><td>'.  $row['referral_fee'] . '</td><td>' .  $row['joined_date'] . '</td><td>'.   $row['payment_date'] .'</td><td>'.   $this->is_paid( $row['is_paid'] ) .'</td>';
 	    $data2 .= '</tr>';
 
 

@@ -238,6 +238,16 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 
 		  }
 
+		 public function is_paid( $value = '') {
+
+		   if($value == true) {
+		      $output = 'YES';
+		   }
+		   else {
+		      $output = ' ';
+		   }
+		   return $output;
+		 }
 
 		public function user_email() {
 		  $current_user = wp_get_current_user();

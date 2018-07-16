@@ -108,13 +108,6 @@ class Ontra_members {
 		$affiliate_center = new MyBB_Affiliate_Centre( $this->ontraport );
 		$link_builder     = new LinkBuilder();
 
-		$this->loader->add_action( 'wp_ajax_ontra_update_contact', $plugin_public, 'update_contact' );
-		$this->loader->add_action( 'wp_ajax_nopriv_ontra_update_contact', $plugin_public, 'update_contact' );
-		$this->loader->add_action( 'wp_ajax_nopriv_upload_user_photo', $plugin_public, 'upload_user_photo' );
-		$this->loader->add_action( 'wp_ajax_upload_user_photo', $plugin_public, 'upload_user_photo' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
 
 		add_shortcode( 'BB_fastrackMember', array( $plugin_public, 'display_fasttrackmembers' ) );
 		add_shortcode( 'BB_EliteMember', array( $plugin_public, 'display_elitemembers' ) );
@@ -125,6 +118,12 @@ class Ontra_members {
 		add_shortcode( 'MBB_update_info', array( $plugin_public, 'generate_membership_form' ) );
 		add_shortcode( 'mbb_your_consultant', array( $plugin_public, 'your_consultant' ) );
 
+		$this->loader->add_action( 'wp_ajax_ontra_update_contact', $plugin_public, 'update_contact' );
+		$this->loader->add_action( 'wp_ajax_nopriv_ontra_update_contact', $plugin_public, 'update_contact' );
+		$this->loader->add_action( 'wp_ajax_nopriv_upload_user_photo', $plugin_public, 'upload_user_photo' );
+		$this->loader->add_action( 'wp_ajax_upload_user_photo', $plugin_public, 'upload_user_photo' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 
