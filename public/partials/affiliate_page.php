@@ -20,8 +20,8 @@ $output .= '<h2>People registered on your link</h2>';
 
 
 if($referrals != false) {
-    $data .= '<div class="table-wrap">';
-	$data .= '<table class="table-default-brand">';
+    $data .= '<div class="table-responsive">';
+	$data .= '<table class="table table-default-brand" cellpadding="0">';
 	$data .= '<thead><tr><th>#</th><th>Name</th><th>Email</th><th>City</th><th>Date</th><th>Attended</th></tr></thead><tbody>';
 
 	$count = $start;
@@ -46,9 +46,9 @@ else {
 
 if($members) {
 
-    $data2 .= '<div class="table-wrap">';
-	$data2 .= '<table class="table-default-brand">';
-	$data2 .= '<tr><th>#</th><th>First Name</th><th>Last Name</th><th>Membership Level</th><th>Referral Fee</th><th>Start Date</th><th>Payment Due</th><th>Paid</th></tr>';
+    $data2 .= '<div class="table-responsive">';
+	$data2 .= '<table class="table table-default-brand" cellpadding="0">';
+	$data2 .= '<thead><tr><th>#</th><th>First Name</th><th>Last Name</th><th>Membership Level</th><th>Referral Fee</th><th>Start Date</th><th>Payment Due</th><th>Paid</th></tr><thead><tbody>';
 
 	$count = 1;
 	foreach( $members as $row) {
@@ -62,7 +62,7 @@ if($members) {
 	}
 
 
-	$data2 .= '</table>';
+	$data2 .= '</tbody></table>';
 	$data2 .= '</div>';
 }
 else {
