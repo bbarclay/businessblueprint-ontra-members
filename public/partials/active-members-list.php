@@ -1,6 +1,6 @@
 <?php 
 
- 	 $page = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+ 	$page = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
 	$lists = $this->get_active_members($page); 
 
@@ -36,10 +36,12 @@
 	 	  $state     	= $list['StateAUS_131'];
 
 
-
+	 	  $url = site_url() . '/profile/?ontraport_id=' . $id . '';
 	 	 if( ! $show_firstname || ! $show_lastname ) :
 	 	?>
-		   	   <div class="contact-item">
+	 		<div class="contact-item">
+	 			<a href="<?php echo esc_url( $url); ?>">
+		   	   
 					<div class="inner">
 						<?php 
 							$img_url = wp_get_attachment_url( $id );
@@ -55,27 +57,6 @@
 						<div class="detail">
 							
 						    <h4 class="name"><?php echo $firstname . ' ' . $lastname ?></h4>
-  							<?php if( $website  && $show_website  || $email && $show_email || !empty( $mobile ) && $show_mobile  ) : ?>	
-								    <ul class="contact">
-								    	<?php 
-								    		if( $website  && $show_website ) :
-								    	?>
-								    			<li><a href="http://<?php echo $website; ?>" target="_blank"><span class="fa fa-globe"></span>Website</a></li>
-								    	<?php 
-								    		endif;
-								    		if( $email  && $show_email ) :
-								    	?>
-								    			<li><a href="mailto:<?php echo $email; ?>"><span class="fa fa-envelope"></span>Email</a></li>
-								    	<?php 
-								    		endif;
-								    		if( $cellphone && $show_mobile ) :
-								    	?>
-								    			<li><a href="tel:<?php echo $cellphone; ?>"><span class="fa fa-phone"></span>Phone</a></li>
-								    	<?php
-								    		endif;
-								    	?>
-								    </ul>
-								<?php endif; ?> 
 						    
 						    <?php   if( ! $show_state ) : 
 
@@ -87,22 +68,12 @@
 						   	<?php   endif; ?>	
 						   	
 
-						   	<?php if( $company ||  $office_phone ) : ?>
-								    <ul class="company-detail">
-								    	<?php if( $company && $show_company ) : ?>
-								    		<li><span>Company : </span><span><?php echo $company; ?></span></li>
-								    	<?php 
-								    		endif;
-								    		if( $office_phone && $show_office_no ) :
-								    	?>	
-								    		<li><span>Office No : </span><span><?php echo $office_phone; ?></span></li>
-								    	<?php endif; ?>	
-								    </ul>
-							<?php endif; ?>
 							
 						</div>
 					</div>
-				</div>
+				
+				</a>
+			</div>
 		<?php endif; ?>
 	<?php endforeach; ?>
 				

@@ -384,9 +384,9 @@ class Ontra_Members_Public {
 
 	    ob_start();		
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/active-members-list.php';
-        $content = ob_get_clean();
-
-        return $content; 
+	    $output_string = ob_get_contents();
+	    ob_end_clean();
+	    return $output_string;
     }
 
 
@@ -406,9 +406,10 @@ class Ontra_Members_Public {
 
 		ob_start();	
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/fasttrack-members-list.php'; 
-   		$content = ob_get_clean();
 
-   		return $content;
+		$output_string = ob_get_contents();
+		ob_end_clean();
+		return $output_string;
     }
 
 	/** 
@@ -427,9 +428,9 @@ class Ontra_Members_Public {
 
 		ob_start();	
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/elite-members-list.php'; 
-    	$content = ob_get_clean();
-
-    	return $content;
+		$output_string = ob_get_contents();
+		if (ob_get_contents()) ob_end_clean();
+		return $output_string;
     }
 
 	/** 
@@ -449,7 +450,10 @@ class Ontra_Members_Public {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/past-members-list.php'; 
     	$content = ob_get_clean();
 
-    	return $content;
+		$output_string = ob_get_contents();
+
+		if (ob_get_contents()) ob_end_clean();
+		return $output_string;
     }
 
 
@@ -467,9 +471,9 @@ class Ontra_Members_Public {
 
 		ob_start();
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/edit-membership-info.php'; 
-    	$content = ob_get_clean();
-
-    	return $content;
+		$output_string = ob_get_contents();
+		if (ob_get_contents()) ob_end_clean();
+		return $output_string;
     }
 
 
@@ -504,7 +508,6 @@ class Ontra_Members_Public {
 		$this->owner 			= $this->getConsultant($response[0]['owner']);
     	return $this->owner;
     }
-
 
 
 	/** 
@@ -698,9 +701,7 @@ class Ontra_Members_Public {
 		$userID 				= get_current_user_id();
 
 		if( ! $this->get_ontraport_id() ) {
-
 			$this->set_ontraport_id( $this->id );
-			
 		}
 
 		$this->firstname 		= $response[0]['firstname'];
@@ -721,41 +722,100 @@ class Ontra_Members_Public {
 	    $this->affiliate_link  = str_replace('*****', $this->id, $aff_link );
 
 		if( !empty( $response[0]['BBCustomer_165'] ) ) {
-
 			$this->customer_type 	= $this->getCustomerType($response[0]['BBCustomer_165']);
-
 		}
 		else {
-
 			$this->customer_type 	= "N/A";
-
 		}
 
 		if( !empty( $response[0]['JoinedBlue_174'] ) ) {
-
 			$this->joined_date		= date('m-d-Y', $response[0]['JoinedBlue_174']);
-
 		}
 		else {
-
 			$this->joined_date 		= "N/A";
 		}
 
 		if( !empty( $response[0]['RenewalDat_214'] ) ) {
-
 			$this->renew_date		= date('m-d-Y',$response[0]['RenewalDat_214']);
-
 		}
 		else {
-
 			$this->renew_date 		= "N/A";
-
 		}
 	
 		$this->business_type 		= $response[0]['TestDropBo_234'];
 		$this->owner 				= $this->getConsultant($response[0]['owner']);
 		$this->thumbnail		    = $this->get_profile_photo($response[0]['id']);
 		$this->yearlevel 		    = $this->getYearLevel($response[0]['BBYearLeve_258']);
+	}
+
+
+	/**
+	 * Get user's ontraport information
+	 * @param  int   $id  Ontraport Id
+	 * @return strings          
+	 */
+	public function get_single_user($id) {
+
+		$id = esc_attr($id);
+
+		//connect ontraport
+		$client = $this->ontraport;
+
+		//query ontraport database
+	    $queryParams = array(
+
+	          "id" => $id
+		);
+
+	    //response from ontraport server
+		$response 				= $client->contact()->retrieveSingle($queryParams);
+		$response 				= json_decode($response, true);
+		$response 				= $response['data'];
+		$this->id 				= $id;
+
+		$this->firstname 		= $response['firstname'];
+		$this->lastname 		= $response['lastname'];
+		$this->website   		= $response['website'];
+		$this->address 			= $response['address'];
+		$this->address2 		= $response['address2'];
+		$this->city 			= $response['city'];
+		$this->state 			= $response['state'];
+		$this->zipcode 			= $response['zip'];
+		$this->country 			= $response['country'];
+		$this->mobile_no 		= $response['cell_phone'];
+		$this->office_no 		= $response['office_phone'];
+		$this->company 			= $response['company'];
+		$this->email 			= $response['email'];
+		$this->year_level 		= $this->getYearLevel($response['BBYearLeve_258']);
+	    $aff_link               = $response['f1608'];
+
+	    $this->affiliate_link  = str_replace('*****', $this->id, $aff_link );
+
+		if( !empty( $response['BBCustomer_165'] ) ) {
+			$this->customer_type 	= $this->getCustomerType($response['BBCustomer_165']);
+		}
+		else {
+			$this->customer_type 	= "N/A";
+		}
+
+		if( !empty( $response['JoinedBlue_174'] ) ) {
+			$this->joined_date		= date('m-d-Y', $response['JoinedBlue_174']);
+		}
+		else {
+			$this->joined_date 		= "N/A";
+		}
+
+		if( !empty( $response['RenewalDat_214'] ) ) {
+			$this->renew_date		= date('m-d-Y',$response['RenewalDat_214']);
+		}
+		else {
+			$this->renew_date 		= "N/A";
+		}
+	
+		$this->business_type 		= $response['TestDropBo_234'];
+		$this->owner 				= $this->getConsultant($response['owner']);
+		$this->thumbnail		    = $this->get_profile_photo($response['id']);
+		$this->yearlevel 		    = $this->getYearLevel($response['BBYearLeve_258']);
 	}
 
 
@@ -769,9 +829,24 @@ class Ontra_Members_Public {
 		ob_start();
 		$this->getContactMeta();
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/profile.php';
-		$content = ob_get_clean();
+	    $output_string = ob_get_contents();
+	    if (ob_get_contents()) ob_end_clean();
+	    return $output_string;
+	}
 
-		return $content;
+	/**
+	 *  Display user profile
+	 * @return [type] [description]
+	 */
+	public function user_profile()
+	{	
+
+		ob_start();
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/single-profile.php';
+	    $output_string = ob_get_contents();
+	    if (ob_get_contents()) ob_end_clean();
+	    return $output_string;
+
 	}
 
 	public function getMeta( $type ) {
@@ -1070,8 +1145,6 @@ class Ontra_Members_Public {
 	  }
 
 
-
-
 	public function getConsultant($id) {
 
 
@@ -1111,11 +1184,12 @@ class Ontra_Members_Public {
 				 return 'BB Platinum - Ruby Pass';
 				 break;	 
 			default:
-				return 'Support';
+				return '';
 				break;	 
 		}	
-
 	}
+
+
 
 
 	public function get_country($code) {
