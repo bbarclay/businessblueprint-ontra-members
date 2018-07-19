@@ -80,11 +80,12 @@
 						<span>Renewal Date</span><span class="text"><?php echo (  $this->renew_date ) ?  $this->renew_date : 'N/A'; ?></span>
 					</div>
 				</div>
-
+	            <?php if( $show_website ) : ?>
 				<button class="accordion"><span><img src="<?php echo esc_url( plugins_url('businessblueprint-ontra-members/public/image/other-info.svg') ) ?>" width="24" /> Website Link</span>  <span class="fa fa-plus"></span></button>
 				<div class="panel">
 				    <div class="website"><span class="label">Website </span><span class="text"><?php echo (  $this->website  ) ?  $this->website : 'N/A'; ?></span></div>
 				</div>
+				<?php endif ?>
 
 			</div>	
 		</section>
