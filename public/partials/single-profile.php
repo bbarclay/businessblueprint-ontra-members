@@ -61,7 +61,7 @@
 				    	<?php if( $show_address ) : ?>
 				    			<div class="location">
 				    				<span class="label">Address </span>
-				    				<span class="text"><?php echo $this->address; ?> <?php echo ( $this->address2 ) ? ',' . $this->address2: ''; ?><?php echo $this->city; ?><?php echo ( $this->state ) ? ',' . $this->state: ''; ?> <?php echo $this->get_country( $this->country ); ?>  <?php echo $this->zipcode; ?> </span>
+				    				<span class="text"><?php echo $this->address; ?><?php echo ( $this->address2 ) ? ', ' . $this->address2: ''; ?><?php echo $this->city; ?><?php echo ( $this->state ) ? ', ' . $this->state: ''; ?> <?php echo $this->get_country( $this->country ); ?>  <?php echo $this->zipcode; ?> </span>
 				    			</div>
 				    	<?php endif; ?>
 				</div>
