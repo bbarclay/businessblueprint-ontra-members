@@ -55,9 +55,9 @@
 				    	<?php if( $this->office_no && $show_office_no ) : ?>
 				    		<div class="contact"><span class="label">Office No </span><span class="text"><?php echo $this->office_no; ?></span></div>
 				    	<?php endif; ?>
-				    	<?php if( $show_email ) :?>
-				    			<div class="email"><span class="label">Email </span><span class="text"><?php echo $this->email; ?></span></div>
-				    	<?php endif; ?>		
+				    	
+				    		<div class="email"><span class="label">Email </span><span class="text"><?php echo ( $this->email &&  $show_email ) ? $this->email: 'Private'; ?></span></div>
+				    
 				    	<?php if( $show_address ) : ?>
 				    			<div class="location">
 				    				<span class="label">Address </span>

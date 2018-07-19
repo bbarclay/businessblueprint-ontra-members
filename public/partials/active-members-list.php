@@ -63,12 +63,6 @@
 						   			  echo 	'<span class="state"><span class="fa fa-map-marker"></span> ' . $this->get_state( $state ) . '</span>';
 
 						    	 	endif; ?>
-						    <?php   if( $show_address ) : ?>
-						   				 <p><?php echo $address . ','; ?> <?php echo ( $address2 ) ?  $address2 . ',': '' ; ?> <?php echo $city; ?> <?php echo $zip; ?></p>
-						   	<?php   endif; ?>	
-						   	
-
-							
 						</div>
 					</div>
 				
