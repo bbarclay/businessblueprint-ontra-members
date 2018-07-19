@@ -40,7 +40,7 @@
 	 	 if( ! $show_firstname || ! $show_lastname ) :
 	 	?>
 	 		<div class="contact-item">
-	 			<a href="<?php echo esc_url( $url); ?>">
+	 			<a href="<?php echo esc_url( $url); ?>" target="_blank">
 		   	   
 					<div class="inner">
 						<?php 
