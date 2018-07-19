@@ -36,7 +36,7 @@
 	     	var fileExtension = file.substr( file.lastIndexOf('.') + 1 );
 
 
-	     	if( fileExtension != "jpg" && fileExtension != "jpeg"  && fileExtension != "png" ) {
+	     	if( fileExtension != "jpg" && fileExtension != "jpeg"  && fileExtension != "png" && fileExtension != "JPG" && fileExtension != "JPEG" && fileExtension != "PNG"  ) {
 
 	     		if( $(this).hasClass('input-error') == false ) {
 
@@ -160,7 +160,7 @@
 	     		
 	     		});
 	     }
-	     submit_edit_profile();
+	     //submit_edit_profile();
 
 
 

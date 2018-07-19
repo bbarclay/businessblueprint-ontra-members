@@ -60,17 +60,17 @@
 								    	<?php 
 								    		if( $website  && $show_website ) :
 								    	?>
-								    			<li><a href="<?php echo $website; ?>" target="_blank"><span class="fa fa-globe"></span>Website</a></li>
+								    			<li><a href="http://<?php echo $website; ?>" target="_blank"><span class="fa fa-globe"></span>Website</a></li>
 								    	<?php 
 								    		endif;
 								    		if( $email  && $show_email ) :
 								    	?>
-								    			<li><a href="<?php echo $email; ?>" target="_blank"><span class="fa fa-envelope"></span>Email</a></li>
+								    			<li><a href="mailto:<?php echo $email; ?>"><span class="fa fa-envelope"></span>Email</a></li>
 								    	<?php 
 								    		endif;
 								    		if( $cellphone && $show_mobile ) :
 								    	?>
-								    			<li><a href="<?php echo $cellphone; ?>"><span class="fa fa-phone"></span>Phone</a></li>
+								    			<li><a href="tel:<?php echo $cellphone; ?>"><span class="fa fa-phone"></span>Phone</a></li>
 								    	<?php
 								    		endif;
 								    	?>

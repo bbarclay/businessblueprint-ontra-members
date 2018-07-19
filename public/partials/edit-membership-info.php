@@ -18,22 +18,22 @@
 			   <div class="col-sm-6">
 			   	  <label>First Name</label> 
 			   	  <span class="privacy-status"><input type="checkbox" name="hide_firstname" <?php echo ( get_user_meta(  $user_id , 'hide_firstname' ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
-			   	  <input type="text" name="firstname" value="<?php echo $this->firstname; ?>" class="form-control"  required/>
+			   	  <input type="text" name="firstname" value="<?php echo $this->firstname; ?>" style="color: #bfbcbc;" readonly="readonly"   class="form-control"  required/>
 			   </div>
 
 			   <div class="col-sm-6">
 			      <label>Last Name</label> <span class="privacy-status"><input type="checkbox" name="hide_lastname" <?php echo ( get_user_meta(  $user_id , 'hide_lastname' ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
-			   	  <input type="text" name="lastname" value="<?php echo $this->lastname; ?>" class="form-control" required/>
+			   	  <input type="text" name="lastname" value="<?php echo $this->lastname; ?>" style="color: #bfbcbc;  class="form-control" readonly="readonly" required/>
 			   </div>
 
 			   <div class="col-sm-6">
 			      <label>Address</label> <span class="privacy-status"><input type="checkbox" name="show_address" <?php echo ( !get_user_meta(  $user_id , 'show_address' ) == 1 ) ? "checked='checked'": ""; ?>> Hide Complete Address</span><br>
-			   	  <input type="text" name="address" value="<?php echo $this->address; ?>" class="form-control" required/>
+			   	  <input type="text" name="address" value="<?php echo $this->address; ?>"  class="form-control"required/>
 			   </div>
 
 			   <div class="col-sm-6">
 			      <label>Address 2</label><br>
-			   	  <input type="text" name="address2" value="<?php echo $this->address2; ?>" class="form-control" required/>
+			   	  <input type="text" name="address2" value="<?php echo $this->address2; ?>" class="form-control" />
 			   </div>
 
 			   <div class="col-sm-6">
@@ -69,7 +69,7 @@
 			   <div class="col-sm-6">
 			      <label>Company</label> 
 			      <span class="privacy-status"><input type="checkbox" name="show_company" <?php echo ( !get_user_meta(  $user_id , 'show_company' ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
-			   	  <input type="text" name="company" value="<?php echo $this->company; ?>" class="form-control" required/>
+			   	  <input type="text" name="company" value="<?php echo $this->company; ?>" class="form-control" />
 			   </div>
 
 			   <div class="col-sm-6" id="businessType">
@@ -84,7 +84,7 @@
 
 			   <div class="col-sm-6">
 			      <label>Office No.</label> <span class="privacy-status"><input type="checkbox" name="show_office_no" <?php echo ( !get_user_meta(  $user_id , 'show_office_no' ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
-			   	  <input type="text" name="office_no" value="<?php echo $this->office_no; ?>" class="form-control" required/>
+			   	  <input type="text" name="office_no" value="<?php echo $this->office_no; ?>" class="form-control" />
 			   </div>
 
 			   <div class="col-sm-12">
