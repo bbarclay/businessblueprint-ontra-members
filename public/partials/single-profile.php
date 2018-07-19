@@ -18,7 +18,7 @@
 
 	if( $id && $active_member != 'N/A') : ?>
 
-		<button  class="button  button--alt  button--login button__login  button--wide" onclick="goBack()">Back </button>
+		<!-- <button  id="backButton" class="button  button--alt  button--login button__login  button--wide" onclick="goBack()">Back </button> -->
 		<section class="module module__membership">		
 		  <div class="profile">	
 
@@ -89,11 +89,6 @@
 
 			</div>	
 		</section>
-		<script>
-		function goBack() {
-		    window.history.back();
-		}
-		</script>
 <?php 
 
 else:
