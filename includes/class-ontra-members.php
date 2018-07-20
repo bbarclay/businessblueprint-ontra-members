@@ -111,9 +111,9 @@ class Ontra_members {
 
 		add_shortcode( 'BB_fastrackMember', array( $plugin_public, 'display_fasttrackmembers' ) );
 		add_shortcode( 'BB_EliteMember', array( $plugin_public, 'display_elitemembers' ) );
-	    add_shortcode( 'BB_PastMember', array( $plugin_public, 'display_pastmembers' ) );
-		// add_shortcode( 'bb_active_members', array( $plugin_public, 'display_active_members' ) );
-		// add_shortcode( 'MBB_contactInfo', array( $plugin_public, 'get_contactInfo' ) );
+	    //add_shortcode( 'BB_PastMember', array( $plugin_public, 'display_pastmembers' ) );
+		add_shortcode( 'bb_active_members', array( $plugin_public, 'display_active_members' ) );
+		add_shortcode( 'MBB_contactInfo', array( $plugin_public, 'get_contactInfo' ) );
 		// add_shortcode( 'mbb_get_customer_type', array( $plugin_public, 'get_member_type' ) );
 		// add_shortcode( 'MBB_update_info', array( $plugin_public, 'generate_membership_form' ) );
 		// add_shortcode( 'mbb_your_consultant', array( $plugin_public, 'your_consultant' ) );
