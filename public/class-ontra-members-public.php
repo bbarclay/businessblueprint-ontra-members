@@ -517,158 +517,153 @@ class Ontra_Members_Public {
   		$nonce = $_POST['update_ontra_field'];
 
 
-    	// if( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'update_ontra_action' ) ) {
+    	if( ! isset( $_POST['update_ontra_field'] ) || ! wp_verify_nonce( $_REQUEST['update_ontra_field'], 'update_ontra_action') ) {
 
-    	// 	die('Security issue');
+    		die('Sorry unable to verify nonce');
 
-    	// }
+    	}
+    	else {
 
-    	// if( ! $_POST['firstname'] ) {
+		     	$firstname 			= sanitize_text_field( $_POST['firstname'] );
+		     	$lastname 			= sanitize_text_field( $_POST['lastname'] );
+				$address 			= sanitize_text_field( $_POST['address'] );
+				$address2 			= sanitize_text_field( $_POST['address2'] );
+				$city 				= sanitize_text_field( $_POST['city'] );
+				$state 				= sanitize_text_field( $_POST['state'] );
+				$zip				= sanitize_text_field( $_POST['zip'] );
+		     	$mobile_no 			= sanitize_text_field( $_POST['mobile_no'] );
+		     	$company 			= sanitize_text_field( $_POST['company'] );
+		     	$business_type 		= sanitize_text_field( $_POST['business_type'] );
+		     	$website 			= sanitize_text_field( $_POST['website'] );
+		     	$office_phone 		= sanitize_text_field( $_POST['office_no'] );
 
-    	// 	return new WP_Error('broke', __( "Firstname cannot be empty!") );	
-
-    	// } 
-
-
-     	$firstname 			= sanitize_text_field( $_POST['firstname'] );
-     	$lastname 			= sanitize_text_field( $_POST['lastname'] );
-		$address 			= sanitize_text_field( $_POST['address'] );
-		$address2 			= sanitize_text_field( $_POST['address2'] );
-		$city 				= sanitize_text_field( $_POST['city'] );
-		$state 				= sanitize_text_field( $_POST['state'] );
-		$zip				= sanitize_text_field( $_POST['zip'] );
-     	$mobile_no 			= sanitize_text_field( $_POST['mobile_no'] );
-     	$company 			= sanitize_text_field( $_POST['company'] );
-     	$business_type 		= sanitize_text_field( $_POST['business_type'] );
-     	$website 			= sanitize_text_field( $_POST['website'] );
-     	$office_phone 		= sanitize_text_field( $_POST['office_no'] );
-
-     	$hide_firstname 	= sanitize_text_field( $_POST['hide_firstname'] );
-     	$hide_lastname 		= sanitize_text_field( $_POST['hide_lastname'] );
-		$show_address 		= sanitize_text_field( $_POST['show_address'] );
-		$show_mobile_no	 	= sanitize_text_field( $_POST['show_mobile'] );
-		$hide_state	 		= sanitize_text_field( $_POST['hide_state'] );
-		$show_company 		= sanitize_text_field( $_POST['show_company'] );
-     	$show_business_type = sanitize_text_field( $_POST['show_business_type'] );
-     	$show_website 		= sanitize_text_field( $_POST['show_website'] );
-     	$show_office_phone 	= sanitize_text_field( $_POST['show_office_no'] );
-     	$show_email	 		= sanitize_text_field( $_POST['show_email'] );
+		     	$hide_firstname 	= sanitize_text_field( $_POST['hide_firstname'] );
+		     	$hide_lastname 		= sanitize_text_field( $_POST['hide_lastname'] );
+				$show_address 		= sanitize_text_field( $_POST['show_address'] );
+				$show_mobile_no	 	= sanitize_text_field( $_POST['show_mobile'] );
+				$hide_state	 		= sanitize_text_field( $_POST['hide_state'] );
+				$show_company 		= sanitize_text_field( $_POST['show_company'] );
+		     	$show_business_type = sanitize_text_field( $_POST['show_business_type'] );
+		     	$show_website 		= sanitize_text_field( $_POST['show_website'] );
+		     	$show_office_phone 	= sanitize_text_field( $_POST['show_office_no'] );
+		     	$show_email	 		= sanitize_text_field( $_POST['show_email'] );
 
 
-     	$user_id = $this->get_ontraport_id();
+		     	$user_id = $this->get_ontraport_id();
 
-     	$meta_value = array(
-     			'hide_firstname' => 1,
-     			'hide_lastname' => 1,
-     			'hide_state' => 1,
-     			'show_address' => 1,
-     			'show_mobile' => 1,
-     			'show_email' => 1,
-     			'show_company' => 1,
-     			'show_business_type' => 1,
-     			'show_website' => 1,
-     			'show_office_no' => 1,
+		     	$meta_value = array(
+		     			'hide_firstname' => 1,
+		     			'hide_lastname' => 1,
+		     			'hide_state' => 1,
+		     			'show_address' => 1,
+		     			'show_mobile' => 1,
+		     			'show_email' => 1,
+		     			'show_company' => 1,
+		     			'show_business_type' => 1,
+		     			'show_website' => 1,
+		     			'show_office_no' => 1,
 
-     		);
+		     		);
 
-     	update_user_meta( $user_id, 'ontra_member_fields', $meta_value );
+		     	update_user_meta( $user_id, 'ontra_member_fields', $meta_value );
 
-		if( !empty($hide_firstname) ) {
-			update_user_meta( $user_id, 'hide_firstname', 1);
-		} else {
-			delete_user_meta( $user_id, 'hide_firstname', 1);
-		}
+				if( !empty($hide_firstname) ) {
+					update_user_meta( $user_id, 'hide_firstname', 1);
+				} else {
+					delete_user_meta( $user_id, 'hide_firstname', 1);
+				}
 
-		if( !empty($hide_lastname) ) {
-			update_user_meta( $user_id, 'hide_lastname', 1);
-		} else {
-			delete_user_meta( $user_id, 'hide_lastname', 1);
-		}
+				if( !empty($hide_lastname) ) {
+					update_user_meta( $user_id, 'hide_lastname', 1);
+				} else {
+					delete_user_meta( $user_id, 'hide_lastname', 1);
+				}
 
-		if( !empty( $hide_state ) ) {
-			update_user_meta( $user_id, 'hide_state', 1);
-		} else {
-			delete_user_meta( $user_id, 'hide_state', 1);
-		}
+				if( !empty( $hide_state ) ) {
+					update_user_meta( $user_id, 'hide_state', 1);
+				} else {
+					delete_user_meta( $user_id, 'hide_state', 1);
+				}
 
-		if( empty($show_address) ) {
-			update_user_meta( $user_id, 'show_address', 1);
-		} else {
-			delete_user_meta( $user_id, 'show_address', 1);
-		}
-     	
-     	if( empty($show_mobile_no) ) {
-			update_user_meta( $user_id, 'show_mobile', 1);
-		} else {
-			delete_user_meta( $user_id, 'show_mobile', 1);
-		}
+				if( empty($show_address) ) {
+					update_user_meta( $user_id, 'show_address', 1);
+				} else {
+					delete_user_meta( $user_id, 'show_address', 1);
+				}
+		     	
+		     	if( empty($show_mobile_no) ) {
+					update_user_meta( $user_id, 'show_mobile', 1);
+				} else {
+					delete_user_meta( $user_id, 'show_mobile', 1);
+				}
 
-		if( empty($show_email) ) {
-			update_user_meta( $user_id, 'show_email', 1);
-		} else {
-			delete_user_meta( $user_id, 'show_email', 1);
-		}
+				if( empty($show_email) ) {
+					update_user_meta( $user_id, 'show_email', 1);
+				} else {
+					delete_user_meta( $user_id, 'show_email', 1);
+				}
 
-		if( empty($show_company) ) {
-			update_user_meta( $user_id, 'show_company', 1);
-		} else {
-			delete_user_meta( $user_id, 'show_company', 1);
-		}
+				if( empty($show_company) ) {
+					update_user_meta( $user_id, 'show_company', 1);
+				} else {
+					delete_user_meta( $user_id, 'show_company', 1);
+				}
 
-		if( empty($show_business_type) ) {
-			update_user_meta( $user_id, 'show_business_type', 1);
-		} else {
-			delete_user_meta( $user_id, 'show_business_type', 1);
-		}
+				if( empty($show_business_type) ) {
+					update_user_meta( $user_id, 'show_business_type', 1);
+				} else {
+					delete_user_meta( $user_id, 'show_business_type', 1);
+				}
 
-		if( empty($show_website) ) {
-			update_user_meta( $user_id, 'show_website', 1);
-		} else {
-			delete_user_meta( $user_id, 'show_website', 1);
-		}
+				if( empty($show_website) ) {
+					update_user_meta( $user_id, 'show_website', 1);
+				} else {
+					delete_user_meta( $user_id, 'show_website', 1);
+				}
 
-		if( empty($show_office_phone) ) {
-			add_user_meta( $user_id, 'show_office_no', 1);
-		} else {
-			delete_user_meta( $user_id, 'show_office_no', 1);
-		}
-
-
-		$client 		= $this->ontraport;
-
-	    $queryParams = array(
-				"id"          	 => $this->get_ontraport_id(),
-		        "firstname"   	 => $firstname,
-		        "lastname"    	 => $lastname,
-		        "cell_phone"  	 => $mobile_no,
-		        "address"     	 => $address,
-		        "address2"    	 => $address2,
-		        "city"        	 => $city,
-		        "StateAUS_131"   => $state,
-		        "zip"         	 => $zip,
-		        "company"        => $company,
-		        "TestDropBo_234" => $business_type,
-		        "website"        => $website,
-		        "office_phone"   => $office_phone,  
-		);
+				if( empty($show_office_phone) ) {
+					add_user_meta( $user_id, 'show_office_no', 1);
+				} else {
+					delete_user_meta( $user_id, 'show_office_no', 1);
+				}
 
 
-		$response = $client->contact()->update($queryParams);
-		$response = json_decode($response, true);
-		$response = $response['data'];
+				$client 		= $this->ontraport;
+
+			    $queryParams = array(
+						"id"          	 => $this->get_ontraport_id(),
+				        "firstname"   	 => $firstname,
+				        "lastname"    	 => $lastname,
+				        "cell_phone"  	 => $mobile_no,
+				        "address"     	 => $address,
+				        "address2"    	 => $address2,
+				        "city"        	 => $city,
+				        "StateAUS_131"   => $state,
+				        "zip"         	 => $zip,
+				        "company"        => $company,
+				        "TestDropBo_234" => $business_type,
+				        "website"        => $website,
+				        "office_phone"   => $office_phone,  
+				);
 
 
-		if( $_FILES['file'] ) {
-			$this->upload_user_photo( $_FILES['file'], $this->get_ontraport_id() );
-		}
+				$response = $client->contact()->update($queryParams);
+				$response = json_decode($response, true);
+				$response = $response['data'];
+
+
+				if( $_FILES['file'] ) {
+					$this->upload_user_photo( $_FILES['file'], $this->get_ontraport_id() );
+				}
 
 
 
-		$url = site_url() . '/your-profile';
+				$url = site_url() . '/your-profile';
 
-		wp_redirect( $url );
+				wp_redirect( $url );
 
-		die();
+				die();
+		}	
 
     }
 
