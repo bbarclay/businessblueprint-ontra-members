@@ -114,10 +114,10 @@ class Ontra_members {
 	    //add_shortcode( 'BB_PastMember', array( $plugin_public, 'display_pastmembers' ) );
 		add_shortcode( 'bb_active_members', array( $plugin_public, 'display_active_members' ) );
 		add_shortcode( 'MBB_contactInfo', array( $plugin_public, 'get_contactInfo' ) );
-		// add_shortcode( 'mbb_get_customer_type', array( $plugin_public, 'get_member_type' ) );
-		// add_shortcode( 'MBB_update_info', array( $plugin_public, 'generate_membership_form' ) );
-		// add_shortcode( 'mbb_your_consultant', array( $plugin_public, 'your_consultant' ) );
-		// add_shortcode( 'mbb_user_profile', array( $plugin_public, 'user_profile' ) );
+		add_shortcode( 'mbb_get_customer_type', array( $plugin_public, 'get_member_type' ) );
+		add_shortcode( 'MBB_update_info', array( $plugin_public, 'generate_membership_form' ) );
+		add_shortcode( 'mbb_your_consultant', array( $plugin_public, 'your_consultant' ) );
+		add_shortcode( 'mbb_user_profile', array( $plugin_public, 'user_profile' ) );
 
 		$this->loader->add_action( 'wp_ajax_ontra_update_contact', $plugin_public, 'update_contact' );
 		$this->loader->add_action( 'wp_ajax_nopriv_ontra_update_contact', $plugin_public, 'update_contact' );
