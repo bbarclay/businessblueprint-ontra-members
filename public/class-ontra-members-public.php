@@ -428,6 +428,7 @@ class Ontra_Members_Public {
 
 		ob_start();	
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/elite-members-list.php'; 
+        
 		$output_string = ob_get_contents();
 		if (ob_get_contents()) ob_end_clean();
 		return $output_string;
@@ -448,6 +449,7 @@ class Ontra_Members_Public {
 
 		ob_start();	
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/past-members-list.php'; 
+
 		$output_string = ob_get_contents();
 		if (ob_get_contents()) ob_end_clean();
 		return $output_string;
