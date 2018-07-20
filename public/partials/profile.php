@@ -14,7 +14,7 @@
 	   			<span class="label">Name <span class="text"><?php echo $this->firstname; ?> <?php echo $this->lastname; ?></span></span>
 	   		</div>
 	   		<div class="inner-info">
-	    		<span class="label">Company <span class="text"><?php echo $this->company ?></span></span>
+	    		<span class="label">Company <span class="text"><?php echo ( $this->company ) ? $this->company : ''; ?></span></span>
 	    	</div>
 	   		<div class="inner-info">	
 				<span class="label">Business Type <span class="text">

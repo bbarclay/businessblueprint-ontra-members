@@ -126,7 +126,7 @@ class Ontra_Members_Public {
 			    );
 
 
-			  $response = $this->ontraport->connect()->contact()->retrieveMultiple($queryParams);
+			  $response = $client->contact()->retrieveMultiple($queryParams);
 			  $response = json_decode($response, true);
 			  $response = $response['data'];
 
@@ -385,7 +385,7 @@ class Ontra_Members_Public {
 	    ob_start();		
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/active-members-list.php';
 	    $output_string = ob_get_contents();
-	    ob_end_clean();
+	    if (ob_get_contents()) ob_end_clean();
 	    return $output_string;
     }
 
@@ -408,7 +408,7 @@ class Ontra_Members_Public {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/fasttrack-members-list.php'; 
 
 		$output_string = ob_get_contents();
-		ob_end_clean();
+		if (ob_get_contents()) ob_end_clean();
 		return $output_string;
     }
 
@@ -448,10 +448,7 @@ class Ontra_Members_Public {
 
 		ob_start();	
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/past-members-list.php'; 
-    	$content = ob_get_clean();
-
 		$output_string = ob_get_contents();
-
 		if (ob_get_contents()) ob_end_clean();
 		return $output_string;
     }
