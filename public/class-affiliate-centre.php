@@ -51,9 +51,11 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 		   $pagination  = $this->display_pagination($id);
 		   $members 	= $this->get_blueprint_referrals($id);
 		 
+		  ob_start();	
 		  require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/affiliate_page.php';
-
-		  return $output;
+		  $output_string = ob_get_contents();
+	      if (ob_get_contents()) ob_end_clean();
+	      return $output_string;
 
 		}
 
