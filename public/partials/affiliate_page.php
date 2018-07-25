@@ -18,7 +18,6 @@
 
 $output .= '<h2>People registered on your link</h2>';
 
-
 if($referrals != false) {
     $data .= '<div class="table-responsive">';
 	$data .= '<table class="table table-default-brand" cellpadding="0">';

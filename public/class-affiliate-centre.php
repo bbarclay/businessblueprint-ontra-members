@@ -15,10 +15,9 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
    		*
    		*
    		**/
-   		public function __construct(Ontraport_API $ontraport ) {
-			$this->ontraport = $ontraport;
-   			add_shortcode('mbb_affiliate_centre', array( $this, 'affiliate_centre' ) );
-
+   		public function __construct( $ontraport  ) {
+		
+   			$this->ontraport = $ontraport;
    		}	
 
    		/**
@@ -43,19 +42,17 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 		 
 
 
-		   $response = $this->ontraport->connect()->contact()->retrieveMultiple($queryParams);
+		   $response = $this->ontraport->contact()->retrieveMultiple($queryParams);
 		   $response = json_decode($response, true);
 		   $id 		 = (int)$response['data'][0]['id'];
 
 		   $referrals   = $this->get_referrals($id); 
 		   $pagination  = $this->display_pagination($id);
 		   $members 	= $this->get_blueprint_referrals($id);
-		 
-		  ob_start();	
+			
+
 		  require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/affiliate_page.php';
-		  $output_string = ob_get_contents();
-	      if (ob_get_contents()) ob_end_clean();
-	      return $output_string;
+	      return $output;
 
 		}
 
@@ -93,7 +90,7 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 		    );
 		 
 
-		    $response = $this->ontraport->connect()->contact()->retrieveMultiple($queryParams);
+		    $response = $this->ontraport->contact()->retrieveMultiple($queryParams);
 		    $res = json_decode($response, true);
 
 
@@ -156,7 +153,7 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 		 
 
 
-		  $response = $this->ontraport->connect()->contact()->retrieveMultiple($queryParams);
+		  $response = $this->ontraport->contact()->retrieveMultiple($queryParams);
 		  $resx = json_decode($response, true);
 
 		  //return $resx;
@@ -251,12 +248,18 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 		   return $output;
 		 }
 
+		 /**
+		  * Get User email
+		  * @return [type] [description]
+		  */
 		public function user_email() {
 		  $current_user = wp_get_current_user();
 		  $user_email   = $current_user->user_email;
 
 		  return  $user_email;
 		}
+
+
 		/**
    		*
    		*  Display pagination links
@@ -318,7 +321,7 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 
 	          );
 
-	          $response = $this->ontraport->connect()->contact()->retrieveCollectionInfo($query);
+	          $response = $this->ontraport->contact()->retrieveCollectionInfo($query);
 	          $response = json_decode($response, true);
 	          $count = $response["data"]["count"];
 

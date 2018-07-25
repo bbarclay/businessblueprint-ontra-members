@@ -105,7 +105,7 @@ class Ontra_members {
 	private function define_public_hooks() {
 
 		$plugin_public 	  = new Ontra_Members_Public( $this->get_plugin_name(), $this->get_version(), $this->ontraport->connect());
-		$affiliate_center = new MyBB_Affiliate_Centre( $this->ontraport );
+		$affiliate_center = new MyBB_Affiliate_Centre( $this->ontraport->connect() );
 		$link_builder     = new LinkBuilder();
 
 
@@ -118,6 +118,7 @@ class Ontra_members {
 		add_shortcode( 'MBB_update_info', array( $plugin_public, 'generate_membership_form' ) );
 		add_shortcode( 'mbb_your_consultant', array( $plugin_public, 'your_consultant' ) );
 		add_shortcode( 'mbb_user_profile', array( $plugin_public, 'user_profile' ) );
+		add_shortcode( 'mbb_affiliate_centre', array( $affiliate_center, 'affiliate_centre' ) );
 
 		$this->loader->add_action( 'wp_ajax_ontra_update_contact', $plugin_public, 'update_contact' );
 		$this->loader->add_action( 'wp_ajax_nopriv_ontra_update_contact', $plugin_public, 'update_contact' );
@@ -144,7 +145,6 @@ class Ontra_members {
 	public function get_version() {
 		return $this->version;
 	}
-
 
 
 }
