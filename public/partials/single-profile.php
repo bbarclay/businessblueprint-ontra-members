@@ -65,21 +65,6 @@
 				    			</div>
 				    	<?php endif; ?>
 				</div>
-				<button class="accordion"><span><img src="<?php echo esc_url( plugins_url('businessblueprint-ontra-members/public/image/customer-info.svg') ) ?>" width="24" /> Membership Info</span>  <span class="fa fa-plus"></span></button>
-				<div class="panel">
-					<div class="label">
-						<span>Customer Type</span><span class="text"><?php echo ( $this->customer_type ) ? $this->customer_type: 'N/A'; ?></span>
-					</div>
-					<div class="label">
-						<span>Year Level</span><span class="text"><?php echo ( $this->yearlevel ) ? $this->yearlevel : 'N/A';?></span>
-					</div>
-					<div class="label">
-						<span>Joined Date</span><span class="text"><?php echo ( $this->joined_date ) ? $this->joined_date : 'N/A';  ?></span>
-					</div>
-					<div class="label">
-						<span>Renewal Date</span><span class="text"><?php echo (  $this->renew_date ) ?  $this->renew_date : 'N/A'; ?></span>
-					</div>
-				</div>
 	            <?php if( $show_website ) : ?>
 				<button class="accordion"><span><img src="<?php echo esc_url( plugins_url('businessblueprint-ontra-members/public/image/other-info.svg') ) ?>" width="24" /> Website Link</span>  <span class="fa fa-plus"></span></button>
 				<div class="panel">
