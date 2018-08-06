@@ -46,8 +46,14 @@ class Ontra_members {
 
 
 		/**
-		 * The class is Ontaport API
+		 *  The Core Ontraport Library
 		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/lib/ontraport/Ontraport.php';
+
+		/**
+		 * The class is use to connect Ontaport API
+		 */
+		
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/lib/ontraport-api.php';
 
 
@@ -60,6 +66,10 @@ class Ontra_members {
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/members/class-members.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/members/class-fasttrack.php';
+
+
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ontra-members-public.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-affiliate-centre.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-link-builder.php';
@@ -104,6 +114,7 @@ class Ontra_members {
 	 */
 	private function define_public_hooks() {
 
+
 		$plugin_public 	  = new Ontra_Members_Public( $this->get_plugin_name(), $this->get_version(), $this->ontraport->connect());
 		$affiliate_center = new MyBB_Affiliate_Centre( $this->ontraport->connect() );
 		$link_builder     = new LinkBuilder();
@@ -111,7 +122,6 @@ class Ontra_members {
 
 		add_shortcode( 'BB_fastrackMember', array( $plugin_public, 'display_fasttrackmembers' ) );
 		add_shortcode( 'BB_EliteMember', array( $plugin_public, 'display_elitemembers' ) );
-	    //add_shortcode( 'BB_pastMember', array( $plugin_public, 'display_pastmembers' ) );
 		add_shortcode( 'bb_active_members', array( $plugin_public, 'display_active_members' ) );
 		add_shortcode( 'MBB_contactInfo', array( $plugin_public, 'get_contactInfo' ) );
 		add_shortcode( 'mbb_get_customer_type', array( $plugin_public, 'get_member_type' ) );
@@ -120,6 +130,10 @@ class Ontra_members {
 		add_shortcode( 'mbb_user_profile', array( $plugin_public, 'user_profile' ) );
 		add_shortcode( 'mbb_affiliate_centre', array( $affiliate_center, 'affiliate_centre' ) );
 
+		//add_shortcode( 'BB_pastMember', array( $plugin_public, 'display_pastmembers' ) );
+
+		$this->loader->add_action( 'wp_ajax_search_ontra', $plugin_public, 'searchMembers' );
+		$this->loader->add_action( 'wp_ajax_nopriv_search_ontra', $plugin_public, 'searchMembers' );
 		$this->loader->add_action( 'wp_ajax_ontra_update_contact', $plugin_public, 'update_contact' );
 		$this->loader->add_action( 'wp_ajax_nopriv_ontra_update_contact', $plugin_public, 'update_contact' );
 		$this->loader->add_action( 'wp_ajax_nopriv_upload_user_photo', $plugin_public, 'upload_user_photo' );

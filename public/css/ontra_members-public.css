@@ -10,32 +10,37 @@
     font-size: 1.1em !important;
 }
 .ontramember-list .member .bg-Orange {
+    padding: .5em;
+
     background: #f15d22 !important;
-    padding: 0.5em;
 }
 
 .mbb-form {
     position: relative;
 }
 .mbb-form label {
-    color: #737171; 
-    margin-top: 10px;
     display: inline-block;
-    font-family: 'Geogrotesque-SemiBold', sans-serif;
+    margin-top: 10px;
+
+    font-family: "Geogrotesque-SemiBold", sans-serif;
+    font-size: 20px;
+
+    color: #737171;
     color: #002749;
-    font-size: 20px;      
 }
-.mbb-form input[type="text"], 
+.mbb-form input[type="text"],
 .mbb-form input[type="email"],
 .mbb-form input[type="url"],
-.mbb-form select {
-    margin-bottom: 10px;
+.mbb-form select,
+.mbb-form textarea {
     width: 100%;
-    background: #f5f4f4;
+    margin-bottom: 10px;
+
     border: 1px solid #e8e6e6;
     border-radius: 3px;
-    -webkit-box-shadow: inset 0px 1px 1px 1px #f1efef;
-    box-shadow: inset 0px 1px 1px 1px #f1efef;
+    background: #f5f4f4;
+    -webkit-box-shadow: inset 0 1px 1px 1px #f1efef;
+            box-shadow: inset 0 1px 1px 1px #f1efef;
 }
 
 .mbb-form input[type="text"].input-error,
@@ -45,8 +50,9 @@
 
 .mbb-form input[type="file"] {
     display: inline-block;
+    margin: 5px 0 2px 0;
+
     border: 0;
-    margin: 5px 0 2px 0;   
     background: transparent;
 }
 .mbb-form input[type="file"]:focus {
@@ -56,48 +62,137 @@
 
 .mbb-form .title {
     margin-bottom: 20px;
+
     border-bottom: 1px solid #f1f1f1;
 }
 
 .mbb-form input[type="submit"] {
-	max-width: 150px;
-	margin: 10px auto;
     display: block;
+    max-width: 150px;
+    margin: 10px auto;
+
     color: #fff;
-    border-radius: 3px;
     border: 0;
+    border-radius: 3px;
 }
 
 .mbb-form .spin-loader {
-    display: none;
     position: fixed;
-    z-index: 110;
     top: 0;
     left: 0;
-    height: 100%;
+    z-index: 110;
+
+    display: none;
     width: 100%;
-    background: rgba(0,0,0,0.4);
+    height: 100%;
+
+    background: rgba(0,0,0,.4);
 }
 
 .mbb-form .spin-loader span {
-    font-size: 50px;
-    color: #000000;
     position: absolute;
-    z-index: 100;
     top: calc(50% - 29px);
     left: calc(50% - 29px);
+    z-index: 100;
+
+    font-size: 50px;
+
     transform: translate(-50%, -50%);
+
+    color: #000;
 }
 
 .mbb-form .error-message {
-    color: #f15d22;
-    font-size: 17px;
     display: block;
+
+    font-size: 17px;
+
+    color: #f15d22;
 }
 .mbb-form .label-default {
-    background: #d5f5bd;
     display: block;
-    color: #4d792b;
     padding: 10px;
+
+    color: #4d792b;
     border-radius: 3px;
+    background: #d5f5bd;
+}
+
+.contact-pagination {
+    margin-top: 25px;
+
+    text-align: center;
+}
+
+
+/**
+ * Members Directory
+ */
+.member-contact-listing {
+    margin: 0 -10px !important;
+}
+.mbb-form.inline-group {
+    padding: 10px 10px;
+
+    background: #f5f5f5;
+}
+.mbb-form #searchMembers {
+    width: 300px;
+    margin: 0;
+
+    background: #fff;
+}
+.member-contact-listing .contact-item .detail {
+    min-height: 80px !important;
+}
+.mbb-form #searchByState {
+    width: 250px;
+    margin: 0;
+
+    background: #fff;
+}
+.mbb-form #searchDirectory {
+    height: 45px;
+    padding: 10px 20px;
+
+    vertical-align: top;
+
+    background: #7ac143;
+}
+.mbb-form #searchDirectory:hover {
+    background: #00274c;
+}
+.mbb-form #clearSearch {
+    float: right;
+    padding: 0 15px;
+
+    line-height: 45px;
+}
+.mbb-form #clearSearch:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+.member-contact-listing > p {
+    display: block;
+    padding: 0 15px;
+
+    text-align: center;
+}
+
+
+@media screen and ( max-width: 835px ) {
+    .mbb-form #searchMembers,
+    .mbb-form #searchByState {
+        width: 100%;
+        margin-bottom: 5px;
+
+        border-radius: 0;
+    }
+    .mbb-form submit,
+    .mbb-form #clearSearch {
+        width: 50%;
+        margin: 5px 0;
+
+        border-radius: 0;
+    }
 }

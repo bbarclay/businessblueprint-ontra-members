@@ -35,6 +35,7 @@ class Ontra_Members_Public {
 	public $yearlevel; 
 	public $active_members;
 	public $affiliate_link;
+	public $about_me;
 	protected $ontraport;
 	private $plugin_name;
 	private $version;
@@ -68,12 +69,16 @@ class Ontra_Members_Public {
 	*/
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ontra_members-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'ontra-members', plugin_dir_url( __FILE__ ) . 'js/ontra_members-public.js', array( 'jquery' ), $this->version, false );
 
-		  // wp_localize_script( $this->plugin_name, 'mybb_ontramembers', array( 
-    //     	'security' => wp_create_nonce('todo_post_once'),
-    //     ) );
+        wp_localize_script( 
+           'ontra-members', 
+           'search_members', 
+           array( 
+              'ajax_url' => admin_url('admin-ajax.php'),
+              'security' => wp_create_nonce('ontra_security_action', 'ontra_security_field')
 
+        ) );
 
 	}
 
@@ -154,12 +159,27 @@ class Ontra_Members_Public {
 
 	}
 
+	private function defaultPagination( $max = 50, $total = '')
+	{
+		if( empty($total) )
+		{
+			return false;
+		}
+
+		if( $total % $max ) {
+	        $lists =  ( $total / $max ) + 1;
+	    }
+	    else {
+	        $lists =  ( $total / $max );
+	    }
+	}
+
 	public function get_active_members($page_number = '')
 	{
 		$client = $this->ontraport;
 
 	   	$max = 50;
-	    $total = $this->get_total_active_members();
+	    $total = $this->get_total_active_members($client);
 
 
 		if( $total % $max ) {
@@ -170,37 +190,33 @@ class Ontra_Members_Public {
 	    }
 
 
+	    $start = ($page_number > 1) ? $page_number * $max : 0;
+	    $range = 50;
 
-	     $start = ($page_number > 1) ? $page_number * $max : 0;
-	     $range = 50;
-
-	     $contact = [];
+	    $contact = [];
          
 
-	    	  $queryParams = array(
-			          "condition"     => 
-			                             '[
-	                             {
-			                              "field":{"field":"BBCustomer_165"},
-			                              "op":"IN",
-										   "value":{"list":[{"value":802},{"value":800}]}
-			                     }
-			                       ]',
+    	$queryParams = array(
+		          "condition"     => 
+		                      '[{
+	                              "field":{"field":"BBCustomer_165"},
+	                              "op":"IN",
+								   "value":{"list":[{"value":802},{"value":800}]}
+		                       }]',
 
-			         "listFields" => "id, firstname, lastname, email, cell_phone, address, address2, city, StateAUS_131, zip, company, TestDropBo_234, website, office_phone, BBCustomer_165, JoinedBlue_174,  BBYearLeve_258",
-			         "start" => $start,
-		        	 "range" => $range,
-		        	 'sort' => 'firstname',
-		        	 'sortDir' => 'asc'                  
-			    );
-  
-			  $response = $this->ontraport->contact()->retrieveMultiple($queryParams);
-			  $response = json_decode($response, true);
-			  $response = $response['data'];
-			
-			  $contact = array_merge($contact, $response);
+		         "listFields" => "id, firstname, lastname,StateAUS_131",
+		         "start" => $start,
+	        	 "range" => $range,
+	        	 'sort' => 'firstname',
+	        	 'sortDir' => 'asc'                  
+		);
+
+		$response = $this->ontraport->contact()->retrieveMultiple($queryParams);
+		$response = json_decode($response, true);	
+		$response = $response['data'];
+
+		$contact  = array_merge($contact, $response);
 			  
-
 	   return $contact;
 	}
 
@@ -223,6 +239,216 @@ class Ontra_Members_Public {
 
           return $count;
     }
+
+	public function searchMembers()
+	{
+		$start   = (int)$_POST['start'];
+		$range   = (int)$_POST['end'];
+		$name    = sanitize_text_field( $_POST['name'] );
+		$state   = intval( $_POST['stateId'] );
+
+		if( ! isset( $_POST['security'] ) || ! check_ajax_referer( 'ontra_security_action', 'security') ) {
+			return wp_send_json_error();
+		}
+
+		if( current_user_can('subscriber') &&  current_user_can('administrator') ) {
+			return wp_send_json_error();
+		}
+
+    	
+    	$contact = [];
+ 
+
+    	if( $name && empty( $state ) ) {
+
+    		// Count total entries
+			$query = array(
+				"search"	 => $name,
+			    "condition"  => 
+	                      '[{
+                              "field":{"field":"BBCustomer_165"},
+                              "op":"IN",
+							   "value":{"list":[{"value":802},{"value":800}]}
+	                       }]',
+	        );
+
+	    	// Query the name only
+	    	$queryParams = array(
+	    			 "search"	 => $name,
+			          "condition"     => 
+			                      '[{
+		                              "field":{"field":"BBCustomer_165"},
+		                              "op":"IN",
+									   "value":{"list":[{"value":802},{"value":800}]}
+			                       }]',
+
+			         "listFields" => "id, firstname, lastname,StateAUS_131",
+		        	 'sort' => 'firstname',
+		        	 "start" => $start,
+		  			 "range" => $range,
+		        	 'sortDir' => 'asc',
+			);
+
+	    } 
+
+
+	    if( $state && empty( $name ) ) {
+
+	    	// Count total entries
+			$query = array(
+			          "condition"     => 
+	                      '[{
+                              "field":{"field":"BBCustomer_165"},
+                              "op":"IN",
+							   "value":{"list":[{"value":802},{"value":800}]}
+	                       },
+	                       "AND",
+	                       {
+	                       	  "field":{"field":"StateAUS_131"},
+	                       	  "op":"=",
+	                       	  "value": {"value": "'. $state .'"}
+	                       }]',
+	         );
+
+
+	    	// Query the state only
+	    	$queryParams = array(
+			          "condition"     => 
+			                      '[{
+		                              "field":{"field":"BBCustomer_165"},
+		                              "op":"IN",
+									   "value":{"list":[{"value":802},{"value":800}]}
+			                       },
+			                       "AND",
+			                       {
+			                       	  "field":{"field":"StateAUS_131"},
+			                       	  "op":"=",
+			                       	  "value": {"value": "'. $state .'"}
+			                       }]',
+
+			         "listFields" => "id, firstname, lastname,StateAUS_131",
+		        	 'sort' => 'firstname',
+		        	 "start" => $start,
+		  			 "range" => $range,
+		        	 'sortDir' => 'asc',
+			);
+
+	    } 
+
+
+		// Query if name and state is filled up
+    	if( $name && $state )  {
+
+
+    		// Count total entries
+			$query = array(
+				"search"	 => $name,
+			    "condition"  => 
+	                      '[{
+                              "field":{"field":"BBCustomer_165"},
+                              "op":"IN",
+							   "value":{"list":[{"value":802},{"value":800}]}
+	                       },
+	                       "AND",
+			                {
+			                       	  "field":{"field":"StateAUS_131"},
+			                       	  "op":"=",
+			                       	  "value": {"value": "'. $state .'"}
+			                }]',
+	        );
+
+
+	    	// Query the name only
+	    	$queryParams = array(
+	    			  "search"	 => $name,
+			          "condition"     => 
+			                      '[{
+		                              "field":{"field":"BBCustomer_165"},
+		                              "op":"IN",
+									   "value":{"list":[{"value":802},{"value":800}]}
+			                       },
+			                       "AND",
+			                       {
+			                       	  "field":{"field":"StateAUS_131"},
+			                       	  "op":"=",
+			                       	  "value": {"value": "'. $state .'"}
+			                       }]',
+
+			         "listFields" => "id, firstname, lastname,StateAUS_131",
+		        	 'sort' => 'firstname',
+		        	 "start" => $start,
+		  			 "range" => $range,
+		        	 'sortDir' => 'asc',
+			);
+
+    	} 
+
+    	if( empty( $name ) && empty( $state ) ) {
+
+	    	// Count total entries
+			$query = array(
+			          "condition"     => 
+	                      '[{
+                              "field":{"field":"BBCustomer_165"},
+                              "op":"IN",
+							   "value":{"list":[{"value":802},{"value":800}]}
+	                       }]',
+	        );
+
+	    	/// Query all members
+	    	$queryParams = array(
+			          "condition"     => 
+			                      '[{
+		                              "field":{"field":"BBCustomer_165"},
+		                              "op":"IN",
+									   "value":{"list":[{"value":802},{"value":800}]}
+			                       }]',
+
+			         "listFields" => "id, firstname, lastname,StateAUS_131",
+		        	 'sort' => 'firstname',
+		        	 "start" => $start,
+		  			 "range" => $range,
+		        	 'sortDir' => 'asc',
+		        	 );
+	    }
+
+	    //Count All entries
+	    $response = $this->ontraport->contact()->retrieveCollectionInfo($query);
+        $response = json_decode($response, true);
+        $count 	  = $response["data"]["count"];
+
+
+        // Contat List
+		$response = $this->ontraport->contact()->retrieveMultiple($queryParams);
+		$response = json_decode($response, true);
+		$total_contact = count( $response['data'] );
+
+	
+		for( $x = 0; $x < $total_contact;  $x++ )
+		{
+
+			$contact[$x]['id'] 			 = $response['data'][$x]['id'];  
+			$contact[$x]['firstname'] 	 = $response['data'][$x]['firstname']; 
+			$contact[$x]['lastname'] 	 = $response['data'][$x]['lastname']; 
+			$contact[$x]['StateAUS_131'] = $response['data'][$x]['StateAUS_131']; 
+			$contact[$x]['owner'] 		 = $response['data'][$x]['owner'];  
+			$contact[$x]['link'] 		 = site_url() . '/profile?ontraport_id=' . $response['data'][$x]['id'];
+			$contact[$x]['photo'] 		 = $this->get_profile_photo($response['data'][$x]['id']);
+
+		}
+
+		//$contact  = array_merge($contact, $response);
+
+		$pages 	  = ceil( $count  / 50 );
+
+		$response = array('success' => true, 'data' => $contact, 'total' => $count, 'pages' => $pages );
+
+		return wp_send_json_success($response);
+
+
+	}
+
+
 
 
 	public function get_elite() 
@@ -390,6 +616,8 @@ class Ontra_Members_Public {
     }
 
 
+
+
 	/** 
 	*   Display FastTrack
 	*/
@@ -524,6 +752,7 @@ class Ontra_Members_Public {
     	}
     	else {
 
+    			$about 				= wp_strip_all_tags( $_POST['about_me']);
 		     	$firstname 			= sanitize_text_field( $_POST['firstname'] );
 		     	$lastname 			= sanitize_text_field( $_POST['lastname'] );
 				$address 			= sanitize_text_field( $_POST['address'] );
@@ -566,6 +795,12 @@ class Ontra_Members_Public {
 		     		);
 
 		     	update_user_meta( $user_id, 'ontra_member_fields', $meta_value );
+
+		     	if( !empty($about) ) {
+					update_user_meta( $user_id, 'about_me', $about);
+				} else {
+					delete_user_meta( $user_id, 'about_me');
+				}
 
 				if( !empty($hide_firstname) ) {
 					update_user_meta( $user_id, 'hide_firstname', 1);
@@ -740,6 +975,9 @@ class Ontra_Members_Public {
 		$this->owner 				= $this->getConsultant($response[0]['owner']);
 		$this->thumbnail		    = $this->get_profile_photo($response[0]['id']);
 		$this->yearlevel 		    = $this->getYearLevel($response[0]['BBYearLeve_258']);
+
+
+		$this->about_me = get_user_meta( $this->id, 'about_me', true );
 	}
 
 
@@ -810,6 +1048,7 @@ class Ontra_Members_Public {
 		$this->owner 				= $this->getConsultant($response['owner']);
 		$this->thumbnail		    = $this->get_profile_photo($response['id']);
 		$this->yearlevel 		    = $this->getYearLevel($response['BBYearLeve_258']);
+		$this->about_me 			= get_user_meta( $this->id, 'about_me', true );
 	}
 
 
@@ -818,14 +1057,14 @@ class Ontra_Members_Public {
     *
     */
 	public function get_contactInfo() {
-
-		
+	
 		ob_start();
 		$this->getContactMeta();
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/profile.php';
 	    $output_string = ob_get_contents();
 	    if (ob_get_contents()) ob_end_clean();
 	    return $output_string;
+
 	}
 
 	/**
@@ -1184,8 +1423,6 @@ class Ontra_Members_Public {
 	}
 
 
-
-
 	public function get_country($code) {
 
 		switch($code) {
@@ -1318,13 +1555,34 @@ class Ontra_Members_Public {
     	
     }
 
+    /** 
+	*   Thumbnail for user profile
+	*
+	*  @param int Ontraport ID
+	*  @return url of the image
+	*/
+    public function get_photo_ajax( $id ) {
+
+    	// Check if user has user photo in the meta table
+        $image = get_user_meta( $id, 'user_photo', true );  
+
+        if( $image ) {
+        	return wp_get_attachment_url($image);
+        }
+
+    	return $this->get_defaultThumbnail();
+    	
+    }
+
+
+
 	/** 
 	*   Thumbnail for user profile
 	*
 	*  @param int Ontraport ID
 	*  @param bool 
 	*/
-    public function get_thumbnail($id) {
+    public function get_thumbnail( $id ) {
 
     	// Check if user has user photo in the meta table
         $image = get_user_meta( $id, 'user_photo', true );  
@@ -1345,7 +1603,7 @@ class Ontra_Members_Public {
 
     }
 
-    public function get_color($owner) {
+    public function get_color( $owner ) {
 
     	if($owner == '22') {
     		$output = 'bg-Blue';

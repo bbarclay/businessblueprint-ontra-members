@@ -1,18 +1,14 @@
 <?php
 
-//Add Base PHP
-require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/ontraport/Ontraport.php';
-
 //Use Ontraport 
 use Ontraport_API\Ontraport;
 
 
 class Ontraport_API {
 
-    public $client;
- 	protected $api_ID;
- 	protected $api_Key;
- 	public static $instance = null;
+ 	public $client;
+ 	protected $api_id;
+ 	protected $api_key;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -23,18 +19,25 @@ class Ontraport_API {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
+	public function __construct() 
+	{
  
+        $this->api_id = get_option( 'ontrabb_appid' );
+        $this->api_key = get_option( 'ontrabb_appkey' );
 
-        $this->api_ID = get_option( 'ontrabb_appid' );
-        $this->api_Key = get_option( 'ontrabb_appkey' );
 
 	}  
 
-    public function connect() {
-         
-        $this->client = new Ontraport( $this->api_ID, $this->api_Key );
 
+	/**
+	 * [connect description]
+	 * @return [type] [description]
+	 */
+    public function connect() 
+    {
+         
+        $this->client = new Ontraport(  $this->api_id, $this->api_key );
+        
         return $this->client;
          
     }

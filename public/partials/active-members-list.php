@@ -1,10 +1,38 @@
 <?php 
-
  	$page = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-
 	$lists = $this->get_active_members($page); 
-
 ?>
+<form action="<?php echo esc_url( admin_url('admin-ajax') )  ?>" class="mbb-form inline-group" autocomplete="off">
+    <input type="hidden" value="search_ontra" name="action" />
+    <?php wp_nonce_field( 'search_members_action', 'search_members_field' ); ?>
+	<input type="text" name="search" id="searchMembers" placeholder="Search by name" />
+	<?php 
+		$states = [
+			'747' => 'New South Wales', 
+			'748' => 'Victoria',
+			'749' => 'Queensland',
+			'750' => 'Western Australia',
+			'751' => 'South Australia',
+			'752' => 'Tasmania',
+			'753' => 'Australian Capital Territory',
+			'754' => 'Northern Territory',
+			'763' => 'Outside Australia'
+		] 
+
+	?>
+	<select name="state" id="searchByState">
+			<option value="">Select State</option>
+		<?php foreach($states as $key => $value) : ?>
+			<option value="<?php echo $key ?>"><?php  echo $value; ?></option>
+		<?php endforeach ?>
+	</select>
+	<div class="spin-loader">
+	    <span class="fa fa-spinner fa-spin spin-normal"></span>
+	</div>
+	<submit type="submit" class="button" id="searchDirectory">Search</submit>
+	<span id="clearSearch" class="button">Clear</span>
+</form>
+
 <div class="member-contact-listing">
 								
 	 <?php foreach( $lists as $list ) : 
@@ -13,26 +41,11 @@
 
 	 	  $show_firstname = get_user_meta( $id, 'hide_firstname', true); 
 	 	  $show_lastname  = get_user_meta( $id, 'hide_lastname', true);
-	 	  $show_website   = get_user_meta( $id, 'show_website', true);
-	 	  $show_email     = get_user_meta( $id, 'show_email', true);
-	 	  $show_mobile    = get_user_meta( $id, 'show_mobile', true);
-	 	  $show_address   = get_user_meta( $id, 'show_address', true);
-	 	  $show_company   = get_user_meta( $id, 'show_company', true);
-	 	  $show_office_no = get_user_meta( $id, 'show_office_no', true);
 	 	  $show_state 	  = get_user_meta( $id, 'show_state', true);
 
 
 	 	  $firstname 	= $list['firstname'];
 	 	  $lastname  	= $list['lastname'];
-	 	  $website   	= $list['website'];
-	 	  $email     	= $list['email'];
-	 	  $cellphone 	= $list['cell_phone'];
-	 	  $address   	= $list['address'];
-	 	  $address2  	= $list['address2'];
-	 	  $city      	= $list['city'];
-	 	  $zip       	= $list['zip'];
-	 	  $company     	= $list['company'];
-	 	  $office_phone = $list['office_phone'];
 	 	  $state     	= $list['StateAUS_131'];
 
 
@@ -50,12 +63,10 @@
 							} else {
 								$img_bg = $this->get_thumbnail( $id );
 							}	
-
 						?>
-						<div class="image <?php echo $this->get_color($list['owner']) ?>" style="background: url(<?php echo $img_bg ?>) center center / cover no-repeat;">
+						<div class="image" style="background: url(<?php echo $img_bg ?>) center center / cover no-repeat;">
 						</div>	
 						<div class="detail">
-							
 						    <h4 class="name"><?php echo $firstname . ' ' . $lastname ?></h4>
 						    
 						    <?php   if( ! $show_state ) : 
@@ -65,12 +76,13 @@
 						    	 	endif; ?>
 						</div>
 					</div>
-				
 				</a>
 			</div>
 		<?php endif; ?>
 	<?php endforeach; ?>
 				
 </div>
+<div class="contact-pagination">
 <?php echo  $this->display_pagination(); ?>	
+</div>
 

@@ -31,11 +31,13 @@
 				   			<span class="label">Name <span class="text"><?php echo ( $this->firstname && !$hide_firstname) ? $this->firstname: ''; ?> <?php echo ( $this->lastname && !$hide_lastname) ? $this->lastname: ''; ?></span></span>
 				   		</div>
 			   		<?php endif; ?>
-					<?php if( $this->company && $show_company ) : ?>
-				   		<div class="inner-info">
-				    		<span class="label">Company <span class="text"><?php echo $this->company ?></span></span>
-				    	</div>
-			    	<?php endif; ?>
+				   	<div class="inner-info">
+				   			<?php if( $this->company && $show_company ) : ?>
+				    			<span class="label">Company <span class="text"><?php echo $this->company ?></span></span>
+				    		<?php else: ?>
+				    			<span class="label">Company <span class="text hidden">Private</span></span>
+				    		<?php endif; ?>	
+				    </div>
 			   		<div class="inner-info">	
 						<span class="label">Business Type <span class="text">
 					   <?php echo $this->getOntraportValue($this->business_type, 'business_type');  ?></span></span>
@@ -68,12 +70,20 @@
 	            <?php if( $show_website ) : ?>
 				<button class="accordion"><span><img src="<?php echo esc_url( plugins_url('businessblueprint-ontra-members/public/image/other-info.svg') ) ?>" width="24" /> Website Link</span>  <span class="fa fa-plus"></span></button>
 				<div class="panel">
-				    <div class="website"><span class="label">Website </span><span class="text"><?php echo (  $this->website  ) ?  $this->website : 'N/A'; ?></span></div>
+				    <div class="website"><span class="label">Website </span><span class="text"><?php echo (  $this->website  ) ?  esc_html( $this->website ) : 'N/A'; ?></span></div>
 				</div>
 				<?php endif ?>
 
 			</div>	
 		</section>
+		<?php if( $this->about_me ) : ?>
+			<h3>About Me</h3>
+			<div class="about-me-section">
+			   <?php 
+			   echo wpautop( esc_attr( $this->about_me ) ); ?>
+			</div>
+		<?php endif; ?>
+
 <?php 
 
 else:
