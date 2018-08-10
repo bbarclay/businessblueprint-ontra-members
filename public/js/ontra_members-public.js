@@ -21,6 +21,7 @@
 		     		$(this).after("<span class='error-message'>File format is not supported!</span>");
 
 	     		}
+
 	    
 	     	} 
 	     	else {
@@ -104,6 +105,15 @@
 	     				}
 	     			}
 
+	     			if( $('#businessTypeCategory').val() === '' ) {
+	     				$('.classficationDropDownList').addClass('input-error');
+	     				$('#businessTypeCategory').addClass('input-error');
+	     				return false;
+	     				
+	     			} else {
+	     				$('.classficationDropDownList').removeClass('input-error');
+	     				$('#businessTypeCategory').removeClass('input-error');
+	     			}
 	     			if( error_counts < 1 ) {
 
 	     				$('.mbb-form .spin-loader').show();

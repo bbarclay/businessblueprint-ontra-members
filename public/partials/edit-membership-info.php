@@ -60,42 +60,6 @@
 			      <span class="privacy-status"><input type="checkbox" name="show_company" <?php echo ( !get_user_meta(  $user_id , 'show_company', true ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
 			   	  <input type="text" name="company" value="<?php echo $this->company; ?>" class="form-control" />
 			   </div>
-			   <div class="col-sm-6" id="businessType">
-			      <label>Business Type</label> <span class="privacy-status"><input type="checkbox" name="show_business_type" <?php echo ( !get_user_meta(  $user_id , 'show_business_type', true ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
-			         <select>
-			         	<option value="accounting">Accounting</option>
-			         	<option value="accounting">Administration & Office Support</option>
-			         	<option value="accounting">Advertising, Arts & Media</option>
-			         	<option value="accounting">Banking & Financial Services</option>
-			         	<option value="accounting">Call Centre & Customer Services</option>
-			         	<option value="accounting">CEO & General Management</option>
-			         	<option value="accounting">Community Services & Development</option>
-			         	<option value="accounting">Construction</option>
-			         	<option value="accounting">Consulting & Strategy</option>
-			         	<option value="accounting">Design & Architecture</option>
-			         	<option value="accounting">Education & Training</option>
-			         	<option value="accounting">Engineering</option>
-			         	<option value="accounting">Farming, Animals & Conservation</option>
-			         	<option value="accounting">Government & Defence</option>
-			         	<option value="accounting">Healthcare & Medical</option>
-			         	<option value="accounting">Hospitality & Tourism</option>
-			         	<option value="accounting">Human Resources & Recruitment</option>
-			         	<option value="accounting">Information & Communication Technology</option>
-			         	<option value="accounting">Insurance & Superannuation</option>
-			         	<option value="accounting">Information & Communication Technology</option>
-			         	<option value="accounting">Legal</option>
-			         	<option value="accounting">Manufacturing, Transport & Logistics</option>
-			         	<option value="accounting">Marketing & Communications</option>
-			         	<option value="accounting">Mining, Resources & Energy</option>
-			         	<option value="accounting">Real Estate & Property</option>
-			         	<option value="accounting">Retail & Consumer Products</option>
-			         	<option value="accounting">Sales</option>
-			         	<option value="accounting">Science & Technology</option>
-			         	<option value="accounting">Self Employment</option>
-
-			         </select>
-
-			   </div>
 			   <div class="col-sm-6">
 			      <label>Website</label> <span class="privacy-status"><input type="checkbox" name="show_website" <?php echo ( !get_user_meta(  $user_id , 'show_website', true ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
 			   	  <input type="text" name="website" value="<?php echo $this->website; ?>" class="form-control" />
@@ -103,6 +67,68 @@
 			   <div class="col-sm-6">
 			      <label>Office No.</label> <span class="privacy-status"><input type="checkbox" name="show_office_no" <?php echo ( !get_user_meta(  $user_id , 'show_office_no', true ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
 			   	  <input type="text" name="office_no" value="<?php echo $this->office_no; ?>" class="form-control" />
+			   </div>
+			   		   <div class="col-sm-6" id="businessType">
+			      <label>Business Type</label> <span class="privacy-status"><input type="checkbox" name="show_business_type" <?php echo ( !get_user_meta(  $user_id , 'show_business_type', true ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
+			      <input type="hidden" name="business_category" id="businessTypeCategory" value="<?php echo ( get_user_meta(  $user_id , 'business_category', true ) ) ? get_user_meta(  $user_id , 'business_category', true ) : '' ?>"  required/>
+			      <?php 
+
+			      	$types = array(
+			      		"Accounting",
+			      		"Administration & Office Support",
+			      		"Advertising, Arts & Media",
+			      		"Banking & Financial Services",
+			      		"Call Centre & Customer Service",
+			      		"CEO & General Management",
+			      		"Community Services & Development",
+			      		"Construction",
+						"Consulting & Strategy",
+			      		"Design & Architecture",
+			      		"Education & Training",
+			      		"Engineering",
+			      		"Government & Defence",
+			      		"Farming, Animals & Conservation",
+			      		"Healthcare & Medical",
+			      		"Hospitality & Tourism",
+			      		"Human Resources & Recruitment",
+			      		"Information & Communication Technology",
+			      		"Insurance & Superannuation",
+			      		"Marketing & Communications",
+			      		"Mining, Resources & Energy",
+			      		"Real Estate & Property",
+			      		"Retail & Consumer Products",
+			      		"Sales",
+			      		"Science & Technology",
+			      		"Self Employment",
+			      		"Sport & Recreation",
+			      		"Trades & Services" );
+
+			        ?>
+			          <div class="classificationWrapper"> 
+				          <div class="classficationDropDownList">
+				          	<span class="type"><?php echo ( get_user_meta(  $user_id , 'business_category', true ) ) ? get_user_meta(  $user_id , 'business_category', true ) : 'Select classification' ?></span><i class="fa fa-chevron-down"></i>
+				          </div>		
+				          <button id="classificationClose"><span class="fa fa-close"></span></button>
+					  </div> 	
+					  <div id="classificationPanel">
+					  	<nav role="navigation">
+
+					  		<ul class="classificationMain">
+					  			<?php 
+					  			foreach($types as $value ) : ?>
+						  			<li class="parent-item">
+						  				<a href="" role="checkbox" aria-checked="false" target="_self" <?php echo ( get_user_meta(  $user_id , 'business_category', true ) == $value ) ? "class='is-checked is-active'": ""; ?>>
+						  					<span class="item-text">
+						  						<span><?php echo $value ?></span>
+						  					</span>
+						  				</a>
+
+						  			</li>
+								<?php 
+								endforeach ?>	
+					  		</ul>
+					  	</nav>
+					  </div>	
 			   </div>
 			</div>
 
@@ -117,11 +143,118 @@
       </form>
 	</div>
 </div>
-<style>
-	.privacy-status {
-	    float: right;
-	    margin-top: 15px;
-	    font-size: 15px;
-	    color: #9c9b9b;
-	}
-</style>
+<script>
+  var classificationPanel = document.getElementById('classificationPanel');
+  var classLink = classificationPanel.querySelectorAll('a');
+
+
+  (function($){
+
+  	$('.classificationMain > li > a').on('click', function(e){
+
+  		e.preventDefault();
+
+  		//$('.classificationMain > li > a').removeClass('is-checked is-active');
+  		$('.classificationMain > li').find('.submenu a').removeClass('is-checked');
+  		$('.classificationMain > li').find('.submenu').removeClass('show');
+
+
+  		if( $(this).hasClass('is-active') ) {
+
+  			
+  			$(this).removeClass('is-checked is-active');
+
+  			$(this).closest('li').find('.submenu a').removeClass('is-checked');
+  			$(this).closest('li').find('.submenu').removeClass('show');
+  		
+  		} else {
+
+  			$('.classificationMain > li > a').removeClass('is-checked is-active');
+  			$(this).addClass('is-checked is-active');
+  			$(this).closest('li').find('.submenu > li:first-child a').addClass('is-checked is-first');
+
+  			$(this).closest('li').find('.submenu').addClass('show');
+
+  		}
+
+
+  		if( $('.classificationMain').find('.is-active').length > 1 ) {
+
+
+  			var total = $('.classificationMain').find('.is-active').length;
+
+  			var title = total.toString() + " Classifications";
+
+  			$('.classficationDropDownList .type').html( title );
+  			$('.classficationDropDownList').removeClass('input-error');
+
+  		} else if( $('.classificationMain').find('.is-active').length == 1 ) {
+
+  		  	var title = $(this).find('.item-text span').text();
+
+  			$('.classficationDropDownList .type').html( title );
+  			$('.classficationDropDownList i').addClass('type-added');
+  			$('#classificationClose').addClass('active');
+  			$('.classficationDropDownList').removeClass('input-error');
+
+  		} else {
+
+  			$('.classficationDropDownList .type').html( 'Select Classification');
+  			$('.classficationDropDownList i').removeClass('type-added');
+  			$('#classificationClose').removeClass('active');
+  			$('#businessTypeCategory').val('');
+
+  		}
+
+  		//get value and store in input
+  		var active  = $('.classificationMain').find('.is-active');
+  		var output  = [];
+  		var output2 = [];
+  		var text 	= [];
+  		var text2   = [];
+
+
+  		$('#businessTypeCategory').val('');
+
+
+  		for( var a = 1; a <= active.length; a++ ) {
+      
+      		text 	 = $('.classificationMain').find('.is-active:nth-child(' + a + ') .item-text span').text();	
+      		text2 	 = $('.classificationMain .submenu').find('.is-first.is-checked:nth-child(' + a + ')').text();
+      		output   = text;
+      		output2 += text2;
+  			$('#businessTypeCategory').val(output);
+  		}
+
+
+
+
+  	});
+
+  
+  	$('.classficationDropDownList').on('click', function(){
+  		$(this).find('i').toggleClass('rotate');
+  		$('#classificationPanel').toggleClass('classification-visible');
+
+  	})
+
+  	$('#classificationClose').on('click', function(e){
+
+  		e.preventDefault();
+
+		$('.classficationDropDownList .type').html( 'Select Classification');
+		$('#classificationClose').removeClass('active');
+
+		$('.classficationDropDownList').find('i').removeClass('type-added');
+		$('.classificationMain  a').removeClass('is-checked is-active');
+		$('.classificationMain  .submenu').removeClass('show');
+		
+		$('#businessTypeSubcategory').html('');
+		$('#businessTypeCategory').val('');
+  	})
+
+
+  })(jQuery)
+
+	
+</script>

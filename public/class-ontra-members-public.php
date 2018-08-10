@@ -750,7 +750,10 @@ class Ontra_Members_Public {
     		die('Sorry unable to verify nonce');
 
     	}
-    	else {
+    	if( !current_user_can('subscriber') && !current_user_can('editor') && !current_user_can('administrator')   )
+		{
+			wp_send_json_error('You are not an authorized user!');
+    	}
 
     			$about 				= wp_strip_all_tags( $_POST['about_me']);
 		     	$firstname 			= sanitize_text_field( $_POST['firstname'] );
@@ -765,6 +768,7 @@ class Ontra_Members_Public {
 		     	$business_type 		= sanitize_text_field( $_POST['business_type'] );
 		     	$website 			= sanitize_text_field( $_POST['website'] );
 		     	$office_phone 		= sanitize_text_field( $_POST['office_no'] );
+		     	$category   		= wp_strip_all_tags(sanitize_text_field( $_POST['business_category'] ) );
 
 		     	$hide_firstname 	= sanitize_text_field( $_POST['hide_firstname'] );
 		     	$hide_lastname 		= sanitize_text_field( $_POST['hide_lastname'] );
@@ -863,6 +867,14 @@ class Ontra_Members_Public {
 				}
 
 
+				if( !empty($category) ) {
+					update_user_meta( $user_id, 'business_category', $category);
+				} else {
+					delete_user_meta( $user_id, 'business_category');
+				}
+
+
+
 				$client 		= $this->ontraport;
 
 			    $queryParams = array(
@@ -898,7 +910,7 @@ class Ontra_Members_Public {
 				wp_redirect( $url );
 
 				die();
-		}	
+			
 
     }
 
@@ -978,6 +990,7 @@ class Ontra_Members_Public {
 
 
 		$this->about_me = get_user_meta( $this->id, 'about_me', true );
+		$this->business_category = get_user_meta( $this->id, 'business_category', true );
 	}
 
 

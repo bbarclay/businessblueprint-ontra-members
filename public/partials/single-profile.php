@@ -13,6 +13,7 @@
 	  $show_company   = get_user_meta( $id, 'show_company', true);
 	  $show_office_no = get_user_meta( $id, 'show_office_no', true);
 	  $show_state 	  = get_user_meta( $id, 'show_state', true);
+	  $show_business  = get_user_meta( $id, 'show_business_type', true);
 
 
 
@@ -33,14 +34,14 @@
 			   		<?php endif; ?>
 				   	<div class="inner-info">
 				   			<?php if( $this->company && $show_company ) : ?>
-				    			<span class="label">Company <span class="text"><?php echo $this->company ?></span></span>
+				    			<span class="label">Company <span class="text"><?php echo ( $this->company ) ? $this->company: 'N/A';  ?></span></span>
 				    		<?php else: ?>
-				    			<span class="label">Company <span class="text hidden">Private</span></span>
+				    			<span class="label">Company <span class="text">Private</span></span>
 				    		<?php endif; ?>	
 				    </div>
 			   		<div class="inner-info">	
 						<span class="label">Business Type <span class="text">
-					   <?php echo $this->getOntraportValue($this->business_type, 'business_type');  ?></span></span>
+						<?php echo ( $show_business && get_user_meta( $id, 'business_category', true) ) ? get_user_meta( $id, 'business_category', true): 'Private'; ?></span></span>
 					</div>
 			   		<div class="inner-info">	
 							<span class="label">Consultant <span class="text"><?php echo $this->owner ?></span></span>

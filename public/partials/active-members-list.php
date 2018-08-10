@@ -50,8 +50,10 @@
 
 
 	 	  $url = site_url() . '/profile/?ontraport_id=' . $id . '';
-	 	 if( ! $show_firstname || ! $show_lastname ) :
-	 	?>
+
+	 	 if( ! $show_firstname || ! $show_lastname ) : ?>
+
+
 	 		<div class="contact-item">
 	 			<a href="<?php echo esc_url( $url); ?>" target="_blank">
 		   	   
@@ -83,6 +85,6 @@
 				
 </div>
 <div class="contact-pagination">
-<?php echo  $this->display_pagination(); ?>	
+	<?php echo  $this->display_pagination(); ?>	
 </div>
 

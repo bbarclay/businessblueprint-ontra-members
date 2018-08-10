@@ -22,7 +22,7 @@
 	    	<?php endif; ?>
 	   		<div class="inner-info">	
 				<span class="label">Business Type <span class="text">
-			   <?php echo $this->getOntraportValue($this->business_type, 'business_type');  ?></span></span>
+					<?php echo ( $this->business_category ) ? $this->business_category: 'N/A'; ?></span></span>
 			</div>
 	   		<div class="inner-info">	
 				<span class="label">Consultant <span class="text"><?php echo $this->owner ?></span></span>
