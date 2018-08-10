@@ -104,7 +104,7 @@
 			      		"Trades & Services" );
 
 			        ?>
-			        <select name="business_category" id="businessTypeCategory" required>
+			        <select name="business_category" id="businessTypeCategory" class="required-field" required>
 			        	<option value="">Select</option>
 			        <?php foreach( $types as $type )  {?>
 			        
