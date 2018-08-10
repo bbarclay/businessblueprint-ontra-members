@@ -104,9 +104,16 @@
 			      		"Trades & Services" );
 
 			        ?>
-			          <div class="classificationWrapper"> 
+			        <select name="business_category" id="businessTypeCategory" required>
+			        	<option value="">Select</option>
+			        <?php foreach( $types as $type )  {?>
+			        
+			        	<option value="<?php echo $type; ?>" <?php echo ( get_user_meta(  $user_id , 'business_category', true ) ) ? 'selected' : ''; ?>><?php echo $type; ?></option>
+			    		<?php } ?>
+			    	</select>	
+			          <!-- <div class="classificationWrapper"> 
 				          <div class="classficationDropDownList">
-				          	<span class="type"><?php echo ( get_user_meta(  $user_id , 'business_category', true ) ) ? get_user_meta(  $user_id , 'business_category', true ) : 'Select classification' ?></span><i class="fa fa-chevron-down"></i>
+				          	<span class="type"><?php //echo ( get_user_meta(  $user_id , 'business_category', true ) ) ? get_user_meta(  $user_id , 'business_category', true ) : 'Select classification' ?></span><i class="fa fa-chevron-down"></i>
 				          </div>		
 				          <button id="classificationClose"><span class="fa fa-close"></span></button>
 					  </div> 	
@@ -128,7 +135,7 @@
 								endforeach ?>	
 					  		</ul>
 					  	</nav>
-					  </div>	
+					  </div> -->	
 			   </div>
 			</div>
 
@@ -143,7 +150,7 @@
       </form>
 	</div>
 </div>
-<script>
+<!-- <script>
   var classificationPanel = document.getElementById('classificationPanel');
   var classLink = classificationPanel.querySelectorAll('a');
 
@@ -257,4 +264,4 @@
   })(jQuery)
 
 	
-</script>
+</script> -->
