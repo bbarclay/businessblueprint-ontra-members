@@ -6,11 +6,6 @@
 	  <form action="<?php echo esc_url( admin_url('admin-ajax.php') ) ?>" method="POST"  enctype="multipart/form-data" autocomplete="off">
 	   		<input type="hidden" name="action" value="ontra_update_contact" />
 	   		<?php wp_nonce_field( 'update_ontra_action', 'update_ontra_field' ); ?>
-			<h3 class="title">Profile Picture</h3>   
-			<div class='image-preview-wrapper'>
-			    <label>Accepted file formats: <small>jpg, jpeg and png</small></label><br>
-		  		<input type="file" name="file" />
-			</div>
 			<?php $user_id = $this->get_ontraport_id(); ?>
 			<h3 class="title">Personal info</h3>
 			<div class="row">
@@ -122,17 +117,17 @@
 
 					  		<ul class="classificationMain">
 					  			<?php 
-					  			foreach($types as $value ) : ?>
+					  			//foreach($types as $value ) : ?>
 						  			<li class="parent-item">
-						  				<a href="" role="checkbox" aria-checked="false" target="_self" <?php echo ( get_user_meta(  $user_id , 'business_category', true ) == $value ) ? "class='is-checked is-active'": ""; ?>>
+						  				<a href="" role="checkbox" aria-checked="false" target="_self" <?php //echo ( get_user_meta(  $user_id , '//business_category', true ) == $value ) ? "class='is-checked is-active'": ""; ?>>
 						  					<span class="item-text">
-						  						<span><?php echo $value ?></span>
+						  						<span><?php //echo $value ?></span>
 						  					</span>
 						  				</a>
 
 						  			</li>
 								<?php 
-								endforeach ?>	
+								//endforeach ?>	
 					  		</ul>
 					  	</nav>
 					  </div> -->	

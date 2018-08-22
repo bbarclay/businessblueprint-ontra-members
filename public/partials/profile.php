@@ -1,7 +1,8 @@
 	
 	<div class="option-to-edit">
-	    <a href="<?php echo site_url() ?>/reset-password" class="reset-link">Reset Password</a>
-		<a href="<?php echo site_url() ?>/edit-membership-info" ><span class="fa fa-edit"></span> Edit</a>
+	    <a href="<?php echo site_url() ?>/reset-password" class="button button--small button__danger">Reset Password</a>
+	    <a href="<?php echo site_url() ?>/upload-photo" class="button button--small">Change Photo</a>
+		<a href="<?php echo site_url() ?>/edit-membership-info"  class="button button--small button__success"><span class="fa fa-edit"></span> Edit</a>
 	</div>
 	<!-- end of option -->
 
@@ -46,7 +47,7 @@
 		    		<div class="contact"><span class="label">Office No </span><span class="text"><?php echo $this->office_no; ?></span></div>
 		    	<?php endif; ?>
 		    	<div class="email"><span class="label">Email </span><span class="text"><?php echo $this->email; ?></span></div>
-		    	<div class="location"><span class="label">Address </span><span class="text"><?php echo $this->address; ?> <?php echo ( $this->address2 ) ? ', ' . $this->address2: ''; ?><?php echo $this->city; ?><?php echo ( $this->state ) ? ', ' . $this->state: ''; ?> <?php echo $this->get_country( $this->country ); ?>  <?php echo $this->zipcode; ?> </span></div>
+		    	<div class="location"><span class="label">Address </span><span class="text"><?php echo $this->address . ', '; ?><?php echo ( $this->address2 ) ? $this->address2 . ', ': ''; ?><?php echo $this->city; ?><?php echo ( $this->state ) ? ', ' . $this->state: ''; ?> <?php echo ( $this->state !== 'Outside Australia') ? ', ' . $this->get_country( $this->country) : ''; ?>  <?php echo $this->zipcode; ?> </span></div>
 		</div>
 		<!-- end of accordion -->
 

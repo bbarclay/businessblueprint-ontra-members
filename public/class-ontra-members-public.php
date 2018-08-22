@@ -58,7 +58,7 @@ class Ontra_Members_Public {
 	public function enqueue_styles() {
 
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ontra_members-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ontra-members-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -69,11 +69,22 @@ class Ontra_Members_Public {
 	*/
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( 'ontra-members', plugin_dir_url( __FILE__ ) . 'js/ontra_members-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'jcrop');
+
+		wp_enqueue_script( 'ontra-members', plugin_dir_url( __FILE__ ) . 'js/ontra-members-public.js', array( 'jquery' ), $this->version, false );
 
         wp_localize_script( 
            'ontra-members', 
            'search_members', 
+           array( 
+              'ajax_url' => admin_url('admin-ajax.php'),
+              'security' => wp_create_nonce('ontra_security_action', 'ontra_security_field')
+
+        ) );
+
+        wp_localize_script( 
+           'ontra-members', 
+           'upload_photo', 
            array( 
               'ajax_url' => admin_url('admin-ajax.php'),
               'security' => wp_create_nonce('ontra_security_action', 'ontra_security_field')
@@ -447,8 +458,6 @@ class Ontra_Members_Public {
 
 
 	}
-
-
 
 
 	public function get_elite() 
@@ -951,7 +960,7 @@ class Ontra_Members_Public {
 		$this->address 			= $response[0]['address'];
 		$this->address2 		= $response[0]['address2'];
 		$this->city 			= $response[0]['city'];
-		$this->state 			= $response[0]['state'];
+		$this->state 			= $this->get_state( $response[0]['StateAUS_131'] );
 		$this->zipcode 			= $response[0]['zip'];
 		$this->country 			= $response[0]['country'];
 		$this->mobile_no 		= $response[0]['cell_phone'];
@@ -1129,7 +1138,7 @@ class Ontra_Members_Public {
 		$output = '<select name="'. $name .'" class="'. $class .'">';
 
 			foreach($response as $key => $value) :
-				$selected = ($curValue == $key ) ? "selected" : "";
+				$selected = ($curValue == $value ) ? "selected" : "";
 
 				if( $meta == 'states' ) {
 
@@ -1260,11 +1269,11 @@ class Ontra_Members_Public {
 
 	    $file_return = wp_handle_upload( $file, array('test_form' => false ) );
 
-	      if( isset( $file_return['error'] ) || isset( $file_return['upload_error_handler'] ) ) {
+        if( isset( $file_return['error'] ) || isset( $file_return['upload_error_handler'] ) ) {
 
-	          return false;
+          return false;
 
-	      } else {
+        } else {
 
 	          $filename = $file_return['file'];
 
@@ -1292,6 +1301,190 @@ class Ontra_Members_Public {
 	      return false;
 
 	      exit();
+
+	}
+
+
+    public function uploadNewPhoto( $file = array(), $id  = '') {
+
+    	if( ! isset( $_POST['ontra_security_field'] ) || ! wp_verify_nonce( $_REQUEST['ontra_security_field'], 'ontra_security_action') ) {
+
+    		die('Sorry unable to verify nonce');
+
+    	}
+
+    	if( !current_user_can('subscriber') && !current_user_can('editor') && !current_user_can('administrator')   )
+		{
+			wp_send_json_error('You are not an authorized user!');
+
+    	} else {
+
+
+    	$user_id   = $this->get_ontraport_id();
+
+    	//include admin for upload 
+	    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+	    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+	    require_once( ABSPATH . 'wp-admin/includes/media.php' );
+
+		//$attachment_id = media_handle_upload( 'file', 0 );
+		//
+		$file             = $_FILES['file'];
+		$upload_overrides = array('action' => 'upload_new_photo');
+
+		$movefile = wp_handle_upload( $file, $upload_overrides );
+	
+		//if ( is_wp_error( $attachment_id ) ) {
+		if( !$movefile && !isset( $movefile['error'] ) ) {
+
+			wp_send_json_error('Can\'t save the image!');
+   
+		} else {
+
+			$img_url        = $movefile['url'];
+			$update_photo   = update_user_meta( $user_id, 'new_uploaded_photo', $img_url  );
+			$generate_image = '<img src="'. $img_url .'" id="cropbox" />';
+
+			//$photo_meta   = wp_get_attachment_metadata( $attachment_id ); 
+            //$photo_link   = wp_get_attachment_image( $attachment_id, 'full' ,"", array('id' => 'cropbox'));
+
+			$data = array(
+					'photo_link' => $generate_image
+			);
+
+	        wp_send_json_success( $data );
+		}	
+
+
+	  }
+
+	  die();
+
+	}
+
+    public function update_profile_photo() {
+
+  		$nonce = $_POST['update_photo_field'];
+
+
+    	if( ! isset( $_POST['update_photo_field'] ) || ! wp_verify_nonce( $_REQUEST['update_photo_field'], 'update_photo_action') ) {
+
+    		die('Sorry unable to verify nonce');
+
+    	}
+
+    	if( !current_user_can('subscriber') && !current_user_can('editor') && !current_user_can('administrator')   )
+		{
+			wp_send_json_error('You are not an authorized user!');
+    	}
+
+    	// Add file if function exists
+    	if ( ! function_exists( 'wp_handle_upload' ) ) {
+		    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+		    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		    require_once( ABSPATH . 'wp-admin/includes/media.php' );
+		}
+
+		$user 			= wp_get_current_user();
+    	$id   			= $this->get_ontraport_id();
+	    $image_url      = get_user_meta( $id, 'new_uploaded_photo', true  );
+
+		$targ_w = $targ_h = 150;
+		$jpeg_quality = 90;
+		$src          = $image_url;
+
+		$img_r = imagecreatefromjpeg($src);
+
+		// $mime_type = mime_content_type($src);
+
+  //       switch ( $mime_type ) {
+  //           case 'image/jpeg': 
+  //               $img_r = imagecreatefrompng($src);
+  //           case 'image/png':
+  //               $img_r = imagecreatefromjpeg($src);
+  //           case 'image/gif':
+  //               $img_r = imagecreatefromgif($src);
+  //           default:
+  //               return '';
+  //       }
+
+        //$temp_file = download_url( $url, 5 );
+
+		//Create a new true color image
+		$dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
+
+		//Copy and resize part of the image
+		imagecopyresampled( $dst_r, $img_r, 0, 0, $_POST['x'], $_POST['y'], $targ_w, $targ_h, $_POST['w'], $_POST['h'] );
+
+		$upload_dir   = wp_upload_dir();
+		$filename     = 'profile-picture-'. $id . '-' . time() . '.jpg';
+
+		
+		if( isset( $user->user_login ) && ! empty( $upload_dir['basedir'] ) ) {
+			$profile_folder = $upload_dir['basedir'] . '/profile';
+
+			if( !file_exists( $profile_folder))
+			 	  wp_mkdir_p($profile_folder);
+
+		 	if( $dst_r && $profile_folder ) {
+		 		$distfile = $profile_folder . '/'. $filename;
+				$is_image_uploaded = imagejpeg($dst_r, $distfile, 90);
+		 	}
+		}
+		
+
+		if( $is_image_uploaded) {
+			$id = $this->get_ontraport_id();
+			$photo_link = $upload_dir['baseurl'] .'/profile/'. $filename;
+			$update_photo = update_user_meta( $id, 'user_photo', $photo_link );
+
+			$url = site_url() . '/your-profile';
+	        wp_redirect( $url );
+	        die();
+	        
+		} else {
+			$url = get_permalink();
+	        wp_redirect($url);
+			die();
+		}
+
+	
+
+	    $file_return = wp_handle_upload( $link, array('test_form' => false ) );
+
+	    if( isset( $file_return['error'] ) || isset( $file_return['upload_error_handler'] ) ) {
+
+	          return false;
+
+	    } else {
+
+	          $filename = $file_return['file'];
+
+	          $attachment = array(
+	              'post_mime_type' => $file_return['type'],
+	              'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+	              'post_content' => '',
+	              'post_status' => 'inherit',
+	              'guid' => $file_return['url']
+	          );
+
+	          $attachment_id = wp_insert_attachment( $attachment, $file_return['url'] );
+
+	          //update or add user meta name: user_photo
+	          update_user_meta( $id, 'user_photo', $attachment_id  );
+
+	          $attachment_data = wp_generate_attachment_metadata( $attachment_id, $filename );
+
+	          wp_update_attachment_metadata( $attachment_id, $attachment_data );
+
+	          if( 0 < intval( $attachment_id ) ) {
+	          	return $attachment_id;
+	          }
+	    }
+
+	    $url = site_url() . '/your-profile';
+	    wp_redirect($url);
+	    die();
 
 	}
 
@@ -1555,17 +1748,23 @@ class Ontra_Members_Public {
 	*  @param int Ontraport ID
 	*  @return url of the image
 	*/
-    public function get_profile_photo($id) {
+    public function get_profile_photo( $id ) {
 
-    	// Check if user has user photo in the meta table
+	     // Check if user has user photo in the meta table
         $image = get_user_meta( $id, 'user_photo', true );  
 
         if( $image ) {
-        	return wp_get_attachment_url($image);
+        	if( ! wp_get_attachment_url( $image ) ) {
+        		$image_link = $image;
+        	} else {
+                $image_link =  wp_get_attachment_url( $image );
+        	}
+        } else {
+        	$image_link = $this->get_defaultThumbnail();
         }
 
-    	return $this->get_defaultThumbnail();
-    	
+        return $image_link;
+
     }
 
     /** 

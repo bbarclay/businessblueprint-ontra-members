@@ -134,10 +134,23 @@ class Ontra_members {
 
 		$this->loader->add_action( 'wp_ajax_search_ontra', $plugin_public, 'searchMembers' );
 		$this->loader->add_action( 'wp_ajax_nopriv_search_ontra', $plugin_public, 'searchMembers' );
+
+
 		$this->loader->add_action( 'wp_ajax_ontra_update_contact', $plugin_public, 'update_contact' );
 		$this->loader->add_action( 'wp_ajax_nopriv_ontra_update_contact', $plugin_public, 'update_contact' );
+
 		$this->loader->add_action( 'wp_ajax_nopriv_upload_user_photo', $plugin_public, 'upload_user_photo' );
 		$this->loader->add_action( 'wp_ajax_upload_user_photo', $plugin_public, 'upload_user_photo' );
+
+		$this->loader->add_action( 'wp_ajax_nopriv_update_profile_photo', $plugin_public, 'update_profile_photo' );
+		$this->loader->add_action( 'wp_ajax_update_profile_photo', $plugin_public, 'update_profile_photo' );
+
+		// $this->loader->add_action( 'admin_post_nopriv_upload_new_photo', $plugin_public, 'uploadNewPhoto' );
+		// $this->loader->add_action( 'admin_post_upload_new_photo', $plugin_public, 'uploadNewPhoto' );
+
+		$this->loader->add_action( 'wp_ajax_nopriv_upload_new_photo', $plugin_public, 'uploadNewPhoto' );
+		$this->loader->add_action( 'wp_ajax_upload_new_photo', $plugin_public, 'uploadNewPhoto' );
+		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
