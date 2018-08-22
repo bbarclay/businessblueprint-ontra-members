@@ -960,6 +960,7 @@ class Ontra_Members_Public {
 		$this->address 			= $response[0]['address'];
 		$this->address2 		= $response[0]['address2'];
 		$this->city 			= $response[0]['city'];
+		$this->state_edit       = $response[0]['StateAUS_131']; 
 		$this->state 			= $this->get_state( $response[0]['StateAUS_131'] );
 		$this->zipcode 			= $response[0]['zip'];
 		$this->country 			= $response[0]['country'];
@@ -996,10 +997,8 @@ class Ontra_Members_Public {
 		$this->owner 				= $this->getConsultant($response[0]['owner']);
 		$this->thumbnail		    = $this->get_profile_photo($response[0]['id']);
 		$this->yearlevel 		    = $this->getYearLevel($response[0]['BBYearLeve_258']);
-
-
-		$this->about_me = get_user_meta( $this->id, 'about_me', true );
-		$this->business_category = get_user_meta( $this->id, 'business_category', true );
+		$this->about_me             = get_user_meta( $this->id, 'about_me', true );
+		$this->business_category    = get_user_meta( $this->id, 'business_category', true );
 	}
 
 
@@ -1138,7 +1137,7 @@ class Ontra_Members_Public {
 		$output = '<select name="'. $name .'" class="'. $class .'">';
 
 			foreach($response as $key => $value) :
-				$selected = ($curValue == $value ) ? "selected" : "";
+				$selected = ($curValue == $key ) ? "selected" : "";
 
 				if( $meta == 'states' ) {
 

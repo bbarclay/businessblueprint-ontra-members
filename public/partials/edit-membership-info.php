@@ -32,7 +32,7 @@
 			   </div>
 			   <div class="col-sm-6">
 			      <label>State</label><span class="privacy-status"><input type="checkbox" name="hide_state" <?php echo ( get_user_meta(  $user_id , 'hide_state', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
-			      <?php echo $this->getOptions($this->state, 'form-control  required-field','state','states'); ?> 
+			      <?php echo $this->getOptions( $this->state_edit, 'form-control  required-field', 'state', 'states' ); ?> 
 			   </div>
 				<div class="col-sm-6">
 			      <label>Zipcode</label><br>
