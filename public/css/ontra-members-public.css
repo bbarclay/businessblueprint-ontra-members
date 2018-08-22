@@ -1,0 +1,614 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+.ontramember-list .image {
+    width: 100%;
+    height: 250px;
+}
+.ontramember-list .member .name {
+    font-size: 1.1em !important;
+}
+.ontramember-list .member .bg-Orange {
+    padding: .5em;
+
+    background: #f15d22 !important;
+}
+
+.mbb-form {
+    position: relative;
+}
+.mbb-form label {
+    display: inline-block;
+    margin-top: 10px;
+
+    font-family: "Geogrotesque-SemiBold", sans-serif;
+    font-size: 20px;
+
+    color: #737171;
+    color: #002749;
+}
+.mbb-form input[type="text"],
+.mbb-form input[type="email"],
+.mbb-form input[type="url"],
+.mbb-form select,
+.mbb-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+
+    border: 1px solid #e8e6e6;
+    border-radius: 3px;
+    background: #f5f4f4;
+    -webkit-box-shadow: inset 0 1px 1px 1px #f1efef;
+            box-shadow: inset 0 1px 1px 1px #f1efef;
+}
+
+.mbb-form input[type="text"].input-error,
+.mbb-form select.input-error {
+    border: 1px solid #f15d22;
+}
+
+.mbb-form input[type="file"] {
+    display: inline-block;
+    margin: 5px 0 2px 0;
+
+    border: 0;
+    background: transparent;
+}
+.mbb-form input[type="file"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.mbb-form .title {
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.mbb-form input[type="submit"] {
+    display: block;
+    max-width: 150px;
+    margin: 10px auto;
+
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+}
+.photo-uploader-form .spin-loader,
+.mbb-form .spin-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+
+    display: none;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,.4);
+}
+.photo-uploader-form .spin-loader span,
+.mbb-form .spin-loader span {
+    position: absolute;
+    top: calc(50% - 29px);
+    left: calc(50% - 29px);
+    z-index: 100;
+
+    font-size: 50px;
+
+    transform: translate(-50%, -50%);
+
+    color: #fff;
+}
+
+.mbb-form .error-message {
+    display: block;
+
+    font-size: 17px;
+
+    color: #f15d22;
+}
+.mbb-form .label-default {
+    display: block;
+    padding: 10px;
+
+    color: #4d792b;
+    border-radius: 3px;
+    background: #d5f5bd;
+}
+
+.contact-pagination {
+    margin-top: 25px;
+
+    text-align: center;
+}
+
+
+/**
+ * Members Directory
+ */
+.member-contact-listing {
+    margin: 0 -10px !important;
+}
+.mbb-form.inline-group {
+    padding: 10px 10px;
+
+    background: #f5f5f5;
+}
+.mbb-form #searchMembers {
+    width: 300px;
+    margin: 0;
+
+    background: #fff;
+}
+.member-contact-listing .contact-item .detail {
+    min-height: 80px !important;
+}
+.mbb-form #searchByState {
+    width: 250px;
+    margin: 0;
+
+    background: #fff;
+}
+.mbb-form #searchDirectory {
+    height: 45px;
+    padding: 10px 20px;
+
+    vertical-align: top;
+
+    background: #7ac143;
+}
+.mbb-form #searchDirectory:hover {
+    background: #00274c;
+}
+.mbb-form #clearSearch {
+    float: right;
+    padding: 0 15px;
+
+    line-height: 45px;
+}
+.mbb-form #clearSearch:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+.mbb-form .privacy-status {
+    float: right;
+    margin-top: 15px;
+
+    font-size: 15px;
+
+    color: #9c9b9b;
+}
+#businessType {
+    position: relative;
+}
+#classificationPanel {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 10;
+
+    visibility: hidden;
+    max-height: 210px;
+    margin-top: 25px;
+    overflow: auto;
+
+    -webkit-transition: all .25s cubic-bezier(.02,1.505,.745,1.235);
+            transition: all .25s cubic-bezier(.02,1.505,.745,1.235);
+    -webkit-transform: translateY(-24px);
+            transform: translateY(-24px);
+    -webkit-transform-origin: 50% 0;
+            transform-origin: 50% 0;
+    pointer-events: auto;
+
+    opacity: 0;
+    border-radius: 2px;
+    background-color: #fff;
+
+    -webkit-overflow-scrolling: touch;
+}
+#classificationPanel.classification-visible {
+    visibility: visible;
+
+    opacity: 1;
+}
+#businessTypeSubcategory {
+    display: none;
+}
+#classificationPanel ul {
+    padding: 5px 0 0 0;
+    margin-bottom: 0;
+
+    list-style: none;
+}
+#classificationPanel ul li {
+    position: relative;
+
+    margin: 0;
+}
+#classificationPanel a {
+    display: block;
+    min-height: 48px;
+    padding-right: 80px;
+    padding-left: 59px;
+
+    line-height: 33px;
+
+    text-decoration: none;
+    word-wrap: break-word;
+
+    color: #1c1c1c;
+}
+.classficationDropDownList {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+
+    border: 1px solid #e8e6e6;
+    border-radius: 3px;
+    background: #f5f4f4;
+    -webkit-box-shadow: inset 0 1px 1px 1px #f1efef;
+            box-shadow: inset 0 1px 1px 1px #f1efef;
+}
+.classificationWrapper {
+    position: relative;
+
+    overflow: hidden;
+}
+.classficationDropDownList:hover {
+    cursor: pointer;
+}
+.classficationDropDownList i {
+    float: right;
+    padding: 7px 0;
+
+    font-size: 14px;
+
+    -webkit-transition: all .3s ease-out;
+       -moz-transition: all .3s ease-out;
+         -o-transition: all .3s ease-out;
+            transition: all .3s ease-out;
+    transform: rotate(0deg);
+}
+.classficationDropDownList i.rotate {
+    transform: rotate(180deg);
+}
+.classficationDropDownList i.type-added {
+    margin-right: 40px;
+}
+#classificationClose {
+    position: absolute;
+    right: -40px;
+    bottom: 12px;
+    z-index: 20;
+
+    float: right;
+    height: 41px;
+    padding: 0 10px;
+
+    font-size: 14px;
+    line-height: 30px;
+
+    -webkit-transition: all .3s ease-out;
+       -moz-transition: all .3s ease-out;
+         -o-transition: all .3s ease-out;
+            transition: all .3s ease-out;
+
+    border-radius: 3px;
+    background: #fff;
+}
+#classificationClose.active {
+    right: 1px;
+}
+#classificationPanel a:before {
+    position: absolute;
+    top: 12px;
+
+    width: 24px;
+    height: 24px;
+
+    content: " ";
+    -webkit-transform: translateX(-39px);
+            transform: translateX(-39px);
+
+    border: 1px solid #d6d6d6;
+    background-color: #fff;
+}
+#classificationPanel .is-checked:before {
+    background: #fff url("../image/check.svg") 50% no-repeat;
+    background-size: 70%;
+}
+#classificationPanel .submenu {
+    display: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 24px;
+
+    background-color: #f7f7f7;
+}
+.member-contact-listing > p {
+    display: block;
+    padding: 0 15px;
+
+    text-align: center;
+}
+
+@media only screen and (min-width: 740px) {
+    #classificationPanel {
+        right: auto;
+        left: auto;
+
+        width: 420px;
+        max-height: 385px;
+
+        box-shadow: 0 6px 30px rgba(0,0,0,.4);
+    }
+    #classificationPanel a {
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+}
+@media screen and ( max-width: 835px ) {
+    .mbb-form #searchMembers,
+    .mbb-form #searchByState {
+        width: 100%;
+        margin-bottom: 5px;
+
+        border-radius: 0;
+    }
+    .mbb-form submit,
+    .mbb-form #clearSearch {
+        width: 50%;
+        margin: 5px 0;
+
+        border-radius: 0;
+    }
+}
+
+
+/* jquery.Jcrop.css v0.9.12 - MIT License */
+/*
+  The outer-most container in a typical Jcrop instance
+  If you are having difficulty with formatting related to styles
+  on a parent element, place any fixes here or in a like selector
+
+  You can also style this element if you want to add a border, etc
+  A better method for styling can be seen below with .jcrop-light
+  (Add a class to the holder and style elements for that extended class)
+*/
+.jcrop-holder {
+    text-align: left;
+
+    direction: ltr;
+}
+/* Selection Border */
+.jcrop-vline,
+.jcrop-hline {
+    position: absolute;
+
+    font-size: 0;
+
+    background: #fff url("Jcrop.gif");
+}
+.jcrop-vline {
+    width: 1px !important;
+    height: 100%;
+}
+.jcrop-vline.right {
+    right: 0;
+}
+.jcrop-hline {
+    width: 100%;
+    height: 1px !important;
+}
+.jcrop-hline.bottom {
+    bottom: 0;
+}
+/* Invisible click targets */
+.jcrop-tracker {
+    width: 100%;
+    height: 100%;
+    /* disable cut copy paste */
+
+    -webkit-user-select: none;
+    /* "turn off" link highlight */
+
+    -webkit-tap-highlight-color: transparent;
+    /* disable callout, image save panel */
+    -webkit-touch-callout: none;
+}
+/* Selection Handles */
+.jcrop-handle {
+    width: 7px;
+    height: 7px;
+
+    font-size: 1px;
+
+    border: 1px #eee solid;
+    background-color: #333;
+}
+.jcrop-handle.ord-n {
+    top: 0;
+    left: 50%;
+
+    margin-top: -4px;
+    margin-left: -4px;
+}
+.jcrop-handle.ord-s {
+    bottom: 0;
+    left: 50%;
+
+    margin-bottom: -4px;
+    margin-left: -4px;
+}
+.jcrop-handle.ord-e {
+    top: 50%;
+    right: 0;
+
+    margin-top: -4px;
+    margin-right: -4px;
+}
+.jcrop-handle.ord-w {
+    top: 50%;
+    left: 0;
+
+    margin-top: -4px;
+    margin-left: -4px;
+}
+.jcrop-handle.ord-nw {
+    top: 0;
+    left: 0;
+
+    margin-top: -4px;
+    margin-left: -4px;
+}
+.jcrop-handle.ord-ne {
+    top: 0;
+    right: 0;
+
+    margin-top: -4px;
+    margin-right: -4px;
+}
+.jcrop-handle.ord-se {
+    right: 0;
+    bottom: 0;
+
+    margin-right: -4px;
+    margin-bottom: -4px;
+}
+.jcrop-handle.ord-sw {
+    bottom: 0;
+    left: 0;
+
+    margin-bottom: -4px;
+    margin-left: -4px;
+}
+/* Dragbars */
+.jcrop-dragbar.ord-n,
+.jcrop-dragbar.ord-s {
+    width: 100%;
+    height: 7px;
+}
+.jcrop-dragbar.ord-e,
+.jcrop-dragbar.ord-w {
+    width: 7px;
+    height: 100%;
+}
+.jcrop-dragbar.ord-n {
+    margin-top: -4px;
+}
+.jcrop-dragbar.ord-s {
+    bottom: 0;
+
+    margin-bottom: -4px;
+}
+.jcrop-dragbar.ord-e {
+    right: 0;
+
+    margin-right: -4px;
+}
+.jcrop-dragbar.ord-w {
+    margin-left: -4px;
+}
+/* The "jcrop-light" class/extension */
+.jcrop-light .jcrop-vline,
+.jcrop-light .jcrop-hline {
+    opacity: .70!important;
+    background: #fff;
+
+    filter: alpha(opacity=70) !important;
+}
+.jcrop-light .jcrop-handle {
+    border-color: #fff;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+    background-color: #000;
+}
+/* The "jcrop-dark" class/extension */
+.jcrop-dark .jcrop-vline,
+.jcrop-dark .jcrop-hline {
+    opacity: .7 !important;
+    background: #000;
+
+    filter: alpha(opacity=70) !important;
+}
+.jcrop-dark .jcrop-handle {
+    border-color: #000;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+    background-color: #fff;
+}
+/* Simple macro to turn off the antlines */
+.solid-line .jcrop-vline,
+.solid-line .jcrop-hline {
+    background: #fff;
+}
+/* Fix for twitter bootstrap et al. */
+.jcrop-holder img,
+img.jcrop-preview {
+    max-width: none;
+}
+
+.photo-uploader-form {
+    min-height: 500px;
+    padding: 3em 0;
+}
+.photo-uploader-form .img-inner {
+    display: inline-block;
+    padding: 8px 10px;
+
+    background: #f5f4f4;
+}
+.photo-uploader-form p {
+    margin-bottom: 0;
+}
+.photo-uploader-form .error-message {
+    display: inline-block;
+    padding: 0 10px;
+    margin-top: 5px;
+
+    font-size: 16px;
+
+    color: #c53e3e;
+    border-radius: 3px;
+    background: #f9d7d7;
+}
+.photo-uploader-form .inner-crop {
+    max-width: 100%;
+    padding: 30px;
+    margin-bottom: 10px;
+    overflow-x: auto;
+
+    border: 1px solid #f1efef;
+    background: #fdfbfb;
+}
+.photoCropper .jcrop-holder {
+    margin: 0 auto;
+}
+.photo-uploader-form #submitCropImage {
+    background: #7ac143;
+}
+.photo-uploader-form #submitCropImage:hover {
+    background: #002749;
+}
+.photo-uploader-form .inner-crop img {
+    height: auto;
+    max-width: initial;
+}
+.photo-uploader-form .text {
+    display: inline-block;
+    padding: 4px 10px;
+
+    color: #5f8640;
+    border-radius: 3px;
+    background: #b9ea93;
+}
+.module__membership .notes .fa {
+    border: 0;
+}
