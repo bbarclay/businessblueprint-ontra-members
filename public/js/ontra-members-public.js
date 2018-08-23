@@ -123,7 +123,7 @@
 		 	var start = 0;
 		 	var end	  = 50;
 
-		 	//console.log(name);
+		 	console.log(name);
 		 	//console.log(state);
 
 		 	$('.mbb-form .spin-loader').addClass('show');
@@ -213,7 +213,7 @@
 		 		},
 		 		success: function(data) {
 
-		 			//console.log(data);
+		 			console.log(data);
 		 			var total = data['data']['data'].length;
 		 			var template = [];
 		 			var contacts = data['data']['data'];

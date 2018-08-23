@@ -276,23 +276,22 @@ class Ontra_Members_Public {
 			$query = array(
 				"search"	 => $name,
 			    "condition"  => 
-	                      '[{
-                              "field":{"field":"BBCustomer_165"},
-                              "op":"IN",
-							   "value":{"list":[{"value":802},{"value":800}]}
-	                       }]',
+                  '[{
+                      "field":{"field":"BBCustomer_165"},
+                      "op":"IN",
+					   "value":{"list":[{"value":802},{"value":800}]}
+                   }]',
 	        );
 
 	    	// Query the name only
 	    	$queryParams = array(
-	    			 "search"	 => $name,
-			          "condition"     => 
-			                      '[{
-		                              "field":{"field":"BBCustomer_165"},
-		                              "op":"IN",
-									   "value":{"list":[{"value":802},{"value":800}]}
-			                       }]',
-
+	    			 "search"	 => $name, 
+			         "condition"  => 
+	                      '[{
+                              "field":{"field":"BBCustomer_165"},
+                              "op":"IN",
+							   "value":{"list":[{"value":802},{"value":800}]}
+	                       }]',      
 			         "listFields" => "id, firstname, lastname,StateAUS_131",
 		        	 'sort' => 'firstname',
 		        	 "start" => $start,
@@ -324,19 +323,18 @@ class Ontra_Members_Public {
 
 	    	// Query the state only
 	    	$queryParams = array(
-			          "condition"     => 
-			                      '[{
-		                              "field":{"field":"BBCustomer_165"},
-		                              "op":"IN",
-									   "value":{"list":[{"value":802},{"value":800}]}
-			                       },
-			                       "AND",
-			                       {
-			                       	  "field":{"field":"StateAUS_131"},
-			                       	  "op":"=",
-			                       	  "value": {"value": "'. $state .'"}
-			                       }]',
-
+			          "condition" => 
+		                      '[{
+	                              "field":{"field":"BBCustomer_165"},
+	                              "op":"IN",
+								   "value":{"list":[{"value":802},{"value":800}]}
+		                       },
+		                       "AND",
+		                       {
+		                       	  "field":{"field":"StateAUS_131"},
+		                       	  "op":"=",
+		                       	  "value": {"value": "'. $state .'"}
+		                       }]',
 			         "listFields" => "id, firstname, lastname,StateAUS_131",
 		        	 'sort' => 'firstname',
 		        	 "start" => $start,
@@ -362,9 +360,9 @@ class Ontra_Members_Public {
 	                       },
 	                       "AND",
 			                {
-			                       	  "field":{"field":"StateAUS_131"},
-			                       	  "op":"=",
-			                       	  "value": {"value": "'. $state .'"}
+	                       	  "field":{"field":"StateAUS_131"},
+	                       	  "op":"=",
+	                       	  "value": {"value": "'. $state .'"}
 			                }]',
 	        );
 
@@ -384,7 +382,6 @@ class Ontra_Members_Public {
 			                       	  "op":"=",
 			                       	  "value": {"value": "'. $state .'"}
 			                       }]',
-
 			         "listFields" => "id, firstname, lastname,StateAUS_131",
 		        	 'sort' => 'firstname',
 		        	 "start" => $start,
@@ -414,7 +411,6 @@ class Ontra_Members_Public {
 		                              "op":"IN",
 									   "value":{"list":[{"value":802},{"value":800}]}
 			                       }]',
-
 			         "listFields" => "id, firstname, lastname,StateAUS_131",
 		        	 'sort' => 'firstname',
 		        	 "start" => $start,
@@ -452,7 +448,7 @@ class Ontra_Members_Public {
 
 		$pages 	  = ceil( $count  / 50 );
 
-		$response = array('success' => true, 'data' => $contact, 'total' => $count, 'pages' => $pages );
+		$response = array('success' => true, 'data' => $contact, 'total' => $count, 'pages' => $pages, 'name' => $name, 'state' => $state );
 
 		return wp_send_json_success($response);
 
