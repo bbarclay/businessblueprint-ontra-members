@@ -364,8 +364,8 @@
 		     		return false;
 	     	} 
 
-	     	if( file['size'] > 300000) {
-	     		$('.upload-status').html("<span class='error-message'>File is too big. Please upload image lesser than 300kb!</span>");
+	     	if( file['size'] > 3000000) {
+	     		$('.upload-status').html("<span class='error-message'>File is too big. Please upload image lesser than 3mb!</span>");
 		     		return false;
 	     	}
 
