@@ -255,7 +255,7 @@ class Ontra_Members_Public {
 	{
 		$start   = (int)$_POST['start'];
 		$range   = (int)$_POST['end'];
-		$name    = sanitize_text_field( $_POST['name'] );
+		$name    = $_POST['name'];
 		$state   = intval( $_POST['stateId'] );
 
 		if( ! isset( $_POST['security'] ) || ! check_ajax_referer( 'ontra_security_action', 'security') ) {
@@ -274,24 +274,27 @@ class Ontra_Members_Public {
 
     		// Count total entries
 			$query = array(
-				"search"	 => $name,
+				
+				"search"	 => jo,
 			    "condition"  => 
                   '[{
                       "field":{"field":"BBCustomer_165"},
                       "op":"IN",
 					   "value":{"list":[{"value":802},{"value":800}]}
                    }]',
+                   
 	        );
 
 	    	// Query the name only
 	    	$queryParams = array(
-	    			 "search"	 => $name, 
+	    			  
 			         "condition"  => 
 	                      '[{
                               "field":{"field":"BBCustomer_165"},
                               "op":"IN",
 							   "value":{"list":[{"value":802},{"value":800}]}
-	                       }]',      
+	                       }]',    
+	                 "search"	 => "jo",       
 			         "listFields" => "id, firstname, lastname,StateAUS_131",
 		        	 'sort' => 'firstname',
 		        	 "start" => $start,
@@ -893,7 +896,6 @@ class Ontra_Members_Public {
 				        "StateAUS_131"   => $state,
 				        "zip"         	 => $zip,
 				        "company"        => $company,
-				        "TestDropBo_234" => $business_type,
 				        "website"        => $website,
 				        "office_phone"   => $office_phone,  
 				);
@@ -1339,9 +1341,6 @@ class Ontra_Members_Public {
 			$img_url        = $movefile['url'];
 			$update_photo   = update_user_meta( $user_id, 'new_uploaded_photo', $img_url  );
 			$generate_image = '<img src="'. $img_url .'" id="cropbox" />';
-
-			//$photo_meta   = wp_get_attachment_metadata( $attachment_id ); 
-            //$photo_link   = wp_get_attachment_image( $attachment_id, 'full' ,"", array('id' => 'cropbox'));
 
 			$data = array(
 					'photo_link' => $generate_image
