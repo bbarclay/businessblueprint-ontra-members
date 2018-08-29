@@ -1324,7 +1324,6 @@ class Ontra_Members_Public {
 	    require_once( ABSPATH . 'wp-admin/includes/file.php' );
 	    require_once( ABSPATH . 'wp-admin/includes/media.php' );
 
-		//$attachment_id = media_handle_upload( 'file', 0 );
 		//
 		$file             = $_FILES['file'];
 		$upload_overrides = array('action' => 'upload_new_photo');
@@ -1387,7 +1386,13 @@ class Ontra_Members_Public {
 		$jpeg_quality = 90;
 		$src          = $image_url;
 
-		$img_r = imagecreatefromjpeg($src);
+		if ( preg_match('/(\.jpg|\.JPG|\.JPEG|\.jpeg)$/i', $src) ) {
+			$img_r = imagecreatefromjpeg($src);
+		} elseif( preg_match('/(\.png|\.PNG)$/i', $src)  ) {
+			$img_r = imagecreatefrompng($src);
+		}
+        
+			
 
 		// $mime_type = mime_content_type($src);
 
@@ -1411,7 +1416,13 @@ class Ontra_Members_Public {
 		imagecopyresampled( $dst_r, $img_r, 0, 0, $_POST['x'], $_POST['y'], $targ_w, $targ_h, $_POST['w'], $_POST['h'] );
 
 		$upload_dir   = wp_upload_dir();
-		$filename     = 'profile-picture-'. $id . '-' . time() . '.jpg';
+		
+
+		if ( preg_match('/(\.jpg|\.JPG|\.JPEG|\.jpeg)$/i', $src) ) {
+			$filename     = 'profile-picture-'. $id . '-' . time() . '.jpg';
+		} elseif( preg_match('/(\.png|\.PNG)$/i', $src)  ) {
+			$filename     = 'profile-picture-'. $id . '-' . time() . '.png';
+		}
 
 		
 		if( isset( $user->user_login ) && ! empty( $upload_dir['basedir'] ) ) {
