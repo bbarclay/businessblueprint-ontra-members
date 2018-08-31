@@ -1376,7 +1376,7 @@ class Ontra_Members_Public {
     	$id   			= $this->get_ontraport_id();
 	    $image_url      = get_user_meta( $id, 'new_uploaded_photo', true  );
 
-		$targ_w = $targ_h = 150;
+		$targ_w = $targ_h = 240;
 		$jpeg_quality = 90;
 		$src          = $image_url;
 
