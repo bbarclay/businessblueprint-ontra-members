@@ -750,8 +750,6 @@ class Ontra_Members_Public {
 	*/
     public function update_contact() {
   	
-  		$nonce = $_POST['update_ontra_field'];
-
 
     	if( ! isset( $_POST['update_ontra_field'] ) || ! wp_verify_nonce( $_REQUEST['update_ontra_field'], 'update_ontra_action') ) {
 
@@ -906,18 +904,14 @@ class Ontra_Members_Public {
 				$response = $response['data'];
 
 
-				if( $_FILES['file'] ) {
-					$this->upload_user_photo( $_FILES['file'], $this->get_ontraport_id() );
-				}
-
-
+			
 
 				$url = site_url() . '/your-profile';
 
 				wp_redirect( $url );
 
 				die();
-			
+				
 
     }
 
@@ -959,7 +953,7 @@ class Ontra_Members_Public {
 		$this->address2 		= $response[0]['address2'];
 		$this->city 			= $response[0]['city'];
 		$this->state_edit       = $response[0]['StateAUS_131']; 
-		$this->state 			= $this->get_state( $response[0]['StateAUS_131'] );
+		//$this->state 			= $this->get_state( $response[0]['StateAUS_131'] );
 		$this->zipcode 			= $response[0]['zip'];
 		$this->country 			= $response[0]['country'];
 		$this->mobile_no 		= $response[0]['cell_phone'];

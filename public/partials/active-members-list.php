@@ -59,12 +59,18 @@
 		   	   
 					<div class="inner">
 						<?php 
-							$img_url = wp_get_attachment_url( $id );
-							if($img_url) {
-								$img_bg = $img_url;
+
+							if( get_user_meta( $id, 'user_photo', true ) )  {
+								$img_bg = get_user_meta( $id, 'user_photo', true );
 							} else {
-								$img_bg = $this->get_thumbnail( $id );
-							}	
+
+								$img_url = wp_get_attachment_url( $id );
+								if($img_url) {
+									$img_bg = $img_url;
+								} else {
+									$img_bg = $this->get_thumbnail( $id );
+								}
+							}
 						?>
 						<div class="image" style="background: url(<?php echo $img_bg ?>) center center / cover no-repeat;">
 						</div>	
