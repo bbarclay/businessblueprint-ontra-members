@@ -3,6 +3,7 @@
       <div class="spin-loader">
      	 <span class="fa fa-spinner fa-spin spin-normal"></span>
       </div>
+      <?php $is_silver =  do_shortcode('[mbb_silver_membership]'); ?>
 	  <form action="<?php echo esc_url( admin_url('admin-ajax.php') ) ?>" method="POST"  enctype="multipart/form-data" autocomplete="off">
 	   		<input type="hidden" name="action" value="ontra_update_contact" />
 	   		<?php wp_nonce_field( 'update_ontra_action', 'update_ontra_field' ); ?>
@@ -11,15 +12,15 @@
 			<div class="row">
 			   <div class="col-sm-6">
 			   	  <label>First Name</label> 
-			   	  <span class="privacy-status"><input type="checkbox" name="hide_firstname" <?php echo ( get_user_meta(  $user_id , 'hide_firstname', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
+			   	  <span class="privacy-status <?php echo ( $is_silver ) ? 'hide': ''; ?>"><input type="checkbox" name="hide_firstname" <?php echo ( get_user_meta(  $user_id , 'hide_firstname', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
 			   	  <input type="text" name="firstname" value="<?php echo $this->firstname; ?>" style="color: #bfbcbc;" readonly="readonly"   class="form-control required-field"  required/>
 			   </div>
 			   <div class="col-sm-6">
-			      <label>Last Name</label> <span class="privacy-status"><input type="checkbox" name="hide_lastname" <?php echo ( get_user_meta(  $user_id , 'hide_lastname', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
+			      <label>Last Name</label> <span class="privacy-status <?php echo ( $is_silver ) ? 'hide': ''; ?>""><input type="checkbox" name="hide_lastname" <?php echo ( get_user_meta(  $user_id , 'hide_lastname', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
 			   	  <input type="text" name="lastname" value="<?php echo $this->lastname; ?>" style="color: #bfbcbc";  class="form-control  required-field" readonly="readonly" required/>
 			   </div>
 			   <div class="col-sm-6">
-			      <label>Address</label> <span class="privacy-status"><input type="checkbox" name="show_address" <?php echo ( !get_user_meta(  $user_id , 'show_address', true ) == 1 ) ? "checked='checked'": ""; ?>> Hide Complete Address</span><br>
+			      <label>Address</label> <span class="privacy-status <?php echo ( $is_silver ) ? 'hide': ''; ?>""><input type="checkbox" name="show_address" <?php echo ( !get_user_meta(  $user_id , 'show_address', true ) == 1 ) ? "checked='checked'": ""; ?>> Hide Complete Address</span><br>
 			   	  <input type="text" name="address" value="<?php echo $this->address; ?>"  class="form-control  required-field" required/>
 			   </div>
 			   <div class="col-sm-6">
@@ -39,11 +40,11 @@
 			   	  <input type="text" name="zip" value="<?php echo $this->zipcode; ?>" class="form-control  required-field" required/>
 			   </div>
 			   <div class="col-sm-6">
-			      <label>Mobile No</label> <span class="privacy-status"><input type="checkbox" name="show_mobile" <?php echo ( !get_user_meta(  $user_id , 'show_mobile', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
+			      <label>Mobile No</label> <span class="privacy-status <?php echo ( $is_silver ) ? 'hide': ''; ?>""><input type="checkbox" name="show_mobile" <?php echo ( !get_user_meta(  $user_id , 'show_mobile', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
 			   	  <input type="text" name="mobile_no" value="<?php echo $this->mobile_no; ?>" class="form-control  required-field" required/>
 			   </div>
 			   <div class="col-sm-6">
-			      <label>Email</label> <span class="privacy-status"><input type="checkbox" name="show_email" <?php echo ( !get_user_meta(  $user_id , 'show_email', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
+			      <label>Email</label> <span class="privacy-status <?php echo ( $is_silver ) ? 'hide': ''; ?>""><input type="checkbox" name="show_email" <?php echo ( !get_user_meta(  $user_id , 'show_email', true ) == 1 ) ? "checked='checked'": ""; ?> /> Hide</span><br>
 			   	  <input type="email" name="email" value="<?php echo $this->email; ?>" class="form-control  required-field" disabled/>
 			   </div>
 		    </div>
@@ -52,7 +53,7 @@
 		    <div class="row">
 			   <div class="col-sm-6">
 			      <label>Company</label> 
-			      <span class="privacy-status"><input type="checkbox" name="show_company" <?php echo ( !get_user_meta(  $user_id , 'show_company', true ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
+			      <span class="privacy-status <?php echo ( $is_silver ) ? 'hide': ''; ?>""><input type="checkbox" name="show_company" <?php echo ( !get_user_meta(  $user_id , 'show_company', true ) == 1 ) ? "checked='checked'": ""; ?>  /> Hide</span><br>
 			   	  <input type="text" name="company" value="<?php echo $this->company; ?>" class="form-control" />
 			   </div>
 			   <div class="col-sm-6">
