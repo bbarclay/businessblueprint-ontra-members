@@ -623,6 +623,21 @@ class Ontra_Members_Public {
 	    return $output_string;
     }
 
+    public function display_silver($atts) {
+
+
+       	$this->atts = $atts;
+
+		$atts = shortcode_atts( array(
+			'title' => 'BusinessBlueprint Fasttrack Member'
+		), $this->atts, 'mbb_silver_membership' );
+
+		
+    	$output = $this->isSilverMembership();
+
+    	return $output;
+
+    }
 
 
 
@@ -1726,6 +1741,48 @@ class Ontra_Members_Public {
 		return  $member_type;
 
 	}
+
+
+
+
+	public function isSilverMembership() {
+
+		$client = $this->ontraport;
+
+		$user =  wp_get_current_user();
+
+		$email = $user->user_email;
+
+			
+	    $queryParams = array(
+
+			          "condition"     => 
+			                             '[{
+						"field":{"field":"email"},
+						"op":"=",
+						"value":{"value":"'. $email .'"}
+						}]',
+
+			         "listFields" => "id, firstname, lastname, BBCustomer_165",
+		);
+
+
+		$response = $client->contact()->retrieveMultiple($queryParams);
+		$response = json_decode($response, true);
+		$response = $response['data'];
+
+		// Fasttrack and Gold Member
+		if($response[0]['BBCustomer_165'] === '1831' ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+			
+
+	}
+
+
 
     public function get_image($id = '') {
 

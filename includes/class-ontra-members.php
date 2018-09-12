@@ -119,7 +119,7 @@ class Ontra_members {
 		$affiliate_center = new MyBB_Affiliate_Centre( $this->ontraport->connect() );
 		$link_builder     = new LinkBuilder();
 
-
+		
 		add_shortcode( 'BB_fastrackMember', array( $plugin_public, 'display_fasttrackmembers' ) );
 		add_shortcode( 'BB_EliteMember', array( $plugin_public, 'display_elitemembers' ) );
 		add_shortcode( 'bb_active_members', array( $plugin_public, 'display_active_members' ) );
@@ -129,6 +129,7 @@ class Ontra_members {
 		add_shortcode( 'mbb_your_consultant', array( $plugin_public, 'your_consultant' ) );
 		add_shortcode( 'mbb_user_profile', array( $plugin_public, 'user_profile' ) );
 		add_shortcode( 'mbb_affiliate_centre', array( $affiliate_center, 'affiliate_centre' ) );
+		add_shortcode( 'mbb_silver_membership', array( $plugin_public, 'display_silver' ) );
 
 		//add_shortcode( 'BB_pastMember', array( $plugin_public, 'display_pastmembers' ) );
 
