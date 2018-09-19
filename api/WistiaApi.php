@@ -224,7 +224,7 @@ class WistiaApi
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_USERPWD, $username .':'.$this->apiKey);
-		curl_setopt ($ch, CURLOPT_CAINFO, "/xampp/htdocs/ontraport/cacert.pem");
+		//curl_setopt ($ch, CURLOPT_CAINFO, "/xampp/htdocs/ontraport/cacert.pem");
 		$result = curl_exec($ch);
 		curl_close($ch);
 		$this->response = $result;

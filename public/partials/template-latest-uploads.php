@@ -59,7 +59,7 @@
 			for( var a = 1; a <= list.length; a++ ) {
 
 				var id = $('.latest-uploads-list li:nth-child('+ a +') .video-thumbnail').attr('id');
-				console.log(id);
+			
 				$.ajax({
 
 					type: 'POST',
