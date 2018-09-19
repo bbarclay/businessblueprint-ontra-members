@@ -719,7 +719,6 @@ img.jcrop-preview {
 }
 .latest-uploads-wrapper {
     max-height: 367px;
-    padding-right: 7px;
     margin-top: 5px;
     overflow: hidden;
 }

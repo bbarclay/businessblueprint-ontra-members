@@ -70,7 +70,7 @@
 			 			id: id,
 			 		},
 			 		success: function(data) {
-						console.log(data);
+					
 			 			var img = '<img src="' + data['data']['img_link'] + '" width="100%" alt="' + data['data']['title'] +'" />';
 			 		
 			 			$('.latest-uploads-list').find('#' + data['data']['id']).html(img);

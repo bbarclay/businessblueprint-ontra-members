@@ -1504,7 +1504,7 @@ class Ontra_Members_Public {
 	 * @return string 
 	 */
 	public function getPostImage() {
-
+		                
 		if( ! isset( $_POST['security'] ) || ! check_ajax_referer( 'ontra_security_action', 'security') ) {
 			return wp_send_json_error();
 		}
@@ -1520,11 +1520,13 @@ class Ontra_Members_Public {
 		$video 			= $videoInfo->mediaShow( $id );
         $img_url 		= $video->thumbnail->url;
         $img_title 		= $video->name;
-
+		$video_stats 	= $videoInfo->mediaShowStats($id);
+		$total_plays	= $video_stats->stats->plays;
         $data = array(
         	'img_link' => $img_url,
         	'id' => $id,
-        	'title' => $img_title 
+        	'title' => $img_title,
+        	'total_plays' => $total_plays 
         );
 
 

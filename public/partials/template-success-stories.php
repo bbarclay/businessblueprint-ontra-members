@@ -59,7 +59,7 @@ wp_reset_postdata();
 			for( var a = 1; a <= list.length; a++ ) {
 
 				var id = $('#success-stories .column:nth-child('+ a +') .video-thumbnail').attr('id');
-				console.log(id);
+		
 				$.ajax({
 
 					type: 'POST',
@@ -70,7 +70,7 @@ wp_reset_postdata();
 			 			id: id,
 			 		},
 			 		success: function(data) {
-						console.log(data);
+				
 			 			var img = '<img src="' + data['data']['img_link'] + '" width="100%" alt="' + data['data']['title'] +'" />';
 			 		
 			 			$('#success-stories').find('#' + data['data']['id']).html(img);
