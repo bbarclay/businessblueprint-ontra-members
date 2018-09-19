@@ -123,8 +123,6 @@
 		 	var start = 0;
 		 	var end	  = 50;
 
-		 	console.log(name);
-		 	//console.log(state);
 
 		 	$('.mbb-form .spin-loader').addClass('show');
 
@@ -199,7 +197,7 @@
 		function contactAjax( name = '', stateID = '', start = 0, end = 50, clean_listing = false, next_page = 2 )
 		{
 		
-			//console.log(start + ' ' + end );
+
 			$.ajax({
 		 		type: 'POST',
 		 		url: search_members.ajax_url,

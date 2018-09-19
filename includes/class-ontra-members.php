@@ -61,6 +61,7 @@ class Ontra_members {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ontra-members-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'api/WistiaApi.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -76,6 +77,7 @@ class Ontra_members {
 
 		$this->loader 	 = new Ontra_Members_Loader();
 		$this->ontraport = new Ontraport_API();
+		$this->wistia    = new WistiaApi(get_option('ontra_member_bb_wistia_key'));  
 
 	}
 
@@ -115,7 +117,7 @@ class Ontra_members {
 	private function define_public_hooks() {
 
 
-		$plugin_public 	  = new Ontra_Members_Public( $this->get_plugin_name(), $this->get_version(), $this->ontraport->connect());
+		$plugin_public 	  = new Ontra_Members_Public( $this->get_plugin_name(), $this->get_version(), $this->ontraport->connect(), $this->wistia);
 		$affiliate_center = new MyBB_Affiliate_Centre( $this->ontraport->connect() );
 		$link_builder     = new LinkBuilder();
 
@@ -131,11 +133,15 @@ class Ontra_members {
 		add_shortcode( 'mbb_affiliate_centre', array( $affiliate_center, 'affiliate_centre' ) );
 		add_shortcode( 'mbb_silver_membership', array( $plugin_public, 'display_silver' ) );
 
-		//add_shortcode( 'BB_pastMember', array( $plugin_public, 'display_pastmembers' ) );
+		add_shortcode( 'mbb_latest_uploads', array( $plugin_public, 'getLatestUploads' ) );
+		add_shortcode( 'mbb_featured_videos', array( $plugin_public, 'getFeaturedVideos' ) );
+		add_shortcode( 'mbb_success_stories', array( $plugin_public, 'getSuccessStories' ) );
+
+
+
 
 		$this->loader->add_action( 'wp_ajax_search_ontra', $plugin_public, 'searchMembers' );
 		$this->loader->add_action( 'wp_ajax_nopriv_search_ontra', $plugin_public, 'searchMembers' );
-
 
 		$this->loader->add_action( 'wp_ajax_ontra_update_contact', $plugin_public, 'update_contact' );
 		$this->loader->add_action( 'wp_ajax_nopriv_ontra_update_contact', $plugin_public, 'update_contact' );
@@ -146,11 +152,11 @@ class Ontra_members {
 		$this->loader->add_action( 'wp_ajax_nopriv_update_profile_photo', $plugin_public, 'update_profile_photo' );
 		$this->loader->add_action( 'wp_ajax_update_profile_photo', $plugin_public, 'update_profile_photo' );
 
-		// $this->loader->add_action( 'admin_post_nopriv_upload_new_photo', $plugin_public, 'uploadNewPhoto' );
-		// $this->loader->add_action( 'admin_post_upload_new_photo', $plugin_public, 'uploadNewPhoto' );
-
 		$this->loader->add_action( 'wp_ajax_nopriv_upload_new_photo', $plugin_public, 'uploadNewPhoto' );
 		$this->loader->add_action( 'wp_ajax_upload_new_photo', $plugin_public, 'uploadNewPhoto' );
+
+		$this->loader->add_action( 'wp_ajax_nopriv_get_wistia_image', $plugin_public, 'getPostImage' );
+		$this->loader->add_action( 'wp_ajax_get_wistia_image', $plugin_public, 'getPostImage' );
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );

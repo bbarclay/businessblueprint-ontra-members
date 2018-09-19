@@ -36,16 +36,17 @@ class Ontra_Members_Public {
 	public $active_members;
 	public $affiliate_link;
 	public $about_me;
+	public $wistia;
 	protected $ontraport;
 	private $plugin_name;
 	private $version;
 	
-	public function __construct( $plugin_name, $version, $ontraport ) {
+	public function __construct( $plugin_name, $version, $ontraport, $wistia ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->ontraport = $ontraport;
-
+		$this->wistia = $wistia;
 
 	}
 
@@ -1403,21 +1404,6 @@ class Ontra_Members_Public {
         
 			
 
-		// $mime_type = mime_content_type($src);
-
-  //       switch ( $mime_type ) {
-  //           case 'image/jpeg': 
-  //               $img_r = imagecreatefrompng($src);
-  //           case 'image/png':
-  //               $img_r = imagecreatefromjpeg($src);
-  //           case 'image/gif':
-  //               $img_r = imagecreatefromgif($src);
-  //           default:
-  //               return '';
-  //       }
-
-        //$temp_file = download_url( $url, 5 );
-
 		//Create a new true color image
 		$dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
 
@@ -1500,6 +1486,71 @@ class Ontra_Members_Public {
 	    wp_redirect($url);
 	    die();
 
+	}
+
+	public function getLatestUploads() {
+		$videoInfo = $this->wistia;
+
+ 		ob_start();		
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/template-latest-uploads.php';
+	    $output_string = ob_get_contents();
+	    if (ob_get_contents()) ob_end_clean();
+	    return $output_string;
+	}
+
+	/**
+	 * Retreive the thumbnail of the Wistia Video
+	 * @param   
+	 * @return string 
+	 */
+	public function getPostImage() {
+
+		if( ! isset( $_POST['security'] ) || ! check_ajax_referer( 'ontra_security_action', 'security') ) {
+			return wp_send_json_error();
+		}
+
+		if( current_user_can('subscriber') &&  current_user_can('administrator') ) {
+			return wp_send_json_error();
+		}
+
+		$id = $_POST['id'];
+
+		$videoInfo = $this->wistia;
+
+		$video 			= $videoInfo->mediaShow( $id );
+        $img_url 		= $video->thumbnail->url;
+        $img_title 		= $video->name;
+
+        $data = array(
+        	'img_link' => $img_url,
+        	'id' => $id,
+        	'title' => $img_title 
+        );
+
+
+	    return wp_send_json_success($data);
+	}
+
+	public function getFeaturedVideos() {
+		$videoInfo = $this->wistia;
+
+
+ 		ob_start();		
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/template-featured-videos.php';
+	    $output_string = ob_get_contents();
+	    if (ob_get_contents()) ob_end_clean();
+	    return $output_string;
+	}
+
+
+	public function getSuccessStories() {
+		$videoInfo = $this->wistia;
+
+ 		ob_start();		
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/template-success-stories.php';
+	    $output_string = ob_get_contents();
+	    if (ob_get_contents()) ob_end_clean();
+	    return $output_string;
 	}
 
 
@@ -1676,7 +1727,6 @@ class Ontra_Members_Public {
 	}
 
 
-
     /**
     * Get member type on Ontraport
     *	 
@@ -1685,14 +1735,11 @@ class Ontra_Members_Public {
 	public function get_member_type() {
 
 		$client = $this->ontraport;
-
-		$user =  wp_get_current_user();
-
-		$email = $user->user_email;
+		$user   =  wp_get_current_user();
+		$email 	= $user->user_email;
 
 			
 	    $queryParams = array(
-
 			          "condition"     => 
 			                             '[{
 						"field":{"field":"email"},
@@ -1708,38 +1755,29 @@ class Ontra_Members_Public {
 		$response = json_decode($response, true);
 		$response = $response['data'];
 
-		//return var_dump($response);
-
-		// Fasttrack and Gold Member
+		 
 		if($response[0]['BBCustomer_165'] === '800' && $response[0]['BBYearLeve_258'] === '1204' ) {
+			// Fasttrack Gold
 			$member_type = 'Fasttrack Gold';
-
 		}
-		// Fasttrack and Platinum Member
 		else if($response[0]['BBCustomer_165'] === '802' && $response[0]['BBYearLeve_258'] === '1204' ) {
+			// Fasttrack Platinum
 			$member_type = 'Fasttrack Platinum';
-
 		}
-
 		else if( $response[0]['BBCustomer_165'] === '800' && $response[0]['BBYearLeve_258'] !== '1204') {
 			$member_type = 'Elite Gold';
-
 		}
 		else if( $response[0]['BBCustomer_165'] === '802' && $response[0]['BBYearLeve_258'] !== '1204') {
 			$member_type = 'Elite Platinum';
-
 		}
 		else if( $response[0]['BBCustomer_165'] === '917' || $response[0]['BBCustomer_165'] === '1652' || $response[0]['BBCustomer_165'] === '1220' || $response[0]['BBCustomer_165'] === '1759' || $response[0]['BBCustomer_165'] === '982' && $response[0]['BBYearLeve_258'] !== '1204') {
 			$member_type = 'Elite Platinum';
-
 		}
 		else {
 			$member_type = 'N/A';
 		}
 		
-		
 		return  $member_type;
-
 	}
 
 

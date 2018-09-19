@@ -197,6 +197,7 @@ class Ontra_Members_Admin {
 
     	register_setting( 'bbmember-setting', 'ontra_member_bb_appid', array($this, 'sanitize_input_field') );
 		register_setting( 'bbmember-setting', 'ontra_member_bb_appkey', array($this, 'sanitize_input_field') );
+		register_setting( 'bbmember-setting', 'ontra_member_bb_wistia_key', array($this, 'sanitize_input_field') );
 
 		add_settings_section(
 		    'ontramember-section',                   		
@@ -217,6 +218,14 @@ class Ontra_Members_Admin {
 		    'ontramember-key',     
 		    'Ontraport APP KEY',      
 		    array($this, 'settings_appKEY'), 
+		    'member_settings',                    
+		    'ontramember-section'               
+		);
+
+		add_settings_field(
+		    'ontramember-wistia-key',     
+		    'Wistia Key',      
+		    array($this, 'settings_wistia_key'), 
 		    'member_settings',                    
 		    'ontramember-section'               
 		);
@@ -339,7 +348,14 @@ class Ontra_Members_Admin {
 		      '</label>';
     }
 
+    public function settings_wistia_key() {
+    	$task = sanitize_text_field(get_option('ontra_member_bb_wistia_key'));
 
+		echo '<label for="ontra_member_bb_wistia_key">' .
+		       '<input id="ontra_member_bb_wistia_key" name="ontra_member_bb_wistia_key" class="regular-text" type="input" value="'. ( !empty($task) ? $task : '' )  .'" />' .
+		      '</label>';
+    }
+    
     /**
 	*  Sanitize Input Field
 	*
