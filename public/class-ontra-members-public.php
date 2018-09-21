@@ -276,7 +276,7 @@ class Ontra_Members_Public {
     		// Count total entries
 			$query = array(
 				
-				"search"	 => jo,
+				"search"	 => $name,
 			    "condition"  => 
                   '[{
                       "field":{"field":"BBCustomer_165"},
