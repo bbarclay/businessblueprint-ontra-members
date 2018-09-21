@@ -288,14 +288,13 @@ class Ontra_Members_Public {
 
 	    	// Query the name only
 	    	$queryParams = array(
-	    			  
+	    			"search"	 => $name,   
 			         "condition"  => 
 	                      '[{
                               "field":{"field":"BBCustomer_165"},
                               "op":"IN",
 							   "value":{"list":[{"value":802},{"value":800}]}
-	                       }]',    
-	                 "search"	 => "jo",       
+	                       }]',          
 			         "listFields" => "id, firstname, lastname,StateAUS_131",
 		        	 'sort' => 'firstname',
 		        	 "start" => $start,
