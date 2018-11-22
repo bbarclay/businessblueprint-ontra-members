@@ -55,8 +55,8 @@
 		<div class="panel">
 				<div class="label"><span>Customer Type</span><span class="text"><?php echo ( $this->customer_type ) ? $this->customer_type: 'N/A'; ?></span></div>
 				<div class="label"><span>Year Level</span><span class="text"><?php echo ( $this->yearlevel ) ? $this->yearlevel : 'N/A';?></span></div>
-				<div class="label"><span>Joined Date</span><span class="text"><?php echo ( $this->joined_date ) ? $this->joined_date : 'N/A';  ?></span></div>
-				<div class="label"><span>Renewal Date</span><span class="text"><?php echo (  $this->renew_date ) ?  $this->renew_date : 'N/A'; ?></span></div>
+				<div class="label"><span>Joined Date</span><span class="text"><?php echo ( $this->joined_date ) ? date('j F Y',strtotime( $this->joined_date)) : 'N/A';  ?></span></div>
+				<div class="label"><span>Renewal Date</span><span class="text"><?php echo (  $this->renew_date ) ? date('j F Y',strtotime(  $this->renew_date)) : 'N/A'; ?></span></div>
 		</div>
 		<!-- end of accordion -->
 
