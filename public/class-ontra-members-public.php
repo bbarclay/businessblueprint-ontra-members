@@ -202,7 +202,7 @@ class Ontra_Members_Public {
 	    }
 
 
-	    $start = ($page_number > 1) ? $page_number * $max : 0;
+	    $start = ($page_number > 1) ? ( $page_number * $max ) - 49  : 0;
 	    $range = 50;
 
 	    $contact = [];
@@ -927,7 +927,6 @@ class Ontra_Members_Public {
 
 				die();
 				
-
     }
 
 	public function getContactMeta() {
@@ -1525,12 +1524,37 @@ class Ontra_Members_Public {
         	'img_link' => $img_url,
         	'id' => $id,
         	'title' => $img_title,
-        	'total_plays' => $total_plays 
+        	'total_plays' => $total_plays
         );
 
 
 	    return wp_send_json_success($data);
 	}
+
+	/**
+	 * Retreive the thumbnail of the Wistia Video
+	 * @param   
+	 * @return string 
+	 */
+	public function getVideoTimeline() {
+		                
+			if( ! isset( $_POST['security'] ) || ! check_ajax_referer( 'ontra_security_action', 'security') ) {
+				return wp_send_json_error();
+			}
+
+			if( current_user_can('subscriber') &&  current_user_can('administrator') ) {
+				return wp_send_json_error();
+			}
+
+			$id = ( isset( $_POST['id']) ) ? $_POST['id'] : "None";
+
+			$list = get_field('list', $id);
+
+	    return wp_send_json_success($list);
+	}
+
+
+
 
 	public function getFeaturedVideos() {
 		$videoInfo = $this->wistia;
@@ -1930,22 +1954,17 @@ class Ontra_Members_Public {
 		$client = $this->ontraport;
 	    $queryParams = array(
 	          "condition"     => 
-	                             '[
-	                             {
-			                              "field":{"field":"BBCustomer_165"},
-			                              "op":"IN",
-										  "value":{"list":[{"value":802},{"value":800},{"value":1652},{"value":1220},{"value":1759}]}
+	                             '[{
+		                              "field":{"field":"BBCustomer_165"},
+		                              "op":"IN",
+									  "value":{"list":[{"value":802},{"value":800},{"value":1652},{"value":1220},{"value":1759}]}
 			                     },
 								"AND",
 	                             {
-			                              "field":{"field":"BBYearLeve_258"},
-			                              "op":"=",
-										  "value":{"value":"1204"}
-	                             }
-	                             
-			                                                         
-
-	                            ]');
+		                              "field":{"field":"BBYearLeve_258"},
+		                              "op":"=",
+									  "value":{"value":"1204"}
+	                             }]');
 
 	    $response = $client->contact()->retrieveCollectionInfo($queryParams);
 	    $response = json_decode($response, true);
