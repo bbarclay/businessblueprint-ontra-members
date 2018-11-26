@@ -213,7 +213,7 @@ class Ontra_Members_Public {
 		                      '[{
 	                              "field":{"field":"BBCustomer_165"},
 	                              "op":"IN",
-								   "value":{"list":[{"value":802},{"value":800}]}
+								   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 		                       }]',
 
 		         "listFields" => "id, firstname, lastname,StateAUS_131",
@@ -240,7 +240,7 @@ class Ontra_Members_Public {
              "condition"  => '[{
 	                              "field":{"field":"BBCustomer_165"},
 	                              "op":"IN",
-								   "value":{"list":[{"value":802},{"value":800}]}
+								   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 		                      }]',
 
           );
@@ -281,25 +281,26 @@ class Ontra_Members_Public {
                   '[{
                       "field":{"field":"BBCustomer_165"},
                       "op":"IN",
-					   "value":{"list":[{"value":802},{"value":800}]}
-                   }]',
-                   
+					   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
+                   }]',    
 	        );
 
 	    	// Query the name only
 	    	$queryParams = array(
-	    			"search"	 => $name,   
+	    			"search"	 => $name,
+		        	 "start" => $start,
+		  			 "range" => $range,
+		  			 "sort" => "firstname",
+		        	 "sortDir" => "asc",
+	    			 "listFields" => "id, firstname, lastname,StateAUS_131",  
 			         "condition"  => 
 	                      '[{
                               "field":{"field":"BBCustomer_165"},
                               "op":"IN",
-							   "value":{"list":[{"value":802},{"value":800}]}
-	                       }]',          
-			         "listFields" => "id, firstname, lastname,StateAUS_131",
-		        	 'sort' => 'firstname',
-		        	 "start" => $start,
-		  			 "range" => $range,
-		        	 'sortDir' => 'asc',
+							   "value":{"list":[{"value":800},{"value":802},{"value":1220}]}
+							 }  
+	                       }]',       
+	                  
 			);
 
 	    } 
@@ -313,7 +314,7 @@ class Ontra_Members_Public {
 	                      '[{
                               "field":{"field":"BBCustomer_165"},
                               "op":"IN",
-							   "value":{"list":[{"value":802},{"value":800}]}
+							   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 	                       },
 	                       "AND",
 	                       {
@@ -330,7 +331,7 @@ class Ontra_Members_Public {
 		                      '[{
 	                              "field":{"field":"BBCustomer_165"},
 	                              "op":"IN",
-								   "value":{"list":[{"value":802},{"value":800}]}
+								   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 		                       },
 		                       "AND",
 		                       {
@@ -359,7 +360,7 @@ class Ontra_Members_Public {
 	                      '[{
                               "field":{"field":"BBCustomer_165"},
                               "op":"IN",
-							   "value":{"list":[{"value":802},{"value":800}]}
+							   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 	                       },
 	                       "AND",
 			                {
@@ -377,7 +378,7 @@ class Ontra_Members_Public {
 			                      '[{
 		                              "field":{"field":"BBCustomer_165"},
 		                              "op":"IN",
-									   "value":{"list":[{"value":802},{"value":800}]}
+									   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 			                       },
 			                       "AND",
 			                       {
@@ -402,7 +403,7 @@ class Ontra_Members_Public {
 	                      '[{
                               "field":{"field":"BBCustomer_165"},
                               "op":"IN",
-							   "value":{"list":[{"value":802},{"value":800}]}
+							   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 	                       }]',
 	        );
 
@@ -412,7 +413,7 @@ class Ontra_Members_Public {
 			                      '[{
 		                              "field":{"field":"BBCustomer_165"},
 		                              "op":"IN",
-									   "value":{"list":[{"value":802},{"value":800}]}
+									   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 			                       }]',
 			         "listFields" => "id, firstname, lastname,StateAUS_131",
 		        	 'sort' => 'firstname',
@@ -433,7 +434,6 @@ class Ontra_Members_Public {
 		$response = json_decode($response, true);
 		$total_contact = count( $response['data'] );
 
-	
 		for( $x = 0; $x < $total_contact;  $x++ )
 		{
 
