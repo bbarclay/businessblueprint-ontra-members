@@ -215,7 +215,6 @@ class Ontra_Members_Public {
 	                              "op":"IN",
 								   "value":{"list":[{"value":802},{"value":800},{"value":1220}]}
 		                       }]',
-
 		         "listFields" => "id, firstname, lastname,StateAUS_131",
 		         "start" => $start,
 	        	 "range" => $range,
