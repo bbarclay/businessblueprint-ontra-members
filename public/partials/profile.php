@@ -55,8 +55,27 @@
 		<div class="panel">
 				<div class="label"><span>Customer Type</span><span class="text"><?php echo ( $this->customer_type ) ? $this->customer_type: 'N/A'; ?></span></div>
 				<div class="label"><span>Year Level</span><span class="text"><?php echo ( $this->yearlevel ) ? $this->yearlevel : 'N/A';?></span></div>
-				<div class="label"><span>Joined Date</span><span class="text"><?php echo ( $this->joined_date ) ? date('j F Y',strtotime( $this->joined_date)) : 'N/A';  ?></span></div>
-				<div class="label"><span>Renewal Date</span><span class="text"><?php echo (  $this->renew_date ) ? date('j F Y',strtotime(  $this->renew_date)) : 'N/A'; ?></span></div>
+				<div class="label"><span>Joined Date</span><span class="text"><?php echo ( $this->joined_date ) ? convert_ontraport_date($this->joined_date) : 'N/A';  ?></span></div>
+				<div class="label"><span>Renewal Date</span><span class="text"><?php echo (  $this->renew_date ) ? convert_ontraport_date($this->renew_date) : 'N/A'; ?></span></div>
+				<?php 
+
+				
+				function convert_ontraport_date($raw_date) {
+
+					$renew_month = substr($raw_date, 0,2);
+					$renew_day = substr($raw_date, 3,2);
+					$renew_year = substr($raw_date, 6,4);
+
+					$new_renew_date = $renew_year . "-" . $renew_month . "-" . $renew_day;
+
+					$create_renew_date = date_create($new_renew_date);
+
+
+					return date_format($create_renew_date, "j F Y");
+				}
+
+
+				?>
 		</div>
 		<!-- end of accordion -->
 
