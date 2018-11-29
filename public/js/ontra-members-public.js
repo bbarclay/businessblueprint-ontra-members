@@ -194,9 +194,14 @@
 		});
 
 
-		function contactAjax( name = '', stateID = '', start = 0, end = 50, clean_listing = false, next_page = 2 )
+		function contactAjax( name, stateID, start, end, clean_listing, next_page )
 		{
-		
+			name  = name || '';
+			stateID = stateID || '';
+			start = start || 0;
+			end   = end || 0;
+			clean_listing = clean_listing || false;
+			next_page = next_page || 2;
 
 			$.ajax({
 		 		type: 'POST',
@@ -266,9 +271,17 @@
 		 	});
 		}
 
-	 	function singleContact(name = '', state = '', id = '', photo = '', link = '', output = []) 
+	 	function singleContact(name, state, id, photo, link, output) 
 	 	{
-	 		
+	 			
+			name  = name || '';
+			state = state || '';
+			id = id || '';
+			photo = photo || '';
+			link = link || '';
+			output = output || [];
+
+
 	 		output += '<div class="contact-item">';
 	 			output += '<a href="'+ link +'" target="_blank">';
 	 				output += '<div class="inner">';

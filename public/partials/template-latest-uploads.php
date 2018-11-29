@@ -18,7 +18,6 @@
 
 				$video_link 	= get_field('video_oembed', $query->ID, false );
 				$first_position = strpos( $video_link, "medias/");
-				
 		        $video_id 		= substr($video_link, ( $first_position + 7 ), 10);
 			 ?>
 
@@ -61,7 +60,6 @@
 				var id = $('.latest-uploads-list li:nth-child('+ a +') .video-thumbnail').attr('id');
 			
 				$.ajax({
-
 					type: 'POST',
 			 		url: search_members.ajax_url,
 			 		data: {

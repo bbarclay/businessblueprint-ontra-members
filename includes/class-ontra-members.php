@@ -79,6 +79,7 @@ class Ontra_members {
 		$this->ontraport = new Ontraport_API();
 		$this->wistia    = new WistiaApi(get_option('ontra_member_bb_wistia_key'));  
 
+
 	}
 
 
@@ -157,6 +158,10 @@ class Ontra_members {
 
 		$this->loader->add_action( 'wp_ajax_nopriv_get_wistia_image', $plugin_public, 'getPostImage' );
 		$this->loader->add_action( 'wp_ajax_get_wistia_image', $plugin_public, 'getPostImage' );
+
+
+		$this->loader->add_action( 'wp_ajax_nopriv_get_post_list', $plugin_public, 'getVideoTimeline' );
+		$this->loader->add_action( 'wp_ajax_get_post_list', $plugin_public, 'getVideoTimeline' );
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
