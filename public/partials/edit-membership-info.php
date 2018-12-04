@@ -74,6 +74,7 @@
 			      		"Administration & Office Support",
 			      		"Advertising, Arts & Media",
 			      		"Banking & Financial Services",
+			      		"Bookkeeping & Cash Management"
 			      		"Call Centre & Customer Service",
 			      		"CEO & General Management",
 			      		"Community Services & Development",
