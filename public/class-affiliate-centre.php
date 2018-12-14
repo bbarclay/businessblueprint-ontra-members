@@ -37,7 +37,7 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 		                              "value":{"value":"'. $this->user_email() .'"}
 		                            }]',
 
-		          "listFields" => "id"                   
+		          "listFields" => "id,f1608"                   
 		    );
 		 
 
@@ -45,15 +45,20 @@ if( !class_exists('MyBB_Affiliate_Centre') ) :
 		   $response = $this->ontraport->contact()->retrieveMultiple($queryParams);
 		   $response = json_decode($response, true);
 		   $id 		 = (int)$response['data'][0]['id'];
+		   $link 	 = $response['data'][0]['f1608'];
+		   $member_aff_link  = ($link) ? str_replace('*****', $id, $link ) : '';
 
 		   $referrals   = $this->get_referrals($id); 
 		   $pagination  = $this->display_pagination($id);
 		   $members 	= $this->get_blueprint_referrals($id);
-			
+		
 
-		  require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/affiliate_page.php';
-	      return $output;
+			ob_start();
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/affiliate_page.php';
+		    $output_string = ob_get_contents();
+		    if (ob_get_contents()) ob_end_clean();
 
+		    return $output_string;
 		}
 
 		/**

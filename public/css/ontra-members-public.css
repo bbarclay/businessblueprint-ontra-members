@@ -743,9 +743,345 @@ img.jcrop-preview {
 .latest-uploads-wrapper:hover::-webkit-scrollbar-thumb {
     background: #c2c5c5;
 }
+
+
+
+/**
+ *  Affiliate Centre
+ * 
+ */
+.referral-link {
+    display: inline-block;
+    padding: 0 0 0 20px;
+
+    font-family: "Geogrotesque-SemiBold", sans-serif;
+
+    color: #002749;
+    border-radius: 5px;
+    background: #f4f4f4;
+    box-shadow: inset 0 2px 3px 0 #ddd;
+}
+.referral-link button {
+    margin-left: 10px;
+
+    background: #7ac143;
+}
+.referral-link button:hover {
+    background: #002749;
+}
+
+.affiliate-center-section .line-top {
+    margin-top: 30px;
+}
+.affiliate-center-section h2 {
+    padding: 10px 0;
+    margin: 14px 0;
+
+    font-size: 25px;
+
+    border-bottom: 1px solid #e6e6e6;
+}
+.affiliate-center-section .table tr:nth-child(even) {
+    background: #fbf9f9;
+}
+.affiliate-center-section  .table  th {
+    color: #002749;
+    background: #f9f7f7;
+}
+
+/* Style the tab */
+.affiliate-center-section .tab {
+    overflow: hidden;
+}
+
+/* Style the buttons that are used to open the tab content */
+.affiliate-center-section .tab button {
+    padding: .25em 1em;
+
+    cursor: pointer;
+    transition: .3s;
+
+    border: 0;
+    outline: none;
+}
+.affiliate-center-section .tab button:focus {
+    border: 0;
+    outline: none;
+}
+
+/* Change background color of buttons on hover */
+.affiliate-center-section .tab button:hover {
+    border: 0;
+    background-color: #f15d22;
+}
+
+/* Create an active/current tablink class */
+.affiliate-center-section .tab button.active {
+    border: 0;
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.affiliate-center-section .tabcontent {
+    display: none;
+    margin-top: 10px;
+
+    border-top: 4px solid #e8e3e3;
+}
+.affiliate-center-section .text-right {
+    text-align: right;
+}
+
+.affiliate-center-section .share-col .btn {
+    display: inline-block;
+    min-width: 150px;
+    padding: .7em .8em;
+    margin: 2.5em .3em 0 .3em;
+
+    font-size: 17px;
+
+    text-align: center;
+
+    color: #fff;
+    border-radius: 31px;
+    background: #79c142;
+}
+.affiliate-center-section .tabshare {
+    display: none;
+}
+.affiliate-center-section .tabshare.active {
+    display: none;
+}
+.affiliate-center-section .share-col .btn:hover {
+    box-shadow: 0 2px 5px #afaaaa;
+}
+.affiliate-center-section .share-col:after {
+    display: block;
+    clear: both;
+
+    content: "";
+}
+.affiliate-center-section .clear {
+    clear: both;
+}
+.affiliate-center-section .share-text li {
+    -webkit-transition: all .1s linear;
+            transition: all .1s linear;
+}
+.affiliate-center-section .share-text li a {
+    color: #c1c0c0;
+}
+.affiliate-center-section .share-text .active span,
+.affiliate-center-section .share-text li:hover span {
+    color: #fff;
+}
+.affiliate-center-section .share-text .active i,
+.affiliate-center-section .share-text li:hover i {
+    color: #fff;
+    background: rgba(255,255,255,.1);
+}
+.affiliate-center-section .share-text .facebook-btn.active,
+.affiliate-center-section .share-text .facebook-btn:hover {
+    border: 2px solid #3b5999;
+    background-color: #3b5999;
+}
+.affiliate-center-section .share-text .google-btn:hover,
+.affiliate-center-section .share-text .google-btn.active {
+    border-color: #d24337;
+    background-color: #d24337;
+}
+.affiliate-center-section .share-text .linkedin-btn.active,
+.affiliate-center-section .share-text .linkedin-btn:hover {
+    border: 2px solid #007fb0;
+    background-color: #007fb0;
+}
+.affiliate-center-section .share-text .twitter-btn.active,
+.affiliate-center-section .share-text .twitter-btn:hover {
+    border: 2px solid #00aaed;
+    background-color: #00aaed;
+}
+.affiliate-center-section .share-text .email-btn.active,
+.affiliate-center-section .share-text .email-btn:hover {
+    border: 2px solid #00274c;
+    background-color: #00274c;
+}
+.affiliate-center-section .share-text {
+    position: relative;
+
+    padding: 1em 0 0 0;
+}
+.affiliate-center-section .share-text:after {
+    display: block;
+    clear: both;
+
+    content: "";
+}
+.affiliate-center-section .share-text {
+    margin-top: 1.5em;
+}
+.affiliate-center-section .share-text ul {
+    padding: 0;
+    margin-bottom: 0;
+
+    list-style: none;
+
+    text-align: center;
+}
+.affiliate-center-section .share-text ul li {
+    display: inline-block;
+    margin: 0 .1em .5em 0;
+}
+.affiliate-center-section .share-text li {
+    display: block;
+    padding: .1em;
+
+    cursor: pointer;
+
+    color: #c1c0c0;
+    border: 2px solid #eceaea;
+    border-radius: 30px;
+}
+.affiliate-center-section .share-text li i {
+    display: inline-block;
+    width: 40px;
+    padding: .5em 0;
+    margin-right: .5em;
+
+    text-align: center;
+
+    border-radius: 50%;
+    background: #f1f1f1;
+}
+.affiliate-center-section .share-text li span {
+    display: inline-block;
+    min-width: 70px;
+    margin-right: 1em;
+}
+.affiliate-center-section .share-info {
+    padding: .5em;
+
+    text-align: center;
+}
+.affiliate-center-section .s-content {
+    position: relative;
+
+    padding: 1.5em 2em;
+    margin: 0 3em;
+}
+.affiliate-center-section .s-content:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 40%;
+    height: 2px;
+    margin: 0 auto;
+    clear: both;
+
+    content: "";
+
+    background: #e8e7e7;
+}
+.affiliate-center-section .share-col {
+    position: relative;
+}
+.affiliate-center-section .share-col:before {
+    position: absolute;
+    top: -7px;
+    right: 0;
+    left: 0;
+
+    width: 12px;
+    height: 12px;
+    margin: 0 auto;
+
+    content: "";
+    transform: rotate(-45deg);
+    text-align: center;
+
+    border-bottom: 2px solid #e8e7e7;
+    border-left: 2px solid #e8e7e7;
+    background: #fff;
+}
+.affiliate-center-section .image__button {
+    margin-bottom: 15px;
+
+    text-align: center;
+}
+.affiliate-center-section .image__button .button {
+    background: #7ac143;
+}
+.affiliate-center-section .image__button .button:hover {
+    background: #002749;
+}
+
+.affiliate-center-section .tabemail {
+    display: none;
+}
+.affiliate-center-section #choose-option span {
+    padding: 0 7px;
+    margin: 0;
+}
+.affiliate-center-section .inner-email {
+    max-width: 800px;
+    padding: 0;
+    margin: 0 auto;
+
+    text-align: left;
+
+    background: #fdfdfd;
+    box-shadow: 0 2px 50px 0 rgba(4, 4, 4, .1);
+}
+.affiliate-center-section .inner-email .header {
+    padding: 10px 25px;
+
+    color: #fff;
+    background: #002749;
+}
+.affiliate-center-section .tabemail.active {
+    display: block;
+}
+.affiliate-center-section .inner-email .subject {
+    padding: 20px 25px;
+
+    border-bottom: 1px solid #efecec;
+}
+.affiliate-center-section .inner-email .subject span {
+    color: #bfbbbb !important;
+}
+.affiliate-center-section .inner-email .share-col:before {
+    display: none;
+}
+.affiliate-center-section .inner-email:after {
+    background: transparent;
+}
+.affiliate-center-section .inner-email .subject p {
+    margin-bottom: 0;
+}
+.affiliate-center-section .inner-email .message {
+    padding: 25px;
+}
+.affiliate-center-section .share-tab-menu h3 {
+    font-size: 20px;
+
+    color: #a6a7a9;
+}
+
+
 @media ( max-width: 991px) {
     .latest-uploads-wrapper {
         max-height: 312px;
+    }
+    .affiliate-center-section .share-tab-menu,
+    .affiliate-center-section .share-tab-menu .text-right {
+        text-align: center;
+    }
+    .affiliate-center-section .s-content {
+        margin: 0;
+    }
+    .affiliate-center-section .referral-link {
+        margin-bottom: 10px;
     }
 }
 @media ( max-width: 960px) {
@@ -756,5 +1092,35 @@ img.jcrop-preview {
 @media ( max-width: 580px) {
     .latest-uploads-list .single-video {
         width: 100%;
+    }
+}
+@media ( max-width: 510px) {
+    .affiliate-center-section .tab button {
+        width: 40%;
+        margin: 1px 1px;
+
+        border-radius: 0;
+    }
+    .affiliate-center-section .tab {
+        display: flex;
+
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #clipboard {
+        display: block;
+        padding: 2px 15px;
+        margin-bottom: 6px;
+
+        font-size: 15px;
+
+        border-radius: 3px;
+        background: #f5f5f5;
+        box-shadow: inset 0 2px 3px 0 #ddd;
+    }
+    .affiliate-center-section .referral-link {
+        border-radius: 5px;
+        background: transparent;
+        box-shadow: none;
     }
 }
