@@ -171,6 +171,70 @@ class Ontra_Members_Public {
 
 	}
 
+	public function show_watch_live()
+	{
+		$ftdate = get_option('ontra_member_ft_date');
+		$today  = current_time('m/d/Y', 1);
+
+  		if(!get_option('ontra_member_ft_date') || strtotime($today) >=  strtotime($ftdate . "+3 days") ) {
+  			return false;
+  		}
+
+	    $client = $this->ontraport;
+
+		$user =  wp_get_current_user();
+
+		$email = $user->user_email;
+
+			
+	    $queryParams = array(
+
+			          "condition"     => 
+			                             '[{
+						"field":{"field":"email"},
+						"op":"=",
+						"value":{"value":"'. $email .'"}
+						}]',
+
+			         "listFields" => "id, firstname, lastname, BBCustomer_165",
+		);
+
+
+		$response = $client->contact()->retrieveMultiple($queryParams);
+		$response = json_decode($response, true);
+		$response = $response['data'];
+
+		$ontra_id = $response[0]['id'];
+
+
+		$queryParams = array(
+				
+				 "id" => $ontra_id,
+		         "listFields" => "id, BBCustomer_165, BBYearLeve_258"                  
+		);
+
+
+		$response = $client->contact()->retrieveSingle($queryParams);
+		$response = json_decode($response, true);
+		$response = $response['data'];
+
+
+		if($response['BBYearLeve_258'] == '1204')
+		{
+
+			if((strtotime($ftdate)  == strtotime($today)) && ($response['BBCustomer_165'] == '802')) {
+
+				return '<li class="navbar__item navbar__item--level-0"><a href="/live-ft-masterclass">WATCH LIVE</a></li>';
+			} 
+			else if( (  strtotime($today) >= strtotime($ftdate . "+1 days") && strtotime($today) <=  strtotime($ftdate . "+2 days")  ) && ($response['BBCustomer_165'] == '802' || $response['BBCustomer_165'] == '800') ) {
+
+               return '<li class="navbar__item navbar__item--level-0"><a href="/live-ft-conference">WATCH LIVE</a></li>';
+			}
+
+		}
+		
+	}
+
 	private function defaultPagination( $max = 50, $total = '')
 	{
 		if( empty($total) )
@@ -275,7 +339,7 @@ class Ontra_Members_Public {
     		// Count total entries
 			$query = array(
 				
-				"search"	 => $name,
+				"search"	 => 'aa',
 			    "condition"  => 
                   '[{
                       "field":{"field":"BBCustomer_165"},
@@ -286,20 +350,20 @@ class Ontra_Members_Public {
 
 	    	// Query the name only
 	    	$queryParams = array(
-	    			"search"	 => $name,
-		        	 "start" => $start,
-		  			 "range" => $range,
-		  			 "sort" => "firstname",
-		        	 "sortDir" => "asc",
-	    			 "listFields" => "id, firstname, lastname,StateAUS_131",  
-			         "condition"  => 
-	                      '[{
-                              "field":{"field":"BBCustomer_165"},
-                              "op":"IN",
-							   "value":{"list":[{"value":800},{"value":802},{"value":1220}]}
-							 }  
-	                       }]',       
-	                  
+	    		 
+	                 "search"	 => $name,
+	                  "range" => $range,  
+	                  "sort" => "firstname",
+	                  "sortDir" => "asc",  
+	                  "condition" => '[{ "field":{"field":"owner"},"op":"=","value":{"value":13}}]'
+
+	         //               '[{
+          //                     "field":{"field":"BBCustomer_165"},
+          //                     "op":"IN",
+							   // "value":{"list":[{"value":800},{"value":802},{"value":1220}]}
+	         //               }]',
+	                 
+   
 			);
 
 	    } 
@@ -408,7 +472,7 @@ class Ontra_Members_Public {
 
 	    	/// Query all members
 	    	$queryParams = array(
-			          "condition"     => 
+			          "condition" => 
 			                      '[{
 		                              "field":{"field":"BBCustomer_165"},
 		                              "op":"IN",
@@ -637,8 +701,6 @@ class Ontra_Members_Public {
     	return $output;
 
     }
-
-
 
 	/** 
 	*   Display FastTrack
@@ -1673,8 +1735,8 @@ class Ontra_Members_Public {
 	  }
 
 
-	public function getConsultant($id) {
-
+	public function getConsultant($id) 
+	{
 
 		switch($id) {
 			case '13':
@@ -1690,8 +1752,8 @@ class Ontra_Members_Public {
 	}
 
 
-	public function getCustomerType($id) {
-
+	public function getCustomerType($id) 
+	{
 		switch($id) {
 			case '800':
 				return 'Gold';
@@ -1718,7 +1780,8 @@ class Ontra_Members_Public {
 	}
 
 
-	public function get_country($code) {
+	public function get_country($code) 
+	{
 
 		switch($code) {
 			case 'AU':
@@ -1731,7 +1794,6 @@ class Ontra_Members_Public {
 				return '';
 				break;	 
 		}	
-
 	}
 
 
@@ -1739,7 +1801,8 @@ class Ontra_Members_Public {
 	*   Get Email from Wordpress
 	*   @return email
 	*/
-	private function getEmail() {
+	private function getEmail() 
+	{
 
 		// Get User in WP
 		$user =  wp_get_current_user();
@@ -1756,7 +1819,8 @@ class Ontra_Members_Public {
     *	 
     * @return member type
     */
-	public function get_member_type() {
+	public function get_member_type() 
+	{
 
 		$client = $this->ontraport;
 		$user   =  wp_get_current_user();
@@ -1807,7 +1871,8 @@ class Ontra_Members_Public {
 
 
 
-	public function isSilverMembership() {
+	public function isSilverMembership() 
+	{
 
 		$client = $this->ontraport;
 
@@ -1839,15 +1904,13 @@ class Ontra_Members_Public {
 		}
 		else {
 			return false;
-		}
-			
-
+		}			
 	}
 
 
 
-    public function get_image($id = '') {
-
+    public function get_image($id = '') 
+    {
     	if($id) {
     		$url = get_post_meta( $id, '_ontramembers_img' , true);
     	}
@@ -1866,9 +1929,9 @@ class Ontra_Members_Public {
 	*  @param int Ontraport ID
 	*  @return url of the image
 	*/
-    public function get_profile_photo( $id ) {
-
-	     // Check if user has user photo in the meta table
+    public function get_profile_photo( $id ) 
+    {
+	    // Check if user has user photo in the meta table
         $image = get_user_meta( $id, 'user_photo', true );  
 
         if( $image ) {
@@ -1891,7 +1954,8 @@ class Ontra_Members_Public {
 	*  @param int Ontraport ID
 	*  @return url of the image
 	*/
-    public function get_photo_ajax( $id ) {
+    public function get_photo_ajax( $id ) 
+    {
 
     	// Check if user has user photo in the meta table
         $image = get_user_meta( $id, 'user_photo', true );  
@@ -1900,8 +1964,7 @@ class Ontra_Members_Public {
         	return wp_get_attachment_url($image);
         }
 
-    	return $this->get_defaultThumbnail();
-    	
+    	return $this->get_defaultThumbnail(); 	
     }
 
 

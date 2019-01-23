@@ -137,7 +137,7 @@ class Ontra_members {
 		add_shortcode( 'mbb_latest_uploads', array( $plugin_public, 'getLatestUploads' ) );
 		add_shortcode( 'mbb_featured_videos', array( $plugin_public, 'getFeaturedVideos' ) );
 		add_shortcode( 'mbb_success_stories', array( $plugin_public, 'getSuccessStories' ) );
-
+		add_shortcode( 'mbb_watch_live', array( $plugin_public, 'show_watch_live' ) );
 
 
 

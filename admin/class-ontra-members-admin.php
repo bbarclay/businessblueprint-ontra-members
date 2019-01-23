@@ -198,6 +198,7 @@ class Ontra_Members_Admin {
     	register_setting( 'bbmember-setting', 'ontra_member_bb_appid', array($this, 'sanitize_input_field') );
 		register_setting( 'bbmember-setting', 'ontra_member_bb_appkey', array($this, 'sanitize_input_field') );
 		register_setting( 'bbmember-setting', 'ontra_member_bb_wistia_key', array($this, 'sanitize_input_field') );
+		register_setting( 'bbmember-setting', 'ontra_member_ft_date', array($this, 'sanitize_input_field') );
 
 		add_settings_section(
 		    'ontramember-section',                   		
@@ -223,15 +224,21 @@ class Ontra_Members_Admin {
 		);
 
 		add_settings_field(
+		    'ontramember-ft-date',     
+		    'FT Conference Date',      
+		    array($this, 'settings_ftDate'), 
+		    'member_settings',                    
+		    'ontramember-section'               
+		);
+
+		add_settings_field(
 		    'ontramember-wistia-key',     
 		    'Wistia Key',      
 		    array($this, 'settings_wistia_key'), 
 		    'member_settings',                    
 		    'ontramember-section'               
 		);
-
     }
-
    
     public function get_defaultThumbnail($name = '') { 
 
@@ -239,16 +246,12 @@ class Ontra_Members_Admin {
 
     }
 
-
     public function ontra_members_page() {
-
     	wp_enqueue_media();
     	$client = $this->get_members();
 
     	require_once( plugin_dir_path(__FILE__) ) . 'partials/main-page-display.php';  
-
     }
-
 
     public function get_customerType($id) {
 
@@ -282,7 +285,6 @@ class Ontra_Members_Admin {
     	  return $output;
 
     }
-
 
     public function get_yearLevel($year_level) {
 
@@ -345,6 +347,14 @@ class Ontra_Members_Admin {
 
 		echo '<label for="ontra_member_bb_appkey">' .
 		       '<input id="ontra_member_bb_appkey" name="ontra_member_bb_appkey" class="regular-text" type="input" value="'. ( !empty($task) ? $task : '' )  .'" />' .
+		      '</label>';
+    }
+
+    public function settings_ftDate() {
+    	$task = sanitize_text_field(get_option('ontra_member_ft_date'));
+
+		echo '<label for="ontra_member_ft_date">' .
+		       '<input id="ontra_member_ft_date" name="ontra_member_ft_date" class="regular-text" type="input" value="'. ( !empty($task) ? $task : '' )  .'" />' .
 		      '</label>';
     }
 
