@@ -224,11 +224,11 @@ class Ontra_Members_Public {
 
 			if((strtotime($ftdate)  == strtotime($today)) && ($response['BBCustomer_165'] == '802')) {
 
-				return '<li class="navbar__item navbar__item--level-0"><a href="/live-ft-masterclass">WATCH LIVE</a></li>';
+				return '<li class="navbar__item navbar__item--level-0"><a href="/live-masterclass">WATCH LIVE</a></li>';
 			} 
 			else if( (  strtotime($today) >= strtotime($ftdate . "+1 days") && strtotime($today) <=  strtotime($ftdate . "+2 days")  ) && ($response['BBCustomer_165'] == '802' || $response['BBCustomer_165'] == '800') ) {
 
-               return '<li class="navbar__item navbar__item--level-0"><a href="/live-ft-conference">WATCH LIVE</a></li>';
+               return '<li class="navbar__item navbar__item--level-0"><a href="/live-conference">WATCH LIVE</a></li>';
 			}
 
 		}
